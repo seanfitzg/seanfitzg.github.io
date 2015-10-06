@@ -25,75 +25,86 @@
 <!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
 
 <body class="theme-invert">
-
-    <div>
-        <nav class="mainmenu" style="float:left">
-            <div style="width:200px" class="container btn-group-vertical" role="group" aria-label="location">
-                <button id="northAtlantic" type="button" class="location btn btn-default active">North Atlantic</button>
-                <button id="atlantic" type="button" class="location btn btn-default">Atlantic</button>
-                <button id="eastAtlantic" type="button" class="location btn btn-default">East Atlantic</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <nav class="mainmenu" style="float:left">
+                    <div style="width:200px" class="container btn-group-vertical" role="group" aria-label="location">
+                        <button id="northAtlantic" type="button" class="location btn btn-default active">North Atlantic</button>
+                        <button id="atlantic" type="button" class="location btn btn-default">Atlantic</button>
+                        <button id="eastAtlantic" type="button" class="location btn btn-default">East Atlantic</button>
+                    </div>
+                </nav>
             </div>
-
-            <div style="width:200px" class="container btn-group-vertical" role="group" aria-label="day">
-                <button id="day1" type="button" class="day btn btn-default active">Monday</button>
-                <button id="day2" type="button" class="day btn btn-default">Tuesday</button>
-                <button id="day3" type="button" class="day btn btn-default">Wednesday</button>
-                <button id="day4" type="button" class="day btn btn-default">Thursday</button>
-                <button id="day5" type="button" class="day btn btn-default">Friday</button>
-                <button id="day6" type="button" class="day btn btn-default">Saturday</button>
-                <button id="day7" type="button" class="day btn btn-default">Sunday</button>
-                <button id="max" type="button" class="day btn btn-default">Max</button>
-                <button id="animation" type="button" class="day btn btn-default">Animation</button>
+            <div class="col-md-1">
+                <nav class="mainmenu" style="float:left">
+                    <div style="width:200px" class="container btn-group-vertical" role="group" aria-label="day">
+                        <button id="day1" type="button" class="day btn btn-default active">Monday</button>
+                        <button id="day2" type="button" class="day btn btn-default">Tuesday</button>
+                        <button id="day3" type="button" class="day btn btn-default">Wednesday</button>
+                        <button id="day4" type="button" class="day btn btn-default">Thursday</button>
+                        <button id="day5" type="button" class="day btn btn-default">Friday</button>
+                        <button id="day6" type="button" class="day btn btn-default">Saturday</button>
+                        <button id="day7" type="button" class="day btn btn-default">Sunday</button>
+                        <button id="max" type="button" class="day btn btn-default">Max</button>
+                        <button id="animation" type="button" class="day btn btn-default">Animation</button>
+                    </div>
+                </nav>
             </div>
-        </nav>
+            <div class="col-md-9">
+                <!-- Main (Home) section -->
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+
+                            <h1 class="title">Eiresurfer</h1>
+
+                        </div>
+                        <!-- /col -->
+                    </div>
+                    <!-- /row -->
+
+                </div>
+
+                <section class="section" id="head">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+
+                                <div style="background: none; width: auto; border: none" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wave Size</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
+                                    </div>
+                                </div>
+
+                                <div style="background: none; width: auto; border: none" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wave Size</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+
+                    </div>
+                </section>
+            </div>        
+        </div>
+
     </div>
 
-    <!-- Main (Home) section -->
-        <div class="container">
 
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
 
-                    <h1 class="title">Eiresurfer</h1>
-
-                </div>
-                <!-- /col -->
-            </div>
-            <!-- /row -->
-
-        </div>
-
-    <section class="section" id="head">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-
-                    <div style="background: none; width: auto; border: none" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Wave Size</h3>
-                        </div>
-                        <div class="panel-body">
-                            <img src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
-                        </div>
-                    </div>
-
-                    <div style="background: none; width: auto; border: none" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Wave Size</h3>
-                        </div>
-                        <div class="panel-body">
-                            <img src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /col -->
-            </div>
-            <!-- /row -->
-
-        </div>
-    </section>
 
     <!-- Load js libs only when the page is loaded. -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
