@@ -85,6 +85,7 @@ $(function() {
                 adjustIndex = adjustIndex - 7;
             var day = getDayFromIndex(adjustIndex);
 
+            $('#day' + i).addClass(day)
             $('#day' + i).text(day)
         }
     }
@@ -133,6 +134,10 @@ $(function() {
         }
     }
 
+    function clickOnSaturday() {
+        $('#days').find('.Saturday').click();
+    }
+
     $('.day').click(function(ev) {
         $('.day').removeClass('active');
         $(ev.target).addClass('active');
@@ -143,11 +148,11 @@ $(function() {
     $('.location').click(function(ev) {
         $('.location').removeClass('active');
         $(ev.target).addClass('active');
-        var activeDay = $('#days').find('button.active').text();        
+        var activeDay = $('#days').find('button.active').text();
         getImages($(ev.target)[0].id, activeDay)
     });
 
     assignDaysToPanels();
-    getImages("NE_atlantic", "Saturday");
+    clickOnSaturday();
 
 });
