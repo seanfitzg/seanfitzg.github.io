@@ -5,23 +5,29 @@ $(function() {
         var baseAddress = 'http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/';
 
         return [{
-        	id: "waveHeight",
+            id: "waveHeight",
             name: "Wave Height",
-            image: getImageAddress(baseAddress, regionCode, 'hs', 'f', hourFactor)
+            image: getImageAddress(baseAddress, regionCode, 'hs', hourFactor)
         }, {
-        	id: "peakPeriod",
+            id: "peakPeriod",
             name: "Peak Period",
-            image: getImageAddress(baseAddress, regionCode, 'tp', 'f', hourFactor)
+            image: getImageAddress(baseAddress, regionCode, 'tp', hourFactor)
         }, {
-        	id: "windSpeed",
+            id: "windSpeed",
             name: "Wind Speed",
-            image: getImageAddress(baseAddress, regionCode, 'u10', 'f', hourFactor)
+            image: getImageAddress(baseAddress, regionCode, 'u10', hourFactor)
         }];
     }
 
-    function getImageAddress(root, regionCode, modelType, forecastType, hourFactor) {
+    function getImageAddress(baseAddress, regionCode, modelType, hourFactor) {
 
-        var imageAddress = root + regionCode + '.' + modelType + '.' + forecastType + hourFactor + 'h.png';
+        var forecastType;
+        if (hourFactor === '000')
+            forecastType = 'h';
+        else
+            forecastType = 'f';
+
+        var imageAddress = baseAddress + regionCode + '.' + modelType + '.' + forecastType + hourFactor + 'h.png';
         //console.log(imageAddress);
         return imageAddress
     };
@@ -71,9 +77,34 @@ $(function() {
 
     }
 
+    function getImagesUsingDay(day) {
+    	var hourFactor;
+        if (day === 'Max')
+            hourFactor = 180
+        else
+            hourFactor = getHourFactorFromDay(day);
+
+        var modelArray = getNoaaData('NE_atlantic', hourFactor);
+
+        $(".cloned").remove()
+
+        var arrayLength = modelArray.length;
+        for (var i = 0; i < arrayLength; i++) {
+            var $template = $("#template");
+            var $newPanel = $template.clone();
+            $newPanel.css("display", "block")
+            $newPanel.addClass('cloned');
+            $newPanel.attr("id", modelArray[i].id);
+            $newPanel.find('.panel-title').text(modelArray[i].name);
+            $newPanel.find('.model-image')[0].src = modelArray[i].image;
+            $("#panelDiv").append($newPanel.fadeIn());
+        }
+    }
+
     $('.day').click(function(ev) {
         $('.day').removeClass('active');
         $(ev.target).addClass('active');
+        getImagesUsingDay($(ev.target).text())
     });
 
     $('.location').click(function(ev) {
@@ -81,18 +112,6 @@ $(function() {
         $(ev.target).addClass('active');
     });
 
-    var hourFactor = getHourFactorFromDay('Saturday');
-    var modelArray = getNoaaData('NE_atlantic', hourFactor);
-
-    var arrayLength = modelArray.length;
-    for (var i = 0; i < arrayLength; i++) {
-    	var $template = $("#template");
-        var $newPanel = $template.clone();
-        $newPanel.css("display", "block")
-        $newPanel.attr("id", modelArray[i].id);
-        $newPanel.find('.panel-title').text(modelArray[i].name);
-        $newPanel.find('.model-image')[0].src = modelArray[i].image;
-        $("#panelDiv").append($newPanel.fadeIn());
-    }    
+    getImagesUsingDay("Saturday");
 
 });
