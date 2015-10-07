@@ -82,8 +82,9 @@ $(function() {
         for (var i = 0; i < 7; i++) {
             var adjustIndex = i + todayIndex;
             if (adjustIndex > 6)
-            	adjustIndex = adjustIndex - 7;
+                adjustIndex = adjustIndex - 7;
             var day = getDayFromIndex(adjustIndex);
+
             $('#day' + i).text(day)
         }
     }
@@ -108,14 +109,14 @@ $(function() {
         return "error";
     }
 
-    function getImagesUsingDay(day) {
+    function getImages(location, day) {
         var hourFactor;
         if (day === 'Max')
             hourFactor = 180
         else
             hourFactor = getHourFactorFromDay(day);
 
-        var modelArray = getNoaaData('NE_atlantic', hourFactor);
+        var modelArray = getNoaaData(location, hourFactor);
 
         $(".cloned").remove()
 
@@ -128,22 +129,25 @@ $(function() {
             $newPanel.attr("id", modelArray[i].id);
             $newPanel.find('.panel-title').text(modelArray[i].name);
             $newPanel.find('.model-image')[0].src = modelArray[i].image;
-            $("#panelDiv").append($newPanel.fadeIn());
+            $("#panelDiv").append($newPanel);
         }
     }
 
     $('.day').click(function(ev) {
         $('.day').removeClass('active');
         $(ev.target).addClass('active');
-        getImagesUsingDay($(ev.target).text())
+        var activeLocation = $('#locations').find('button.active')[0].id;
+        getImages(activeLocation, $(ev.target).text())
     });
 
     $('.location').click(function(ev) {
         $('.location').removeClass('active');
         $(ev.target).addClass('active');
+        var activeDay = $('#days').find('button.active').text();        
+        getImages($(ev.target)[0].id, activeDay)
     });
 
     assignDaysToPanels();
-    getImagesUsingDay("Saturday");
+    getImages("NE_atlantic", "Saturday");
 
 });
