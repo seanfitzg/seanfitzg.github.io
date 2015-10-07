@@ -25,31 +25,87 @@
 <!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
 
 <body class="theme-invert">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <nav class="mainmenu" style="float:left">
+                    <div id="locations" style="width:200px" class="container btn-group-vertical" role="group" aria-label="location">
+                        <button id="NE_atlantic" type="button" class="location btn btn-default active">North-East Atlantic</button>
+                        <button id="atlantic" type="button" class="location btn btn-default">Atlantic</button>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-1">
+                <nav class="mainmenu" style="float:left">
+                    <div id="days" style="width:200px" class="container btn-group-vertical" role="group" aria-label="day">
+                        <button id="day0" type="button" class="day btn btn-default active">Monday</button>
+                        <button id="day1" type="button" class="day btn btn-default">Tuesday</button>
+                        <button id="day2" type="button" class="day btn btn-default">Wednesday</button>
+                        <button id="day3" type="button" class="day btn btn-default">Thursday</button>
+                        <button id="day4" type="button" class="day btn btn-default">Friday</button>
+                        <button id="day5" type="button" class="day btn btn-default">Saturday</button>
+                        <button id="day6" type="button" class="day btn btn-default">Sunday</button>
+                        <button id="max" type="button" class="day btn btn-default">Max</button>
+                        <!-- <button id="animation" type="button" class="day btn btn-default">Animation</button> -->
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-9">
 
-    <!-- Main (Home) section -->
-    <section class="section" id="head">
-        <div class="container">
+                <!-- Main (Home) section -->
+                <div class="container">
 
-            <div class="row">
-                <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+                    <div class="row">
+                        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
 
-                    <h1 class="title">Eiresurfer</h1>
-                    <h2 class="subtitle">Back soon...</h2>
+                            <h1 class="title">Eiresurfer</h1>
+
+                        </div>
+                        <!-- /col -->
+                    </div>
+                    <!-- /row -->
 
                 </div>
-                <!-- /col -->
-            </div>
-            <!-- /row -->
 
+                <section id="head">
+                    <div class="container">
+
+                        <div class="row">
+                            <div id="panelDiv" class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+
+                                <div id="template" style="background: none; width: auto; border: none; display: none" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wave Size</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img class="model-image" src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /col -->
+                        </div>
+                        <!-- /row -->
+
+                    </div>
+                </section>
+            </div>        
         </div>
-    </section>
+
+    </div>
+
+
+
 
     <!-- Load js libs only when the page is loaded. -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="assets/js/modernizr.custom.72241.js"></script>
+
     <!-- Custom template scripts -->
     <script src="assets/js/magister.js"></script>
+    <script src="eiresurfer.js"></script>
+
 </body>
 
 </html>
