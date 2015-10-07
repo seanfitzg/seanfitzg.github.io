@@ -123,6 +123,8 @@ $(function() {
             hourFactor = currentHourFactor + 3;
         else
             hourFactor = getHourFactorFromDay(day);
+        
+        if (hourFactor > 180) hourFactor = 180;
 
         currentHourFactor = hourFactor;
 
