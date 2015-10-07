@@ -1,6 +1,16 @@
 $(function() {
 
+    var currentHourFactor;
+
     function getNoaaData(regionCode, hourFactor) {
+
+        if (hourFactor < 100) {
+            hourFactor = "0" + hourFactor;
+        };
+
+        if (hourFactor < 10) {
+            hourFactor = "0" + hourFactor;
+        };
 
         var baseAddress = 'http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/';
 
@@ -66,13 +76,6 @@ $(function() {
             adjustIndex = 7 - (adjustIndex * -1);
 
         var hourFactor = adjustIndex * 24;
-        if (hourFactor < 100) {
-            hourFactor = "0" + hourFactor;
-        };
-
-        if (hourFactor < 10) {
-            hourFactor = "0" + hourFactor;
-        };
         return hourFactor;
 
     }
@@ -114,8 +117,14 @@ $(function() {
         var hourFactor;
         if (day === 'Max')
             hourFactor = 180
+        else if (day === '-')
+            hourFactor = currentHourFactor - 3;
+        else if (day === '+')
+            hourFactor = currentHourFactor + 3;
         else
             hourFactor = getHourFactorFromDay(day);
+
+        currentHourFactor = hourFactor;
 
         var modelArray = getNoaaData(location, hourFactor);
 
