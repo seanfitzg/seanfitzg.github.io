@@ -77,8 +77,39 @@ $(function() {
 
     }
 
+    function assignDaysToPanels() {
+        var todayIndex = new Date().getDay();
+        for (var i = 0; i < 7; i++) {
+            var adjustIndex = i + todayIndex;
+            if (adjustIndex > 6)
+            	adjustIndex = adjustIndex - 7;
+            var day = getDayFromIndex(adjustIndex);
+            $('#day' + i).text(day)
+        }
+    }
+
+    function getDayFromIndex(index) {
+        switch (index) {
+            case 0:
+                return "Sunday";
+            case 1:
+                return "Monday";
+            case 2:
+                return "Tuesday";
+            case 3:
+                return "Wednesday";
+            case 4:
+                return "Thursday";
+            case 5:
+                return "Friday";
+            case 6:
+                return "Saturday";
+        }
+        return "error";
+    }
+
     function getImagesUsingDay(day) {
-    	var hourFactor;
+        var hourFactor;
         if (day === 'Max')
             hourFactor = 180
         else
@@ -112,6 +143,7 @@ $(function() {
         $(ev.target).addClass('active');
     });
 
+    assignDaysToPanels();
     getImagesUsingDay("Saturday");
 
 });
