@@ -29,6 +29,19 @@ $(function() {
         }];
     }
 
+    function assignDaysToPanels() {
+        var todayIndex = new Date().getDay();
+        for (var i = 0; i < 7; i++) {
+            var adjustIndex = i + todayIndex;
+            if (adjustIndex > 6)
+                adjustIndex = adjustIndex - 7;
+            var day = getDayFromIndex(adjustIndex);
+
+            $('#day' + i).addClass(day)
+            $('#day' + i).text(day)
+        }
+    }
+    
     function getImageAddress(baseAddress, regionCode, modelType, hourFactor) {
 
         var forecastType;
@@ -45,6 +58,16 @@ $(function() {
     function getHourFactorFromDay(requestedDay) {
         var requestedDayIndex;
         var todayIndex = new Date().getDay();
+
+        var hourFactor;
+        if (requestedDay === 'Max')
+            return 180
+        else if (requestedDay === '-')
+            return currentHourFactor - 3;
+        else if (requestedDay === '+')
+            return currentHourFactor + 3;        
+        else if (hourFactor > 180) 
+            return 180;
 
         switch (requestedDay) {
             case "Sunday":
@@ -80,19 +103,6 @@ $(function() {
 
     }
 
-    function assignDaysToPanels() {
-        var todayIndex = new Date().getDay();
-        for (var i = 0; i < 7; i++) {
-            var adjustIndex = i + todayIndex;
-            if (adjustIndex > 6)
-                adjustIndex = adjustIndex - 7;
-            var day = getDayFromIndex(adjustIndex);
-
-            $('#day' + i).addClass(day)
-            $('#day' + i).text(day)
-        }
-    }
-
     function getDayFromIndex(index) {
         switch (index) {
             case 0:
@@ -113,20 +123,7 @@ $(function() {
         return "error";
     }
 
-    function getImages(location, day) {
-        var hourFactor;
-        if (day === 'Max')
-            hourFactor = 180
-        else if (day === '-')
-            hourFactor = currentHourFactor - 3;
-        else if (day === '+')
-            hourFactor = currentHourFactor + 3;
-        else
-            hourFactor = getHourFactorFromDay(day);
-        
-        if (hourFactor > 180) hourFactor = 180;
-
-        currentHourFactor = hourFactor;
+    function getImages(location, hourFactor) {
 
         var modelArray = getNoaaData(location, hourFactor);
 
@@ -152,15 +149,22 @@ $(function() {
     $('.day').click(function(ev) {
         $('.day').removeClass('active');
         $(ev.target).addClass('active');
+
         var activeLocation = $('#locations').find('button.active')[0].id;
-        getImages(activeLocation, $(ev.target).text())
+        currentHourFactor = getHourFactorFromDay($(ev.target).text());
+        getImages(activeLocation, currentHourFactor)
+
     });
 
     $('.location').click(function(ev) {
         $('.location').removeClass('active');
         $(ev.target).addClass('active');
+
         var activeDay = $('#days').find('button.active').text();
-        getImages($(ev.target)[0].id, activeDay)
+        if (activeDay !== '-' && activeDay !== '+')                    
+            currentHourFactor = getHourFactorFromDay(activeDay);
+        getImages($(ev.target)[0].id, currentHourFactor)
+
     });
 
     assignDaysToPanels();
