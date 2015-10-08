@@ -25,78 +25,54 @@
 <!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
 
 <body class="theme-invert">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <div>
-                    <nav class="mainmenu" style="float:left">
-                        <div id="locations" style="width:200px" class="container btn-group-vertical" role="group" aria-label="location">
-                            <button id="NE_atlantic" type="button" class="location btn btn-default active">North-East Atlantic</button>
-                            <button id="atlantic" type="button" class="location btn btn-default">Atlantic</button>
-                        </div>
-                    </nav>
-                </div>
-                <div style="margin-top: 75px">
-                    <nav class="mainmenu" style="float:left">
-                        <div id="days" style="width:200px" class="container btn-group-vertical" role="group" aria-label="day">
-                            <button id="day0" type="button" class="day btn btn-default active">Monday</button>
-                            <button id="day1" type="button" class="day btn btn-default">Tuesday</button>
-                            <button id="day2" type="button" class="day btn btn-default">Wednesday</button>
-                            <button id="day3" type="button" class="day btn btn-default">Thursday</button>
-                            <button id="day4" type="button" class="day btn btn-default">Friday</button>
-                            <button id="day5" type="button" class="day btn btn-default">Saturday</button>
-                            <button id="day6" type="button" class="day btn btn-default">Sunday</button>
-                            <button id="max" type="button" class="day btn btn-default">Max</button>
-                            <button id="prev" type="button" class="day btn btn-default">-</button>
-                            <button id="next" type="button" class="day btn btn-default">+</button>
-                            <!-- <button id="animation" type="button" class="day btn btn-default">Animation</button> -->
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-md-10">
-
-                <!-- Main (Home) section -->
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-
-                            <h1 class="title">Eiresurfer</h1>
-
-                        </div>
-                        <!-- /col -->
-                    </div>
-                    <!-- /row -->
-
-                </div>
-
-                <section id="head">
-                    <div class="container">
-
-                        <div class="row">
-                            <div id="panelDiv" class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-
-                                <div id="template" style="background: none; width: auto; border: none; display: none" class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Wave Size</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <img class="model-image" src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- /col -->
-                        </div>
-                        <!-- /row -->
-
-                    </div>
-                </section>
+    <nav class="mainmenu">
+        <div class="container">
+            <div id="locations" style="width:200px" class="container btn-group-vertical" role="group" aria-label="location">
+                <button id="NE_atlantic" type="button" class="location btn btn-default active">North-East Atlantic</button>
+                <button id="atlantic" type="button" class="location btn btn-default">Atlantic</button>
             </div>
         </div>
+        <div class="container">
+            <div id="days" style="width:200px;margin-top:20px" class="container btn-group-vertical" role="group" aria-label="day">
+                <button id="day0" type="button" class="day btn btn-default active">Monday</button>
+                <button id="day1" type="button" class="day btn btn-default">Tuesday</button>
+                <button id="day2" type="button" class="day btn btn-default">Wednesday</button>
+                <button id="day3" type="button" class="day btn btn-default">Thursday</button>
+                <button id="day4" type="button" class="day btn btn-default">Friday</button>
+                <button id="day5" type="button" class="day btn btn-default">Saturday</button>
+                <button id="day6" type="button" class="day btn btn-default">Sunday</button>
+                <button id="max" type="button" class="day btn btn-default">Max</button>
+                <button id="prev" type="button" class="day btn btn-default">-</button>
+                <button id="next" type="button" class="day btn btn-default">+</button>
+                <!-- <button id="animation" type="button" class="day btn btn-default">Animation</button> -->
+            </div>
+        </div>
+        </div>
+    </nav>
 
-    </div>
+    <!-- Main (Home) section -->
+    <section class="section" id="head">
+        <div class="container">
+
+            <div class="row">
+                <div id="panelDiv" class="col-md-10 col-lg-10 col-md-offset-2 col-lg-offset-2 text-center">
+
+                    <div id="template" style="background: none; border: none; display: none" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Wave Size</h3>
+                        </div>
+                        <div class="panel-body">
+                            <img class="model-image" src="http://polar.ncep.noaa.gov/waves/WEB/multi_1.latest_run/plots/NE_atlantic.tp.f099h.png">
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /col -->
+            </div>
+            <!-- /row -->
+
+        </div>
+    </section>
 
     <!-- Load js libs only when the page is loaded. -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
