@@ -53,17 +53,18 @@
         </div>
 
         <div class="container">
-            <div class="btn-group-vertical" role="group">
-                <input type="checkbox"
-                    id="waveHeight" class="image-type"
-                    checked>Wave Heights</input>
-                <input type="checkbox"
-                    id="peakPeriod" class="image-type"
-                    checked>Peak Period</input>
-                <input type="checkbox"
-                    id="wind" class="image-type"
-                    checked>Wind</input>
-                </ul>
+            <div style="width:175px;margin-top:20px"
+                class="container btn-group-vertical"
+                data-toggle="buttons">
+                <label class="btn btn-default active image-type">
+                    <input id="waveHeight" type="checkbox" checked> Wave Height
+                </label>
+                <label class="btn btn-default active image-type">
+                    <input id="peakPeriod" type="checkbox" checked> Peak Period
+                </label>
+                <label class="btn btn-default active image-type">
+                    <input id="wind" type="checkbox" checked> Wind
+                </label>
             </div>
         </div>
 
