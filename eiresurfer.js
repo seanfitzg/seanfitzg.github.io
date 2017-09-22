@@ -62,9 +62,13 @@ $(function() {
 
         var hourFactor;
         if (requestedDay === 'Max') return 180;
-        else if (requestedDay === '-') return currentHourFactor - 3;
-        else if (requestedDay === '+') return currentHourFactor + 3;
-        else if (hourFactor > 180) return 180;
+        else if (requestedDay === '-') {
+            if (currentHourFactor === 0) return currentHourFactor;            
+            return currentHourFactor - 3;
+        } else if (requestedDay === '+') {
+            if (currentHourFactor === 180) return currentHourFactor;
+            return currentHourFactor + 3;
+        } else if (hourFactor > 180) return 180;
 
         switch (requestedDay) {
             case 'Sunday':
@@ -95,6 +99,7 @@ $(function() {
         if (adjustIndex < 0) adjustIndex = 7 - adjustIndex * -1;
 
         var hourFactor = adjustIndex * 24;
+        if (currentHourFactor > 180) currentHourFactor = 180;
         return hourFactor;
     }
 
