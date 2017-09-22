@@ -125,16 +125,15 @@ $(function() {
 
         var arrayLength = modelArray.length;
         for (var i = 0; i < arrayLength; i++) {
-
             switch (modelArray[i].id) {
                 case 'waveHeight':
-                    if (modelArray[i].show !== showWaves) continue
+                    if (modelArray[i].show !== showWaves) continue;
                     break;
                 case 'peakPeriod':
-                    if (modelArray[i].show !== showPeriod) continue
+                    if (modelArray[i].show !== showPeriod) continue;
                     break;
                 case 'windSpeed':
-                    if (modelArray[i].show !== showWind) continue
+                    if (modelArray[i].show !== showWind) continue;
                     break;
             }
             var $template = $('#template');
@@ -155,9 +154,9 @@ $(function() {
     }
 
     $('.day').click(function(ev) {
-        let showWaves = $('#waveHeight').is(":checked");
-        let showPeriod = $('#peakPeriod').is(":checked");
-        let showWind = $('#wind').is(":checked");
+        let showWaves = $('#waveHeight').is(':checked');
+        let showPeriod = $('#peakPeriod').is(':checked');
+        let showWind = $('#wind').is(':checked');
 
         $('.day').removeClass('active');
         $(ev.target).addClass('active');
@@ -168,9 +167,9 @@ $(function() {
     });
 
     $('.location').click(function(ev) {
-        let showWaves = $('#waveHeight').is(":checked");
-        let showPeriod = $('#peakPeriod').is(":checked");
-        let showWind = $('#wind').is(":checked");        
+        let showWaves = $('#waveHeight').is(':checked');
+        let showPeriod = $('#peakPeriod').is(':checked');
+        let showWind = $('#wind').is(':checked');
 
         $('.location').removeClass('active');
         $(ev.target).addClass('active');
@@ -183,14 +182,14 @@ $(function() {
     });
 
     $('.image-type').change(function(ev) {
-        let showWaves = $('#waveHeight').is(":checked");
-        let showPeriod = $('#peakPeriod').is(":checked");
-        let showWind = $('#wind').is(":checked");
+        let showWaves = $('#waveHeight').is(':checked');
+        let showPeriod = $('#peakPeriod').is(':checked');
+        let showWind = $('#wind').is(':checked');
 
         var activeDay = $('#days')
             .find('button.active')
             .text();
-        var activeLocation = $('#locations').find('button.active')[0].id;            
+        var activeLocation = $('#locations').find('button.active')[0].id;
         if (activeDay !== '-' && activeDay !== '+') currentHourFactor = getHourFactorFromDay(activeDay);
         getImages(activeLocation, currentHourFactor, showWaves, showPeriod, showWind);
     });
