@@ -1,0 +1,11 @@
+version: "3.4"
+
+services:
+  eiresurfer:
+    container_name: eiresurfer
+    image: ${DOCKER_REGISTRY:-}eiresurfer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT}:80
