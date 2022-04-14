@@ -9,3 +9,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - ${PORT}:80
+    environment:
+      - PORT=${PORT}
