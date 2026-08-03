@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos with Teens · 10-Day Activity Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#F8EEDA;--sand-deep:#EFE0C2;--paper:#FFFDF7;
+    --azul:#14608A;--azul-deep:#0E3A52;--ink:#173240;--ink-soft:#4A6472;--coral:#EE6C4D;
+    --c-beach:#E09A2D;--c-water:#1E9B8C;--c-boat:#14608A;--c-adv:#EE6C4D;--c-nature:#5B8C3E;--c-culture:#8A5A9B;
+    --radius:14px;--line:rgba(23,50,64,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .hero{position:relative;overflow:hidden;background:var(--azul-deep);color:#fff;padding:56px 24px 44px}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.22;
+    background-image:
+      radial-gradient(circle at 20px 20px, transparent 8px, rgba(255,255,255,.5) 9px, transparent 10px),
+      radial-gradient(circle at 0 0, rgba(255,255,255,.35) 3px, transparent 4px),
+      radial-gradient(circle at 40px 40px, rgba(255,255,255,.35) 3px, transparent 4px),
+      linear-gradient(45deg, transparent 46%, rgba(255,255,255,.28) 47%, rgba(255,255,255,.28) 53%, transparent 54%),
+      linear-gradient(-45deg, transparent 46%, rgba(255,255,255,.28) 47%, rgba(255,255,255,.28) 53%, transparent 54%);
+    background-size:40px 40px;-webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 90%);mask-image:linear-gradient(to bottom,#000 0%,transparent 90%)}
+  .hero-inner{position:relative;max-width:1080px;margin:0 auto}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#8FD3E8;margin-bottom:16px}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(2.3rem,6vw,4rem);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
+  h1 .coral{color:var(--coral)}
+  .lede{margin-top:18px;max-width:56ch;font-size:1.05rem;color:#D5E6ED}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#B7D3DE}
+  .meta-strip b{color:#fff;font-weight:700}
+  main{max-width:1080px;margin:0 auto;padding:34px 24px 80px}
+  .note{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:10px;padding:16px 18px;font-size:.9rem;color:var(--ink-soft);margin-bottom:16px}
+  .note:last-of-type{margin-bottom:30px}
+  .note.transit-note{border-left-color:var(--azul)}
+  .note b{color:var(--ink)}
+  .note .tick{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--azul)}
+  .filter-wrap{position:sticky;top:0;z-index:20;background:linear-gradient(var(--sand) 72%,transparent);padding:14px 0 16px;margin-bottom:6px}
+  .filter-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;padding:7px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease}
+  .chip:hover{transform:translateY(-1px)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle;background:var(--dot,#999)}
+  .band{margin-top:38px}
+  .band-head{display:flex;align-items:baseline;gap:14px;padding-bottom:10px;margin-bottom:20px;border-bottom:2px solid var(--line)}
+  .band-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.8rem;color:#fff;background:var(--azul);padding:3px 9px;border-radius:6px}
+  .band-head h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em}
+  .band-head .range{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:4px solid var(--cat,var(--azul))}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 26px -14px rgba(14,58,82,.4)}
+  .card.hide{display:none}
+  .tag{align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cat,var(--azul));background:color-mix(in srgb,var(--cat,var(--azul)) 12%,white);padding:4px 9px;border-radius:6px;margin-bottom:11px}
+  .card h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:1.16rem;line-height:1.15;letter-spacing:-.01em;margin-bottom:7px}
+  .card p{font-size:.9rem;color:var(--ink-soft)}
+  .transit{margin-top:12px;background:color-mix(in srgb,var(--azul) 7%,white);border:1px solid color-mix(in srgb,var(--azul) 18%,white);border-radius:9px;padding:9px 11px;font-size:.82rem;color:var(--ink);flex-grow:1}
+  .transit .tlabel{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--azul);margin-bottom:3px}
+  .transit.none{background:color-mix(in srgb,var(--ink-soft) 8%,white);border-color:color-mix(in srgb,var(--ink-soft) 18%,white);color:var(--ink-soft)}
+  .transit.none .tlabel{color:var(--ink-soft)}
+  .card > p{flex-grow:0}
+  .card:not(:has(.transit)) > p{flex-grow:1}
+  .stats{display:flex;gap:10px;margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
+  .stat{flex:1}
+  .stat .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.92rem;color:var(--ink)}
+  .stat.cost .v{color:var(--coral)}
+  .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--azul);text-decoration:none;border:1.5px solid color-mix(in srgb,var(--azul) 30%,white);border-radius:8px;padding:7px 11px;transition:background .12s ease,color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .card-link .arrow{font-size:.8rem}
+  .empty{display:none;text-align:center;padding:50px 20px;color:var(--ink-soft);font-size:.95rem}
+  .empty.show{display:block}
+  footer{max-width:1080px;margin:0 auto;padding:0 24px 60px;font-size:.8rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:18px}
+  a:focus-visible,.chip:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+  @media (max-width:560px){.hero{padding:44px 20px 36px}main{padding:26px 18px 60px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Lagos · Western Algarve · 10 days, 3 teens (12·13·14)</div>
+    <h1>Ten days in <span class="coral">Lagos</span>, sorted by how far you'll travel.</h1>
+    <p class="lede">Sea caves, water parks, go-karts, cliff-top kayaking and the wild west coast — all genuinely fun for 12–14 year olds. Grouped by distance from central Lagos (Praça Luís de Camões), each with a one-way Uber estimate, a public-transport option, and an official link where one exists.</p>
+    <div class="meta-strip"><span><b>22</b> activities</span><span><b>3</b> distance bands</span><span><b>6</b> categories</span><span>train · bus · boat · official links</span></div>
+  </div>
+</header>
+<main>
+  <div class="note"><b>About the numbers.</b> Distances are approximate road distances from central Lagos; drive times assume normal traffic. Uber figures are rough <b>one-way UberX estimates</b> for planning only — real fares swing with demand, time of day and surge. For the far day-trips a rental car or the tour operator's own transfer is often cheaper and more reliable than round-trip Ubers.</div>
+  <div class="note transit-note"><b>Getting around without a car.</b> Lagos is the western end of the <b>CP train</b> line (fast, cheap trips east to Portimão, Silves, Albufeira and Faro — buy at <span class="tick">cp.pt</span>). <b>Vamus</b> regional buses run west to Sagres and Aljezur and up to Monchique (via Portimão), and a <b>Tourist Pass</b> gives unlimited Vamus rides for about €35 (3 days) / €45 (7 days). Around town, the small <b>"A Onda"</b> minibuses reach the beaches and the zoo, and most boat trips leave straight from <b>Lagos Marina</b>, a short walk from the centre. Google Maps has both the train and bus networks built in for live times. Where an attraction has its own official site, the card links to it.</div>
+  <div class="filter-wrap">
+    <div class="filter-label">Filter by type</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">All</button>
+      <button class="chip" data-cat="beach" style="--dot:var(--c-beach)" aria-pressed="false"><span class="dot"></span>Beach &amp; islands</button>
+      <button class="chip" data-cat="water" style="--dot:var(--c-water)" aria-pressed="false"><span class="dot"></span>Water parks</button>
+      <button class="chip" data-cat="boat" style="--dot:var(--c-boat)" aria-pressed="false"><span class="dot"></span>Boat &amp; kayak</button>
+      <button class="chip" data-cat="adv" style="--dot:var(--c-adv)" aria-pressed="false"><span class="dot"></span>Adventure</button>
+      <button class="chip" data-cat="nature" style="--dot:var(--c-nature)" aria-pressed="false"><span class="dot"></span>Nature &amp; wildlife</button>
+      <button class="chip" data-cat="culture" style="--dot:var(--c-culture)" aria-pressed="false"><span class="dot"></span>Culture &amp; towns</button>
+    </div>
+  </div>
+  <div id="bands"></div>
+  <div class="empty" id="empty">Nothing in that category — try another filter.</div>
+</main>
+<footer><div class="rule">Built as a planning reference. Book boat and cave trips a day or two ahead in summer and check the morning of, as rough seas occasionally cancel cave entries. Confirm go-kart height minimums so all three can drive. Bus and ferry timetables thin out at weekends and off-season — check Vamus, CP or Google Maps the day before. Prices and hours change seasonally; verify on the official sites before you go.</div></footer>
+<script>
+const CATS={beach:{label:'Beach & islands',color:'var(--c-beach)'},water:{label:'Water park',color:'var(--c-water)'},boat:{label:'Boat & kayak',color:'var(--c-boat)'},adv:{label:'Adventure',color:'var(--c-adv)'},nature:{label:'Nature & wildlife',color:'var(--c-nature)'},culture:{label:'Culture & towns',color:'var(--c-culture)'}};
+const BANDS=[
+{num:'01',title:'In & around Lagos',range:'walk – 3 km · Uber ≈ €5–10',items:[
+{cat:'culture',name:'Lagos Old Town & Waterfront',dist:'In town · walk',cost:'€5 min fare',desc:'Cobbled lanes, Praça Gil Eanes, 16th-century city walls and the old fort by the water, with a lively marina-side promenade for ice-cream and people-watching.'},
+{cat:'culture',name:'Centro Ciência Viva de Lagos',dist:'In town · walk',cost:'€5 min fare',desc:'Hands-on science centre with a please-touch policy, an outdoor garden and a rooftop café over the harbour — a great rainy-day or too-hot-for-the-beach plan for this age.',url:'https://lagos.cienciaviva.pt/'},
+{cat:'boat',name:'Ponta da Piedade by Kayak or Boat',dist:'Marina · walk',cost:'€5 min fare',desc:"Paddle or cruise through the golden cliffs, arches and grottoes just south of town — the Algarve's signature scenery and a genuine teen highlight.",url:'http://pontadapiedadetours.pt/'},
+{cat:'boat',name:'Dolphin Watching from Lagos Marina',dist:'Marina · walk',cost:'€5 min fare',desc:'Fast-boat trips into the Atlantic to find bottlenose and common dolphins; several well-rated operators leave straight from the marina.'},
+{cat:'beach',name:'Praia Dona Ana & Praia do Camilo',dist:'≈2 km · 25-min walk',cost:'€5–8',desc:"Two of Portugal's most photogenic cliff-backed beaches — golden sand, clear water and a scenic wooden stairway down.",transit:"A pretty clifftop walk from the centre, the 'A Onda' town bus, or a short taxi."},
+{cat:'beach',name:'Meia Praia',dist:'≈3 km',cost:'€6–10',desc:'The long sandy beach east of town — space to spread out, beach bars, and paddleboard or windsurf hire for the active ones.',transit:"The 'A Onda' town bus, one stop on the train to the Meia Praia halt, or a stroll along the promenade."}
+]},
+{num:'02',title:'Short ride',range:'6 – 37 km · Uber ≈ €9–55',items:[
+{cat:'nature',name:'Zoo de Lagos',dist:'≈12 km · 20 min',cost:'€10–15',desc:'140+ species, a petting farm, penguins and daily feedings — compact, shady and easy to get round in a morning.',transit:"'A Onda' green line 6 from Portas de Portugal to Medronhal–Zoo, or a Vamus bus toward Barão de São João; a summer zoo shuttle also runs.",url:'https://zoolagos.com/en'},
+{cat:'adv',name:'Kartódromo Internacional do Algarve',dist:'≈25 km · 30 min',cost:'€28–38',desc:'A proper go-kart circuit near Portimão with fast rental karts and two track layouts — a big hit at this age. Check height and age minimums.',transit:'Train Lagos→Portimão or Mexilhoeira Grande + taxi; a car is easier here.'},
+{cat:'water',name:'Slide & Splash',dist:'≈25 km · 30 min',cost:'€28–38',desc:"The region's biggest, best-kept water park; slides pitched right at 12–14s, plus shows and lawns to picnic on.",transit:"Train Lagos→Estômbar-Lagoa + taxi, or the park's free summer pickup buses from many resorts.",url:'http://www.slidesplash.com/'},
+{cat:'nature',name:'Passadiços de Alvor Boardwalk',dist:'≈15 km · 20 min',cost:'€15–20',desc:'A flat wooden boardwalk over the Ria de Alvor lagoon and dunes out to a wild beach — easy, breezy and full of birdlife.',transit:'Vamus bus Lagos→Alvor, or train Lagos→Portimão + local bus/taxi.'},
+{cat:'culture',name:'Sagres & Cape St. Vincent',dist:'≈37 km · 45 min',cost:'€40–55',desc:"The dramatic 'end of Europe' — a huge clifftop fortress and Europe's south-westernmost lighthouse, with roaring Atlantic views.",transit:'Frequent Vamus bus Lagos→Sagres (~1 h); the cape itself is bus 47 from Lagos (limited departures) or a taxi from Sagres.'},
+{cat:'culture',name:'Silves Castle',dist:'≈30 km · 35 min',cost:'€32–44',desc:'A dramatic red-sandstone Moorish castle above a riverside town, with ramparts to walk and stork nests on the old walls.',transit:'Train Lagos→Silves (~40 min); the station is ~2 km from the old town, so finish with a walk or taxi. Vamus buses also serve it.'},
+{cat:'beach',name:'Praia da Luz & Burgau',dist:'≈6–15 km · 15 min',cost:'€9–16',desc:'Calmer, family-friendly beaches west of Lagos with gentle water, rock pools and easy seafront cafés.',transit:"Vamus / 'A Onda' bus Lagos→Luz (frequent in summer); Burgau is a little further along the coast."},
+{cat:'nature',name:'Barragem da Bravura',dist:'≈15 km · 20 min',cost:'€16–22',desc:'A peaceful reservoir in the hills north of Lagos — kayaking, swimming spots and shady picnic areas away from the coast.',transit:'No public transport to the dam — car or taxi only.',none:true},
+{cat:'beach',name:'Portimão & Praia da Rocha',dist:'≈25 km · 25 min',cost:'€28–38',desc:'A big golden beach backed by ochre cliffs, a lively boardwalk, and boat trips from the marina.',transit:'Direct train Lagos→Portimão (~20 min), then a local bus or taxi down to Praia da Rocha.'}
+]},
+{num:'03',title:'Day trips',range:'35 km+ · Uber ≈ €38–78 · car/tour often cheaper',items:[
+{cat:'boat',name:'Benagil Sea Cave & Praia da Marinha',dist:'≈40 km · 40 min',cost:'€44–58',desc:"The famous domed cave with a hole in its roof, plus one of the world's prettiest beaches next door — best reached by boat.",transit:'No direct public transport — car, or an organised boat tour with pickup.',url:'http://www.tridenteboattrips.com/'},
+{cat:'nature',name:'Carvoeiro Boardwalk & Caves',dist:'≈35 km · 40 min',cost:'€38–52',desc:'A clifftop wooden walkway over turquoise coves and rock arches, with a pretty village and beach below.',transit:'Vamus bus via Lagoa, or train to Estômbar-Lagoa + taxi; car easier.'},
+{cat:'water',name:'Aqualand Algarve',dist:'≈40 km · 40 min',cost:'€44–58',desc:'A big water park known for short weekday queues — endless slides and often half-price return tickets.',transit:'Train to Alcantarilha or a Vamus bus, then taxi — a car or tour is easier.',url:'https://www.aqualand.pt/en/'},
+{cat:'water',name:'Zoomarine',dist:'≈55 km · 50 min',cost:'€58–78',desc:'All-day combo of water slides, dolphin and sea-lion shows, a 4D cinema and a butterfly garden. A two-day ticket is worth it.',transit:'Train Lagos→Albufeira-Ferreiras + bus, or a Vamus line via Guia; car/tour easier.',url:'https://www.zoomarine.pt/'},
+{cat:'nature',name:'Monchique & Fóia Peak',dist:'≈45 km · 50 min',cost:'€48–65',desc:"The Algarve's green mountain range and its highest point, with viewpoints, forest trails and jeep tours.",transit:'Train Lagos→Portimão then the Vamus bus up to Monchique; the summit needs a taxi or jeep tour.'},
+{cat:'adv',name:'Aljezur & Praia do Amado',dist:'≈40 km · 45 min',cost:'€44–60',desc:'The wild west (Costa Vicentina) coast — big Atlantic surf and one of the region\u2019s best beginner surf-school beaches.',transit:'Vamus bus Lagos→Aljezur; the surf beaches beyond need a taxi or a surf-school transfer.'},
+{cat:'adv',name:'Krazy World, Algoz',dist:'≈55 km · 55 min',cost:'€58–78',desc:'Animal park meets activity park — reptiles, farm animals, mini-golf, quad bikes and a pool.',transit:'No practical public transport — car, taxi or organised tour.',none:true,url:'https://www.krazyworld.com/'}
+]}
+];
+const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const transit=it.transit?`<div class="transit${it.none?' none':''}"><span class="tlabel">${it.none?'⚠ Public transport':'🚆 Public transport'}</span>${it.transit}</div>`:'';const link=it.url?`<a class="card-link" href="${it.url}" target="_blank" rel="noopener noreferrer">Official site <span class="arrow">↗</span></a>`:'';return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${transit}<div class="stats"><div class="stat"><span class="k">Distance</span><span class="v">${it.dist}</span></div><div class="stat cost"><span class="k">Uber ~</span><span class="v">${it.cost}</span></div></div>${link}</article>`}).join('')}</div></section>`).join('')}
+function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
+document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
+build();
+</script>
+</body>
+</html>

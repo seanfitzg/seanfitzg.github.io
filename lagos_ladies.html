@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos · A Ten-Day Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4ECDD;--paper-2:#FCF7EE;--ink:#2B2A31;--ink-soft:#6E6968;
+    --pine:#245C4E;--pine-deep:#173B31;--terra:#C0682C;--wine:#8E2C40;
+    --c-culture:#7E4E93;--c-food:#9C2B44;--c-beach:#C08A2E;--c-nature:#4E7B3A;--c-well:#1E8B7D;--c-town:#B96633;
+    --line:rgba(43,42,49,.14);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  /* ---- hero ---- */
+  .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
+  h1 em{font-style:italic;color:var(--terra)}
+  .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:40ch;margin-top:22px;line-height:1.4}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+  .meta-strip b{color:var(--pine);font-weight:600}
+  /* azulejo frieze signature */
+  .frieze{height:26px;margin-top:40px;
+    background-image:
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      radial-gradient(circle at center,var(--terra) 22%,transparent 24%);
+    background-size:26px 26px,26px 26px,26px 26px;
+    background-position:0 0,13px 13px,0 0;
+    opacity:.9;border-top:2px solid var(--pine);border-bottom:2px solid var(--pine)}
+  main{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--terra);border-radius:var(--radius);padding:17px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:16px}
+  .note:last-of-type{margin-bottom:34px}
+  .note.transit-note{border-left-color:var(--pine)}
+  .note b{color:var(--ink);font-weight:600}
+  .note .tick{color:var(--pine);font-weight:600}
+  /* filter */
+  .filter-wrap{position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 74%,transparent);padding:14px 0 16px;margin-bottom:4px}
+  .filter-label{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer;transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease}
+  .chip:hover{transform:translateY(-1px)}
+  .chip[aria-pressed="true"]{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--dot,#999)}
+  /* bands */
+  .band{margin-top:44px}
+  .band-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--pine)}
+  .band-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.15rem;color:var(--terra);letter-spacing:.05em}
+  .band-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;letter-spacing:-.01em;color:var(--pine-deep)}
+  .band-head .range{margin-left:auto;font-size:.8rem;color:var(--ink-soft);white-space:nowrap;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:3px solid var(--cat,var(--pine))}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(23,59,49,.5)}
+  .card.hide{display:none}
+  .tag{align-self:flex-start;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cat,var(--pine));margin-bottom:10px}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cat,var(--pine));margin-right:8px;vertical-align:middle}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;color:var(--pine-deep);margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--ink-soft)}
+  .transit{margin-top:13px;background:color-mix(in srgb,var(--pine) 8%,white);border:1px solid color-mix(in srgb,var(--pine) 20%,white);border-radius:var(--radius);padding:10px 12px;font-size:.83rem;color:var(--ink);flex-grow:1}
+  .transit .tlabel{display:block;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);margin-bottom:4px}
+  .transit.none{background:color-mix(in srgb,var(--ink-soft) 8%,white);border-color:color-mix(in srgb,var(--ink-soft) 20%,white);color:var(--ink-soft)}
+  .transit.none .tlabel{color:var(--ink-soft)}
+  .card > p{flex-grow:0}
+  .card:not(:has(.transit)) > p{flex-grow:1}
+  .stats{display:flex;gap:12px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+  .stat{flex:1}
+  .stat .k{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-weight:600;font-size:.95rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat.cost .v{color:var(--wine)}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);text-decoration:none;border-bottom:1.5px solid var(--terra);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{color:var(--wine);border-color:var(--wine)}
+  .empty{display:none;text-align:center;padding:54px 20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
+  .empty.show{display:block}
+  footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:20px}
+  a:focus-visible,.chip:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  @media (max-width:560px){.hero{padding:48px 20px 0}main{padding:26px 20px 64px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Lagos · Western Algarve · Ten days, three travellers</div>
+  <h1>Lagos, at a <em>leisurely</em> pace.</h1>
+  <p class="lede">Old-town wandering, cliff-top coves, wine among the vines, mountain thermal springs and the dramatic end of Europe.</p>
+  <div class="meta-strip"><span><b>22</b> places</span><span><b>3</b> distance bands</span><span><b>6</b> themes</span><span>train · bus · boat · official links</span></div>
+  <div class="frieze"></div>
+</header>
+<main>
+  <div class="note"><b>About the numbers.</b> Distances are approximate road distances from central Lagos (Praça Luís de Camões); drive times assume normal traffic. Uber figures are rough <b>one-way UberX estimates</b> for planning only — real fares move with demand and time of day. For the far day-trips, a hire car or a tour with its own transfer is usually cheaper and calmer than round-trip Ubers.</div>
+  <div class="note transit-note"><b>Getting around without a car.</b> Lagos sits at the western end of the <b>CP train</b> line — quick, inexpensive runs east to Portimão, Silves and beyond (tickets at <span class="tick">cp.pt</span>). <b>Vamus</b> regional buses head west to Sagres and Aljezur and up to Monchique (change at Portimão); a <b>Tourist Pass</b> gives unlimited Vamus travel for about €35 (3 days) or €45 (7 days). In town, the little <b>"A Onda"</b> minibuses reach the beaches, and the scenic boat trips leave from <b>Lagos Marina</b>, a short stroll from the square. A few stations (Silves, Estômbar) sit outside their towns, so a short taxi finishes the trip. Where a place has its own official site, the card links to it.</div>
+  <div class="filter-wrap">
+    <div class="filter-label">Filter by theme</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">All</button>
+      <button class="chip" data-cat="culture" style="--dot:var(--c-culture)" aria-pressed="false"><span class="dot"></span>Culture &amp; history</button>
+      <button class="chip" data-cat="food" style="--dot:var(--c-food)" aria-pressed="false"><span class="dot"></span>Food &amp; wine</button>
+      <button class="chip" data-cat="beach" style="--dot:var(--c-beach)" aria-pressed="false"><span class="dot"></span>Beaches</button>
+      <button class="chip" data-cat="nature" style="--dot:var(--c-nature)" aria-pressed="false"><span class="dot"></span>Nature &amp; scenery</button>
+      <button class="chip" data-cat="well" style="--dot:var(--c-well)" aria-pressed="false"><span class="dot"></span>Wellness &amp; spa</button>
+      <button class="chip" data-cat="town" style="--dot:var(--c-town)" aria-pressed="false"><span class="dot"></span>Towns &amp; villages</button>
+    </div>
+  </div>
+  <div id="bands"></div>
+  <div class="empty" id="empty">Nothing under that theme — try another.</div>
+</main>
+<footer><div class="rule">Built as a planning reference. Book winery tastings, spa passes and boat trips a day or two ahead, and check the morning of a cave trip, as rough seas occasionally close the caves. Bus timetables thin out at weekends and off-season — check Vamus, CP or Google Maps the day before. Prices and opening hours change seasonally; confirm on the official sites before you set off.</div></footer>
+<script>
+const CATS={culture:{label:'Culture & history',color:'var(--c-culture)'},food:{label:'Food & wine',color:'var(--c-food)'},beach:{label:'Beaches',color:'var(--c-beach)'},nature:{label:'Nature & scenery',color:'var(--c-nature)'},well:{label:'Wellness & spa',color:'var(--c-well)'},town:{label:'Towns & villages',color:'var(--c-town)'}};
+const BANDS=[
+{num:'I',title:'In & around Lagos',range:'walk – 3 km · Uber ≈ €5–8',items:[
+{cat:'culture',name:'Lagos Old Town & City Walls',dist:'In town · walk',cost:'€5 min fare',desc:'Cobbled lanes, the handsome Praça Gil Eanes, 16th-century walls and the waterfront — made for a slow morning of wandering with coffee and pastel de nata stops.'},
+{cat:'culture',name:'Igreja de Santo António & Museu de Lagos',dist:'In town · walk',cost:'€5 min fare',desc:"A dazzling gilded baroque church joined to an atmospheric town museum with a wonderful 'cabinet of curiosities'. Seniors' entry is only a couple of euros."},
+{cat:'culture',name:'Slave Market Museum & Praça do Infante',dist:'In town · walk',cost:'€5 min fare',desc:"A small, sobering museum on the site of Europe's first slave market — thoughtful, important history right in the heart of town."},
+{cat:'food',name:'Lagos Market & Old-Town Tapas',dist:'In town · walk',cost:'€5 min fare',desc:"The municipal market's fish and produce halls, then a graze through the old town's tascas for petiscos, cheese and a glass of Algarve wine."},
+{cat:'nature',name:'Ponta da Piedade Grotto Cruise',dist:'Marina · walk',cost:'€5 min fare',desc:"A gentle boat glide through golden arches, sea stacks and caves just south of town — the Algarve's most beautiful stretch of coast.",url:'http://pontadapiedadetours.pt/'},
+{cat:'beach',name:'Praia Dona Ana & Praia do Camilo',dist:'≈2 km · 25-min walk',cost:'€5–8',desc:'Two exquisite cliff-framed coves — golden sand, clear water and a scenic clifftop path linking them.',transit:"A pretty clifftop walk from the centre, the 'A Onda' town bus, or a short taxi."},
+{cat:'nature',name:'Dolphin Watching from the Marina',dist:'Marina · walk',cost:'€5 min fare',desc:'A calm catamaran trip to see bottlenose and common dolphins in the Atlantic, with respectful, small-group operators.'}
+]},
+{num:'II',title:'Short ride',range:'3 – 37 km · Uber ≈ €6–55',items:[
+{cat:'food',name:'Monte da Casteleja Organic Winery',dist:'≈7 km · 13 min',cost:'€10–14',desc:"The region's only certified-organic estate, a family affair just outside Lagos — a vineyard-and-cellar tour and a tasting of white, red and rosé with local tapas. Book ahead.",transit:'No town bus to the estate — a short taxi/Uber (~15 min); some tours arrange pickup.',url:'https://montecasteleja.com/en/'},
+{cat:'nature',name:'Passadiços de Alvor Boardwalk',dist:'≈15 km · 20 min',cost:'€15–20',desc:'A flat, beautiful boardwalk over the Ria de Alvor salt marshes and dunes — birdlife, sea air and wide views, easy for all paces.',transit:'Vamus bus Lagos→Alvor, or train Lagos→Portimão + local bus/taxi.'},
+{cat:'nature',name:'Sagres & Cape St. Vincent',dist:'≈37 km · 45 min',cost:'€40–55',desc:"Wind-scoured clifftops at the 'end of Europe', a vast fortress and a lighthouse — spectacular at sunset. Bring a jacket.",transit:'Frequent Vamus bus Lagos→Sagres (~1 h); the cape is bus 47 (limited departures) or a taxi from Sagres.'},
+{cat:'culture',name:'Silves Castle & Old Town',dist:'≈30 km · 35 min',cost:'€32–44',desc:'The former Moorish capital — a red-sandstone castle, an old cathedral and a sleepy riverside town made for a long, slow lunch.',transit:'Train Lagos→Silves (~40 min); station ~2 km from the old town, so finish with a walk or taxi. Vamus buses also serve it.'},
+{cat:'beach',name:'Praia da Luz & Burgau',dist:'≈6–15 km · 15 min',cost:'€9–16',desc:'Relaxed seafront villages west of Lagos with calm swimming and unhurried beach-restaurant lunches.',transit:"Vamus / 'A Onda' bus Lagos→Luz (frequent in summer); Burgau is a little further along the coast."},
+{cat:'culture',name:'Museu de Portimão & Praia da Rocha',dist:'≈25 km · 25 min',cost:'€28–38',desc:'An award-winning museum in a restored sardine cannery, then the ochre cliffs and boardwalk of Praia da Rocha.',transit:'Direct train Lagos→Portimão (~20 min), then a short walk or local bus to the museum and beach.'},
+{cat:'well',name:'Spa Afternoon at a Lagos Resort',dist:'≈3 km · 8 min',cost:'€6–10',desc:'Several Lagos resort spas (such as Cascade Wellness) sell day passes — thermal circuits, pools and massages minutes from the old town. Book ahead.',transit:"The 'A Onda' town bus or a short taxi."}
+]},
+{num:'III',title:'Day trips',range:'28 km+ · Uber ≈ €30–65 · car/tour often calmer',items:[
+{cat:'nature',name:'Praia da Marinha & Seven Hanging Valleys Walk',dist:'≈40 km · 40 min',cost:'€44–58',desc:"One of Europe's loveliest beaches and a breathtaking clifftop trail past arches and hidden coves — go early and wear proper shoes.",transit:'No direct public transport — car, or a guided walking tour with pickup.'},
+{cat:'town',name:'Carvoeiro & the Clifftop Boardwalk',dist:'≈35 km · 40 min',cost:'€38–52',desc:'A postcard cove village with a scenic wooden walkway over dramatic rock formations and turquoise water.',transit:'Vamus bus via Lagoa, or train to Estômbar-Lagoa + taxi; car easier.'},
+{cat:'town',name:'Ferragudo',dist:'≈30 km · 35 min',cost:'€32–44',desc:'A whitewashed fishing village of cobbled lanes and bougainvillea across the river from Portimão — lovely for a long cataplana lunch.',transit:'Train Lagos→Portimão then a short taxi or river ferry across; car easier.'},
+{cat:'well',name:'Caldas de Monchique Thermal Spa',dist:'≈45 km · 50 min',cost:'€48–65',desc:"The Algarve's only thermal spa, in a wooded mountain village — alkaline spring waters, thermal pools and treatments in a peaceful setting.",transit:'Train Lagos→Portimão, then the Vamus bus up to Monchique (stops at Caldas); car easier.',url:'https://monchiquetermalresort.com/'},
+{cat:'nature',name:'Fóia Peak & Monchique Village',dist:'≈45 km · 50 min',cost:'€48–65',desc:"The Algarve's highest point for sweeping views, plus a hill town known for craft shops, medronho spirit and honey.",transit:'Train Lagos→Portimão + Vamus bus to Monchique; the summit itself needs a taxi or jeep tour.'},
+{cat:'town',name:'Aljezur & Odeceixe (Costa Vicentina)',dist:'≈40 km · 50 min',cost:'€44–65',desc:'The wild, unspoilt west coast — a castle-topped village, sweeping surf beaches and the pretty river beach at Odeceixe.',transit:'Vamus bus Lagos→Aljezur/Odeceixe (limited); a car is easier for the beaches.'},
+{cat:'food',name:'Quinta dos Vales Winery & Sculpture Garden',dist:'≈28 km · 30 min',cost:'€30–42',desc:"A striking estate near Estômbar with award-winning wines, giant garden sculptures and a fun 'blend-your-own-wine' workshop.",transit:'Train Lagos→Estômbar-Lagoa + taxi; car easier.'},
+{cat:'nature',name:'Benagil Cave by Boat',dist:'≈40 km · 40 min',cost:'€44–58',desc:'The iconic domed sea cave and a scenic cruise along the Lagoa cliffs — relaxed and unforgettable.',transit:'No direct public transport — car, or a boat tour with pickup.',url:'http://www.tridenteboattrips.com/'}
+]}
+];
+const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const transit=it.transit?`<div class="transit${it.none?' none':''}"><span class="tlabel">${it.none?'Public transport':'Public transport'}</span>${it.transit}</div>`:'';const link=it.url?`<a class="card-link" href="${it.url}" target="_blank" rel="noopener noreferrer">Official site ↗</a>`:'';return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${transit}<div class="stats"><div class="stat"><span class="k">Distance</span><span class="v">${it.dist}</span></div><div class="stat cost"><span class="k">Uber ~</span><span class="v">${it.cost}</span></div></div>${link}</article>`}).join('')}</div></section>`).join('')}
+function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
+document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
+build();
+</script>
+</body>
+</html>
