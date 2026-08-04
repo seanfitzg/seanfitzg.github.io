@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos · Spa Afternoons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4ECDD;--paper-2:#FCF7EE;--ink:#2B2A31;--ink-soft:#6E6968;
+    --pine:#245C4E;--pine-deep:#173B31;--terra:#C0682C;--wine:#8E2C40;
+    --line:rgba(43,42,49,.14);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
+  h1 em{font-style:italic;color:var(--terra)}
+  .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:42ch;margin-top:22px;line-height:1.4}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+  .meta-strip b{color:var(--pine);font-weight:600}
+  .frieze{height:26px;margin-top:40px;
+    background-image:
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      radial-gradient(circle at center,var(--terra) 22%,transparent 24%);
+    background-size:26px 26px,26px 26px,26px 26px;background-position:0 0,13px 13px,0 0;
+    opacity:.9;border-top:2px solid var(--pine);border-bottom:2px solid var(--pine)}
+  main{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--terra);border-radius:var(--radius);padding:17px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:34px}
+  .note b{color:var(--ink);font-weight:600}
+  .note .tick{color:var(--pine);font-weight:600}
+  .band{margin-top:14px}
+  .band + .band{margin-top:46px}
+  .band-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--pine)}
+  .band-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.15rem;color:var(--terra);letter-spacing:.05em}
+  .band-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;letter-spacing:-.01em;color:var(--pine-deep)}
+  .band-head .range{margin-left:auto;font-size:.8rem;color:var(--ink-soft);white-space:nowrap;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:3px solid var(--pine)}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(23,59,49,.5)}
+  .tag{align-self:flex-start;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);margin-bottom:10px}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pine);margin-right:8px;vertical-align:middle}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.55rem;line-height:1.1;letter-spacing:-.01em;color:var(--pine-deep);margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--ink-soft);flex-grow:1}
+  .stats{display:flex;gap:12px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+  .stat{flex:1}
+  .stat .k{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-weight:600;font-size:.9rem;color:var(--ink)}
+  .stat.pass .v{color:var(--pine)}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);text-decoration:none;border-bottom:1.5px solid var(--terra);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{color:var(--wine);border-color:var(--wine)}
+  .card-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:14px}
+  .card-links .card-link{margin-top:0}
+  .card-link.map{color:var(--pine);border-color:var(--pine)}
+  .card-link.map:hover,.card-link.map:focus-visible{color:var(--pine-deep);border-color:var(--pine-deep)}
+  footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:20px}
+  a:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  @media (max-width:560px){.hero{padding:48px 20px 0}main{padding:26px 20px 64px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Lagos · Western Algarve · A spa afternoon</div>
+  <h1>A spa afternoon, <em>booked</em> in advance.</h1>
+  <p class="lede">Six resort spas that welcome day visitors — four within minutes of the old town, two worth the drive.</p>
+  <div class="meta-strip"><span><b>6</b> spas</span><span><b>4</b> in &amp; around Lagos</span><span>day passes · treatments</span></div>
+  <div class="frieze"></div>
+</header>
+<main>
+  <div class="note"><b>Before you go.</b> At resort spas the wet areas (pool, sauna, Turkish bath) usually need a <b>booked day pass</b>, and massages and treatments are extra and booked separately — so call or reserve ahead, ideally a day or two out. Access policies shift with the season and how full the hotel is; a couple of these have at times limited the spa to staying guests, so it's always worth confirming when you book. Prices aren't listed here as they change often — check each spa's own page (<span class="tick">linked below</span>) for current rates.</div>
+
+  <section class="band">
+    <div class="band-head"><span class="band-num">I</span><h2>In &amp; around Lagos</h2><span class="range">≈3–5 km · a short taxi from the square</span></div>
+    <div class="grid">
+      <article class="card">
+        <span class="tag">5-star · clifftop</span>
+        <h3>Cascade Spa — Cascade Wellness Resort</h3>
+        <p>The headline choice: a wellness-focused five-star perched on the Ponta da Piedade cliffs, with a heated outdoor pool, sauna, jacuzzi, steam room and ice fountain, plus a full treatment menu. It runs a one-day spa programme for non-guests — though access has at times been kept for hotel guests only, so confirm when you book.</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈3 km · 8 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Day pass + treatments</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://www.cascaderesortalgarve.com/en/spa-algarve" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Cascade%20Wellness%20Resort%20Lagos" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Beachfront · Meia Praia</span>
+        <h3>Satsanga Spa — Vila Galé Lagos</h3>
+        <p>A stylish hotel right on Meia Praia, with the Satsanga spa: an indoor panoramic pool, sauna, Turkish bath and hydromassage, plus relaxation and anti-stress treatments. Book the circuit or a treatment through the spa reception; the wet areas are for ages 16 and over.</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈3 km · 8 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Book via spa desk</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://www.vilagale.com/en/hotels-portugal/hotels-algarve/vila-gale-lagos/" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Vila%20Gal%C3%A9%20Lagos" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">4-star · Porto de Mós</span>
+        <h3>Belmar Spa &amp; Beach Resort</h3>
+        <p>A design-led resort above Porto de Mós beach, five minutes from the centre. The Belmar Spa has an indoor pool, sauna, Turkish bath and a vichy shower, alongside a broad menu of massages, body treatments and facials. Reserve spa access or a treatment ahead.</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈4 km · 10 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Treatments + circuit</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://www.belmarresort.com/en/" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Belmar%20Spa%20%26%20Beach%20Resort%20Lagos" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">5-star · Meia Praia</span>
+        <h3>Spa — Iberostar Selection Lagos Algarve</h3>
+        <p>A contemporary five-star by Meia Praia with a modern spa — Turkish bath and a menu of treatments in an intimate setting, plus several pools including a heated one. Day access is more limited here, so the surest way in is to book a treatment.</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈4 km · 10 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Book a treatment</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://www.iberostar.com/en/hotels/algarve/iberostar-selection-lagos-algarve/" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Iberostar%20Selection%20Lagos%20Algarve" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-head"><span class="band-num">II</span><h2>Worth the drive</h2><span class="range">≈38–45 km · a half-day out</span></div>
+    <div class="grid">
+      <article class="card">
+        <span class="tag">Carvoeiro · non-guest passes</span>
+        <h3>Alma Spa — Monte Santo Resort</h3>
+        <p>The clearest bet for a booked day out: this Carvoeiro resort spa openly sells non-guest day passes to its wellness centre — heated indoor pool, sauna, Turkish bath and jacuzzi — and offers Thalgo facial and body treatments. Combine it with the Carvoeiro boardwalk on the ladies' guide.</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈38 km · 40 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Day passes offered</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://www.montesantoalgarve.com/en/spa" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Monte%20Santo%20Resort%20Carvoeiro" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Monchique mountains · thermal</span>
+        <h3>Thermal Spa — Villa Termal Caldas de Monchique</h3>
+        <p>The Algarve's only thermal spa, in a wooded mountain village — alkaline spring waters, a thermal pool, saunas and treatments in a genuinely tranquil setting. Day spa programmes are bookable, making a restorative half-day paired with a Monchique lunch. (Also on the ladies' guide.)</p>
+        <div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">≈45 km · 50 min</span></div><div class="stat pass"><span class="k">Day visitors</span><span class="v">Day spa programmes</span></div></div>
+        <div class="card-links"><a class="card-link" href="https://monchiquetermalresort.com/" target="_blank" rel="noopener noreferrer">Official site ↗</a><a class="card-link map" href="https://www.google.com/maps/search/?api=1&amp;query=Villa%20Termal%20Caldas%20de%20Monchique&amp;query_place_id=ChIJ_1RJE3QhGw0RcbSNqTpd1U8" target="_blank" rel="noopener noreferrer">Map ↗</a></div>
+      </article>
+    </div>
+  </section>
+</main>
+<footer><div class="rule">A curated shortlist, not an exhaustive one. Spa access for non-guests, opening hours and prices vary by season and how busy each resort is — always confirm on the official site or by phone when you book. Wet-area age limits (often 16+) apply at several of these.</div></footer>
+</body>
+</html>

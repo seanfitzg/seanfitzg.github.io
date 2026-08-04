@@ -25,6 +25,8 @@
   .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:40ch;margin-top:22px;line-height:1.4}
   .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
   .meta-strip b{color:var(--pine);font-weight:600}
+  .spa-cta{display:inline-flex;align-items:center;margin-top:24px;padding:11px 20px;border-radius:999px;background:var(--pine);color:#fff;text-decoration:none;font-size:.9rem;font-weight:600;letter-spacing:.01em;border:1px solid var(--pine);transition:background .14s ease,transform .14s ease}
+  .spa-cta:hover,.spa-cta:focus-visible{background:var(--pine-deep);transform:translateY(-1px)}
   /* azulejo frieze signature */
   .frieze{height:26px;margin-top:40px;
     background-image:
@@ -75,6 +77,10 @@
   .stat.cost .v{color:var(--wine)}
   .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);text-decoration:none;border-bottom:1.5px solid var(--terra);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
   .card-link:hover,.card-link:focus-visible{color:var(--wine);border-color:var(--wine)}
+  .card-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:13px}
+  .card-links .card-link{margin-top:0}
+  .card-link.map{color:var(--pine);border-color:var(--pine)}
+  .card-link.map:hover,.card-link.map:focus-visible{color:var(--pine-deep);border-color:var(--pine-deep)}
   .empty{display:none;text-align:center;padding:54px 20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
   .empty.show{display:block}
   footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
@@ -90,6 +96,7 @@
   <h1>Lagos, at a <em>leisurely</em> pace.</h1>
   <p class="lede">Old-town wandering, cliff-top coves, wine among the vines, mountain thermal springs and the dramatic end of Europe.</p>
   <div class="meta-strip"><span><b>22</b> places</span><span><b>3</b> distance bands</span><span><b>6</b> themes</span><span>train · bus · boat · official links</span></div>
+  <a class="spa-cta" href="lagos_spas.html">Looking to unwind? See our spa afternoon picks ↗</a>
   <div class="frieze"></div>
 </header>
 <main>
@@ -113,6 +120,9 @@
 <footer><div class="rule">Built as a planning reference. Book winery tastings, spa passes and boat trips a day or two ahead, and check the morning of a cave trip, as rough seas occasionally close the caves. Bus timetables thin out at weekends and off-season — check Vamus, CP or Google Maps the day before. Prices and opening hours change seasonally; confirm on the official sites before you set off.</div></footer>
 <script>
 const CATS={culture:{label:'Culture & history',color:'var(--c-culture)'},food:{label:'Food & wine',color:'var(--c-food)'},beach:{label:'Beaches',color:'var(--c-beach)'},nature:{label:'Nature & scenery',color:'var(--c-nature)'},well:{label:'Wellness & spa',color:'var(--c-well)'},town:{label:'Towns & villages',color:'var(--c-town)'}};
+const PID={"Igreja de Santo António & Museu de Lagos":"ChIJX2bM1s8xGw0RF-cMmHDDhCw","Passadiços de Alvor Boardwalk":"ChIJOdb0pBEvGw0RNVCMM-7hnRI","Sagres & Cape St. Vincent":"ChIJpYHbP2BMGw0R1KOzLGFUYRQ","Silves Castle & Old Town":"ChIJw_psdbbZGg0R7gmGapxeO9k","Museu de Portimão & Praia da Rocha":"ChIJSTkT5_AoGw0R_95GHJu-kuo","Monte da Casteleja Organic Winery":"ChIJhdyi-GowGw0RZBfQI4PxaTI","Praia da Marinha & Seven Hanging Valleys Walk":"ChIJS-PpA6TWGg0RmCa3wG5Q9Fw","Carvoeiro & the Clifftop Boardwalk":"ChIJbZyyFBHWGg0RM1oQ2UGcRTA","Ferragudo":"ChIJNyON51MoGw0RrdBDJv3XexY","Caldas de Monchique Thermal Spa":"ChIJ_1RJE3QhGw0RcbSNqTpd1U8","Quinta dos Vales Winery & Sculpture Garden":"ChIJJ-nj-JooGw0RIt6p3FBWSeo"};
+const MQ={"Lagos Old Town & City Walls":"Lagos Old Town Portugal","Slave Market Museum & Praça do Infante":"Mercado de Escravos Lagos","Lagos Market & Old-Town Tapas":"Mercado Municipal de Lagos","Ponta da Piedade Grotto Cruise":"Ponta da Piedade Lagos","Praia Dona Ana & Praia do Camilo":"Praia Dona Ana Lagos","Dolphin Watching from the Marina":"Marina de Lagos Portugal","Praia da Luz & Burgau":"Praia da Luz Lagos","Fóia Peak & Monchique Village":"Fóia Monchique","Aljezur & Odeceixe (Costa Vicentina)":"Aljezur Portugal","Benagil Cave by Boat":"Algar de Benagil Portugal"};
+const NOMAP={"Spa Afternoon at a Lagos Resort":1};
 const BANDS=[
 {num:'I',title:'In & around Lagos',range:'walk – 3 km · Uber ≈ €5–8',items:[
 {cat:'culture',name:'Lagos Old Town & City Walls',dist:'In town · walk',cost:'€5 min fare',desc:'Cobbled lanes, the handsome Praça Gil Eanes, 16th-century walls and the waterfront — made for a slow morning of wandering with coffee and pastel de nata stops.'},
@@ -144,7 +154,7 @@ const BANDS=[
 ]}
 ];
 const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
-function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const transit=it.transit?`<div class="transit${it.none?' none':''}"><span class="tlabel">${it.none?'Public transport':'Public transport'}</span>${it.transit}</div>`:'';const link=it.url?`<a class="card-link" href="${it.url}" target="_blank" rel="noopener noreferrer">Official site ↗</a>`:'';return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${transit}<div class="stats"><div class="stat"><span class="k">Distance</span><span class="v">${it.dist}</span></div><div class="stat cost"><span class="k">Uber ~</span><span class="v">${it.cost}</span></div></div>${link}</article>`}).join('')}</div></section>`).join('')}
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const transit=it.transit?`<div class="transit${it.none?' none':''}"><span class="tlabel">${it.none?'Public transport':'Public transport'}</span>${it.transit}</div>`:'';const link=it.url?`<a class="card-link" href="${it.url}" target="_blank" rel="noopener noreferrer">Official site ↗</a>`:'';return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${transit}<div class="stats"><div class="stat"><span class="k">Distance</span><span class="v">${it.dist}</span></div><div class="stat cost"><span class="k">Uber ~</span><span class="v">${it.cost}</span></div></div><div class="card-links">${link}${NOMAP[it.name]?'':`<a class="card-link map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MQ[it.name]||(it.name+' Algarve'))}${PID[it.name]?('&query_place_id='+PID[it.name]):''}" target="_blank" rel="noopener noreferrer">Map ↗</a>`}</div></article>`}).join('')}</div></section>`).join('')}
 function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
 document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
 build();
