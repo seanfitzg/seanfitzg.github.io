@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos · Restaurants near Casa Margo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4ECDD;--paper-2:#FCF7EE;--ink:#2B2A31;--ink-soft:#6E6968;
+    --pine:#245C4E;--pine-deep:#173B31;--terra:#C0682C;--wine:#8E2C40;
+    --c-port:#8A5A9B;--c-sea:#2A6F8A;--c-meat:#9C2B44;--c-ital:#C56A2C;--c-veg:#4E7B3A;--c-intl:#B8862B;--c-cafe:#7A6A55;
+    --line:rgba(43,42,49,.14);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .topnav{display:flex;gap:22px;margin-bottom:26px;font-size:.85rem;font-weight:600}
+  .topnav a{color:var(--pine);text-decoration:none;padding-bottom:3px;border-bottom:2px solid transparent;transition:color .12s ease,border-color .12s ease}
+  .topnav a:hover{color:var(--pine-deep)}
+  .topnav a.active{color:var(--terra);border-color:var(--terra)}
+  .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
+  h1 em{font-style:italic;color:var(--terra)}
+  .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:44ch;margin-top:22px;line-height:1.4}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+  .meta-strip b{color:var(--pine);font-weight:600}
+  .frieze{height:26px;margin-top:40px;
+    background-image:
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      radial-gradient(circle at center,var(--terra) 22%,transparent 24%);
+    background-size:26px 26px,26px 26px,26px 26px;background-position:0 0,13px 13px,0 0;
+    opacity:.9;border-top:2px solid var(--pine);border-bottom:2px solid var(--pine)}
+  main{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--terra);border-radius:var(--radius);padding:17px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:16px}
+  .note:last-of-type{margin-bottom:34px}
+  .note.fish-note{border-left-color:var(--sea,#2A6F8A)}
+  .note b{color:var(--ink);font-weight:600}
+  .filter-wrap{position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 74%,transparent);padding:14px 0 16px;margin-bottom:4px}
+  .filter-label{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer;transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease}
+  .chip:hover{transform:translateY(-1px)}
+  .chip[aria-pressed="true"]{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--dot,#999)}
+  .band{margin-top:44px}
+  .band-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--pine)}
+  .band-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.15rem;color:var(--terra);letter-spacing:.05em}
+  .band-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;letter-spacing:-.01em;color:var(--pine-deep)}
+  .band-head .range{margin-left:auto;font-size:.8rem;color:var(--ink-soft);white-space:nowrap;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:3px solid var(--cat,var(--pine))}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(23,59,49,.5)}
+  .card.hide{display:none}
+  .tag{align-self:flex-start;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cat,var(--pine));margin-bottom:10px}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cat,var(--pine));margin-right:8px;vertical-align:middle}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;color:var(--pine-deep);margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--ink-soft)}
+  .fishnote{margin-top:13px;background:color-mix(in srgb,var(--terra) 10%,white);border:1px solid color-mix(in srgb,var(--terra) 28%,white);border-radius:var(--radius);padding:10px 12px;font-size:.83rem;color:var(--ink);flex-grow:1}
+  .fishnote .flabel{display:block;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:4px}
+  .card > p{flex-grow:0}
+  .card:not(:has(.fishnote)) > p{flex-grow:1}
+  .stats{display:flex;gap:12px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+  .stat{flex:1}
+  .stat .k{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-weight:600;font-size:.95rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat.price .v{color:var(--pine)}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);text-decoration:none;border-bottom:1.5px solid var(--pine);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{color:var(--pine-deep);border-color:var(--pine-deep)}
+  .card-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:13px}
+  .card-links .card-link{margin-top:0}
+  .empty{display:none;text-align:center;padding:54px 20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
+  .empty.show{display:block}
+  footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:20px}
+  a:focus-visible,.chip:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  @media (max-width:560px){.hero{padding:48px 20px 0}main{padding:26px 20px 64px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <nav class="topnav"><a href="lagos_kids.html">Kids</a><a href="lagos_ladies.html">Ladies</a><a href="lagos_spas.html">Spas</a><a href="lagos_restaurants.html" class="active">Restaurants</a></nav>
+  <div class="eyebrow">Lagos · Western Algarve · Dining near Casa Margo</div>
+  <h1>Dinner, all within a <em>short walk</em>.</h1>
+  <p class="lede">Thirty-four well-loved restaurants, cafés and bars no more than twenty minutes on foot from the apartment — with a note on every fish spot for the one who skips it.</p>
+  <div class="meta-strip"><span><b>34</b> places</span><span><b>≤20</b>-min walk</span><span><b>7</b> cuisines</span><span>non-fish notes</span></div>
+  <div class="frieze"></div>
+</header>
+<main>
+  <div class="note"><b>About the list.</b> Every restaurant is within a 20-minute walk of Casa Margo (Praça Luís de Camões), so the car can stay parked. Walk times are approximate, door to door through the old-town lanes. The price guide is rough — <b>€</b> easy on the wallet, <b>€€</b> mid-range, <b>€€€</b> a treat. Each card links to the restaurant's Google listing for the menu, hours, photos and booking; popular spots fill up, so reserve or arrive early.</div>
+  <div class="note fish-note"><b>One of you doesn't eat fish.</b> Every <b>seafood</b> spot below carries a note on how well it suits a non-fish diner — most also serve meat and other mains, and one or two are best saved for when everyone's happy with seafood. The Portuguese, Italian, grill, veg-friendly and international places are all safe bets either way.</div>
+  <div class="filter-wrap">
+    <div class="filter-label">Filter by cuisine</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">All</button>
+      <button class="chip" data-cat="port" style="--dot:var(--c-port)" aria-pressed="false"><span class="dot"></span>Portuguese &amp; petiscos</button>
+      <button class="chip" data-cat="sea" style="--dot:var(--c-sea)" aria-pressed="false"><span class="dot"></span>Seafood</button>
+      <button class="chip" data-cat="meat" style="--dot:var(--c-meat)" aria-pressed="false"><span class="dot"></span>Meat &amp; grill</button>
+      <button class="chip" data-cat="ital" style="--dot:var(--c-ital)" aria-pressed="false"><span class="dot"></span>Italian &amp; pizza</button>
+      <button class="chip" data-cat="veg" style="--dot:var(--c-veg)" aria-pressed="false"><span class="dot"></span>Veg-friendly</button>
+      <button class="chip" data-cat="intl" style="--dot:var(--c-intl)" aria-pressed="false"><span class="dot"></span>International</button>
+      <button class="chip" data-cat="cafe" style="--dot:var(--c-cafe)" aria-pressed="false"><span class="dot"></span>Café &amp; brunch</button>
+    </div>
+  </div>
+  <div id="bands"></div>
+  <div class="empty" id="empty">Nothing in that cuisine — try another.</div>
+</main>
+<footer><div class="rule">A hand-picked shortlist, not every restaurant in town. Opening days and hours vary (several close on Sundays or one weekday), and the busiest kitchens take reservations well ahead — check the Google listing before you set out. Menus and prices change with the season.</div></footer>
+<script>
+const CATS={port:{label:'Portuguese & petiscos',color:'var(--c-port)'},sea:{label:'Seafood',color:'var(--c-sea)'},meat:{label:'Meat & grill',color:'var(--c-meat)'},ital:{label:'Italian & pizza',color:'var(--c-ital)'},veg:{label:'Veg-friendly',color:'var(--c-veg)'},intl:{label:'International',color:'var(--c-intl)'},cafe:{label:'Café & brunch',color:'var(--c-cafe)'}};
+const PID={"Mullen's":"ChIJr7CqXM4xGw0RncLj-uT0f4c","Lagos Beer&Co":"ChIJqxNOVrgxGw0RNEZXgrPR7QU","BARBOSA Bar & Kitchen":"ChIJiZmZh84xGw0RQRVKJp1FkHc","Beats & Burritos":"ChIJc_31yM8xGw0RWg_ZaPrWSCY","The Underdog Kitchen & Good Times":"ChIJLZt_tAkxGw0R9ETum5c3Fwo","Harley's":"ChIJNUQx088xGw0RRE92FKNJeUU","Nah Nah Bah":"ChIJL6eJlc8xGw0R9EWig8JaE58","Churrasqueira Praça d'Armas":"ChIJ52Fhmc8xGw0RWdHBT7jL_F0","Snack Bar Sudoeste":"ChIJN_AdoskxGw0RjPnBj71F8pM","O Moinho Bar & Grill":"ChIJuyXnnckxGw0RaOaVr-_qkQY","The Collab Bar":"ChIJP1XiTYYxGw0R3_6-J3eX3N8","Qwazi":"ChIJe30EXcQxGw0R0b0CA7DdcE8","Restaurante Azimute":"ChIJkb4zAfYxGw0RQHec22P5fn8","Atasca-te — Tasca Tradicional":"ChIJT4IKoxUxGw0RStmoXRgJJaQ","Casinha do Petisco":"ChIJcxVSX84xGw0R70b_mKGo2Mc","Estúdio Vegetariano":"ChIJv3eKjs4xGw0Rrd5ISH7ItU0","Pepperino Pizzeria":"ChIJee5KBroxGw0REaTaLjLiI2I","Polp! Italian Meatball Lab":"ChIJ21ooXUgxGw0RgHPN_8Oo7Rw","Café Gil Eanes":"ChIJ1d8R180xGw0RYIhk7fs574s","The Stag":"ChIJt6OR-9UxGw0R5xz3hEgc6UY","Casa do Prego":"ChIJPSQSlM4xGw0RSDjPwUf3IZQ","A Petisqueira":"ChIJNRDFF84xGw0RLgbV5QuhM60","Eattico":"ChIJfUWMZ94xGw0RLbbF5kvLE4c","The Seasonal":"ChIJeWdzuecxGw0RWLCAWndY-zo","Don Toro — Angus Grill":"ChIJc7DtzM8xGw0REabFEOJh48s","The Green Room":"ChIJP3Ywi84xGw0RUtkfh0bwudU","Sapore di Casa":"ChIJMT9uW1UxGw0RQzGt3DuczbU","DON GULL":"ChIJ3dm8fWgxGw0RcoM-I4R1e5o","Tapas d'Alma":"ChIJh2zgJdgxGw0R8-VYFVaDVq4","Saporito":"ChIJ-UA_TwAxGw0RL72kNM-zkKc","Alex — coffee, brunch & wine":"ChIJy1bplMAxGw0RZiMBYK726eQ","Fiote Grill & Bar":"ChIJlVJYAAAxGw0RmDtq15T0a9k","Marisqueira O Perceve":"ChIJId1IbxExGw0Rcs5GYqyaAVM","Luca's Rooftop":"ChIJu_myDRMxGw0Rrp9sXFHzx5M"};
+const BANDS=[
+{num:'I',title:'On the doorstep',range:'≤3-min walk',items:[
+{cat:'port',name:'Restaurante Azimute',dist:'2-min walk',cost:'€€',desc:"A warm, modern Portuguese spot moments from the square, praised for polished cooking — tuna steak, garlicky shrimp, creative desserts — and genuinely friendly service. 4.8 stars over 1,200 reviews; book ahead."},
+{cat:'port',name:'Atasca-te — Tasca Tradicional',dist:'2-min walk',cost:'€',desc:"A cosy traditional tasca doing Portuguese petiscos to share — octopus salad, tuna pica-pau, pork cheeks — with well-priced house wine. Great value and a genuine local favourite."},
+{cat:'sea',name:'Casinha do Petisco',dist:'2-min walk',cost:'€€',desc:"A tiny, family-run gem famous for its rich seafood cataplana for two. Hugely popular and first-come — arrive early or reserve. Closed Sundays.",fish:"The seafood cataplana is the star, but there are meat mains on the menu too — the non-fish eater is covered."},
+{cat:'veg',name:'Estúdio Vegetariano',dist:'1-min walk',cost:'€€',desc:"A charming vegetarian and vegan spot (lunch only) with inventive, lovingly-made plates — seitan, shakshuka with smoked tofu, hummus duo — and a relaxed, arty feel. Check the limited opening days."},
+{cat:'ital',name:'Pepperino Pizzeria',dist:'1-min walk',cost:'€€',desc:"Wood-fired pizza and fresh pasta in a cosy old-town room, with artisanal ice cream to finish. Lively, friendly and good value right in the heart of things."},
+{cat:'ital',name:'Polp! Italian Meatball Lab',dist:'1-min walk',cost:'€',desc:"A fun, modern little place built around Nonna-style meatballs — a dozen varieties, plus pasta and bruschetta — with generous portions and gentle prices. A local hit."},
+{cat:'intl',name:'Lagos Beer&Co',dist:'2-min walk',cost:'€€',desc:"A buzzing craft-beer bar and brewpub right in the centre with a big tap-and-bottle list, properly good burgers and fresh pizza, and sport on the screens. Great value and open late."},
+{cat:'port',name:'BARBOSA Bar & Kitchen',dist:'2-min walk',cost:'€€',desc:"A stylish, hugely popular bar-and-kitchen down a quiet alley — Portuguese plates, grilled octopus, burgers and cocktails on a pretty patio, with a kids' menu too. Reserve; it's busy every night."},
+{cat:'port',name:"Mullen's",dist:'3-min walk',cost:'€€',desc:"A much-loved old-town institution with a cosy, cave-like, casual feel and frequent live open-mic music — best known for its peri-peri chicken, plus beef Mozambique, bacalhau and sea bass, at fair prices. Dinner only; closed Mondays and it fills up fast, so go early."}
+]},
+{num:'II',title:'A short stroll',range:'3–8 min',items:[
+{cat:'cafe',name:'Café Gil Eanes',dist:'3-min walk',cost:'€€',desc:"The classic terrace café on Praça Gil Eanes — coffee, drinks and light bites with front-row seats for the square's street music and people-watching."},
+{cat:'intl',name:'The Stag',dist:'3-min walk',cost:'€€',desc:"An easy-going international spot just off the square with a broad menu — grilled meats, piri-piri chicken, fish and pizza — and a great perch for watching the world go by."},
+{cat:'port',name:'Casa do Prego',dist:'4-min walk',cost:'€€',desc:"A buzzing, much-loved tapas-and-prego bar — pork cheek, beef strips, tuna prego, garlic prawns — with sangria and often live music. 4.7 over 4,700 reviews; reserve for dinner."},
+{cat:'port',name:'A Petisqueira',dist:'4-min walk',cost:'€€',desc:"A refined petiscos restaurant on a pretty shopping street, celebrated for its sea bass ceviche, braised octopus and aged beef, with a curious Portuguese wine list. Closed Sundays."},
+{cat:'sea',name:'Eattico',dist:'4-min walk',cost:'€€',desc:"A gem for seafood sandwiches and tapas — prawn, tuna and octopus rolls, plus renowned fish and chips — with fast, friendly service and good AC.",fish:"Very seafood-forward — non-fish choices are limited here, so it's best when fish is on the cards."},
+{cat:'veg',name:'The Seasonal',dist:'4-min walk',cost:'€€',desc:"An Asian-fusion favourite with standout vegan and vegetarian options — Panang and green curries, generous plates — and warm service. Plenty here for non-meat and non-fish eaters alike."},
+{cat:'meat',name:'Don Toro — Angus Grill',dist:'4-min walk',cost:'€€',desc:"A steakhouse for the meat-lovers — Angus cuts, meat platters for two, calamari to start — in a lively room. Portions are generous; book for dinner."},
+{cat:'intl',name:'Beats & Burritos',dist:'4-min walk',cost:'€',desc:"A fun, colourful build-your-own burrito and taco joint — choose your own fillings — with a lively, family-friendly vibe and good gluten-free options. Cheap and cheerful. Cash only; closed Wednesdays."},
+{cat:'meat',name:'The Underdog Kitchen & Good Times',dist:'5-min walk',cost:'€',desc:"A laid-back, dog-friendly kitchen doing cracking smash burgers, gyros and chicken bowls at genuinely reasonable prices, with craft beer and good music. Some veg options too. Closed Wednesdays."},
+{cat:'intl',name:"Harley's",dist:'5-min walk',cost:'€€',desc:"An easy all-day café-bar with burgers, French dishes, omelettes and salads at fair prices, plenty of seating and a good perch for watching the street. Celiac-friendly. Closed Sundays."},
+{cat:'meat',name:'Nah Nah Bah',dist:'6-min walk',cost:'€€',desc:"A Lagos institution — a colourful burger bar that has made a world's-top-50 list, with juicy burgers, famous garlic fries, local beer on tap and 90s hip-hop. Come hungry; a little pricey but worth it."},
+{cat:'meat',name:"Churrasqueira Praça d'Armas",dist:'6-min walk',cost:'€',desc:"A no-frills grill by the old town gate doing superb charcoal piri-piri chicken and dishes by weight — huge portions, around €9 with a drink. A local favourite rather than a tourist trap. Closed Sundays."},
+{cat:'port',name:'Snack Bar Sudoeste',dist:'7-min walk',cost:'€',desc:"An authentic little Portuguese snack bar where the locals eat — three daily specials around €9 with a main, a big drink and dessert, plus a mighty francesinha. Warm, friendly and great value. Closed Sundays."},
+{cat:'meat',name:'O Moinho Bar & Grill',dist:'7-min walk',cost:'€',desc:"A relaxed bar and charcoal grill in a converted old windmill, run by a friendly couple — fresh fish and meat off the grill with salad and fries, and reputedly the cheapest Super Bock in town. Closed Mondays."},
+{cat:'intl',name:'The Green Room',dist:'7-min walk',cost:'€€',desc:"A relaxed spot rated the best Mexican in town — burritos, big portions and good cocktails (2-for-1 happy hour) — with a happy, buzzy atmosphere. Veg-friendly. Closed Sundays."}
+]},
+{num:'III',title:'Up to twenty minutes',range:'8–20 min',items:[
+{cat:'ital',name:'Sapore di Casa',dist:'9-min walk',cost:'€€',desc:"Authentic Neapolitan pizza — light, thin, blistered crust — from a warm Italian family, with a sea-view terrace down by the old cannery. Regularly called some of the best pizza around."},
+{cat:'intl',name:'The Collab Bar',dist:'9-min walk',cost:'€',desc:"A modern beer garden by the waterfront with a sea view, craft beers and cocktails, and 'Take A Bao' Asian street food — including plenty of great vegan options. Affordable and relaxed."},
+{cat:'intl',name:'DON GULL',dist:'10-min walk',cost:'€€€',desc:"A creative modern-fusion kitchen away from the old-town crowds — grilled octopus, wagyu carpaccio, suckling-pig confit — with excellent service. A standout for a special meal; reserve. Closed Thursdays."},
+{cat:'port',name:"Tapas d'Alma",dist:'10-min walk',cost:'€€',desc:"A lively tapas, brunch and brewpub all-rounder loved by locals — octopus, mussels, burgers, pavlova — with homemade lemonades. Something for everyone. Closed Sundays."},
+{cat:'ital',name:'Saporito',dist:'10-min walk',cost:'€€',desc:"A friendly Italian café-deli doing excellent lasagne, daily menus and egg breakfasts, plus wine-tasting evenings. Cosy and welcoming; a small menu done well."},
+{cat:'cafe',name:'Alex — coffee, brunch & wine',dist:'11-min walk',cost:'€€',desc:"A stylish, slightly-hidden brunch and coffee spot — superb cinnamon buns, flat whites, cheese toasties — with a calm, funky vibe. A lovely morning stop."},
+{cat:'meat',name:'Qwazi',dist:'11-min walk',cost:'€',desc:"A small burger spot near Praia do Pinhão turning out big, tasty burgers and fried-chicken sandwiches with garlic-mayo fries at low prices. Cash only."},
+{cat:'meat',name:'Fiote Grill & Bar',dist:'13-min walk',cost:'€',desc:"A small local grill many rate the best-value steak and grill around — mixed grill boards, pork cheeks, daily menus — in a relaxed bar setting near the Intermarché. 4.9 stars. Closed Sundays."},
+{cat:'sea',name:'Marisqueira O Perceve',dist:'15-min walk',cost:'€€',desc:"An off-the-tourist-path shellfish house doing superb-value crab, clams, prawns, goose barnacles and lobster. Small, so reserve. Closed Mondays.",fish:"A dedicated shellfish house — wonderful if everyone eats seafood, but there's very little for a non-fish diner, so best saved for a fish-friendly night."},
+{cat:'sea',name:"Luca's Rooftop",dist:'17-min walk',cost:'€€€',desc:"A rooftop restaurant above Praia Dona Ana with breathtaking cliff-and-ocean views and fresh seafood — best at sunset. Outer view-tables are first-come, so go early or book.",fish:"Lots of fish and seafood for the views, but the menu also has meat and other mains — the non-fish eater is catered for."}
+]}
+];
+const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const fish=it.fish?`<div class="fishnote"><span class="flabel">For the non-fish eater</span>${it.fish}</div>`:'';const map=`<a class="card-link map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.name+' Lagos')}${PID[it.name]?('&query_place_id='+PID[it.name]):''}" target="_blank" rel="noopener noreferrer">Map &amp; menu ↗</a>`;return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${fish}<div class="stats"><div class="stat"><span class="k">On foot</span><span class="v">${it.dist}</span></div><div class="stat price"><span class="k">Price</span><span class="v">${it.cost}</span></div></div><div class="card-links">${map}</div></article>`}).join('')}</div></section>`).join('')}
+function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
+document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
+build();
+</script>
+</body>
+</html>

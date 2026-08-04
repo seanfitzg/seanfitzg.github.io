@@ -17,6 +17,10 @@
   html{scroll-behavior:smooth}
   body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
   .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .topnav{display:flex;gap:22px;margin-bottom:26px;font-size:.85rem;font-weight:600}
+  .topnav a{color:var(--pine);text-decoration:none;padding-bottom:3px;border-bottom:2px solid transparent;transition:color .12s ease,border-color .12s ease}
+  .topnav a:hover{color:var(--pine-deep)}
+  .topnav a.active{color:var(--terra);border-color:var(--terra)}
   .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
   h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
   h1 em{font-style:italic;color:var(--terra)}
@@ -67,6 +71,7 @@
 </head>
 <body>
 <header class="hero">
+  <nav class="topnav"><a href="lagos_kids.html">Kids</a><a href="lagos_ladies.html">Ladies</a><a href="lagos_spas.html" class="active">Spas</a></nav>
   <div class="eyebrow">Lagos · Western Algarve · A spa afternoon</div>
   <h1>A spa afternoon, <em>booked</em> in advance.</h1>
   <p class="lede">Six resort spas that welcome day visitors — four within minutes of the old town, two worth the drive.</p>

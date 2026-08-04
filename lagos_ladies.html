@@ -19,14 +19,16 @@
   body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
   /* ---- hero ---- */
   .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .topnav{display:flex;gap:22px;margin-bottom:26px;font-size:.85rem;font-weight:600}
+  .topnav a{color:var(--pine);text-decoration:none;padding-bottom:3px;border-bottom:2px solid transparent;transition:color .12s ease,border-color .12s ease}
+  .topnav a:hover{color:var(--pine-deep)}
+  .topnav a.active{color:var(--terra);border-color:var(--terra)}
   .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
   h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
   h1 em{font-style:italic;color:var(--terra)}
   .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:40ch;margin-top:22px;line-height:1.4}
   .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
   .meta-strip b{color:var(--pine);font-weight:600}
-  .spa-cta{display:inline-flex;align-items:center;margin-top:24px;padding:11px 20px;border-radius:999px;background:var(--pine);color:#fff;text-decoration:none;font-size:.9rem;font-weight:600;letter-spacing:.01em;border:1px solid var(--pine);transition:background .14s ease,transform .14s ease}
-  .spa-cta:hover,.spa-cta:focus-visible{background:var(--pine-deep);transform:translateY(-1px)}
   /* azulejo frieze signature */
   .frieze{height:26px;margin-top:40px;
     background-image:
@@ -92,11 +94,11 @@
 </head>
 <body>
 <header class="hero">
+  <nav class="topnav"><a href="lagos_kids.html">Kids</a><a href="lagos_ladies.html" class="active">Ladies</a><a href="lagos_spas.html">Spas</a></nav>
   <div class="eyebrow">Lagos · Western Algarve · Ten days, three travellers</div>
   <h1>Lagos, at a <em>leisurely</em> pace.</h1>
   <p class="lede">Old-town wandering, cliff-top coves, wine among the vines, mountain thermal springs and the dramatic end of Europe.</p>
   <div class="meta-strip"><span><b>23</b> places</span><span><b>3</b> distance bands</span><span><b>6</b> themes</span><span>train · bus · boat · official links</span></div>
-  <a class="spa-cta" href="lagos_spas.html">Looking to unwind? See our spa afternoon picks ↗</a>
   <div class="frieze"></div>
 </header>
 <main>
