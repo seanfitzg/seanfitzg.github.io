@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos · Golf Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4ECDD;--paper-2:#FCF7EE;--ink:#2B2A31;--ink-soft:#6E6968;
+    --pine:#245C4E;--pine-deep:#173B31;--terra:#C0682C;--wine:#8E2C40;
+    --c-champ:#8E2C40;--c-resort:#9C5A2C;--c-scenic:#2A6F8A;--c-relaxed:#4E7B3A;
+    --line:rgba(43,42,49,.14);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
+  h1 em{font-style:italic;color:var(--terra)}
+  .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:42ch;margin-top:22px;line-height:1.4}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+  .meta-strip b{color:var(--pine);font-weight:600}
+  .frieze{height:26px;margin-top:40px;
+    background-image:
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      radial-gradient(circle at center,var(--terra) 22%,transparent 24%);
+    background-size:26px 26px,26px 26px,26px 26px;background-position:0 0,13px 13px,0 0;
+    opacity:.9;border-top:2px solid var(--pine);border-bottom:2px solid var(--pine)}
+  main{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--terra);border-radius:var(--radius);padding:17px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:16px}
+  .note:last-of-type{margin-bottom:34px}
+  .note.transit-note{border-left-color:var(--pine)}
+  .note b{color:var(--ink);font-weight:600}
+  .note .tick{color:var(--pine);font-weight:600}
+  .filter-wrap{position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 74%,transparent);padding:14px 0 16px;margin-bottom:4px}
+  .filter-label{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer;transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease}
+  .chip:hover{transform:translateY(-1px)}
+  .chip[aria-pressed="true"]{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--dot,#999)}
+  .band{margin-top:44px}
+  .band-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--pine)}
+  .band-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.15rem;color:var(--terra);letter-spacing:.05em}
+  .band-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;letter-spacing:-.01em;color:var(--pine-deep)}
+  .band-head .range{margin-left:auto;font-size:.8rem;color:var(--ink-soft);white-space:nowrap;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:3px solid var(--cat,var(--pine))}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(23,59,49,.5)}
+  .card.hide{display:none}
+  .tag{align-self:flex-start;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cat,var(--pine));margin-bottom:10px}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cat,var(--pine));margin-right:8px;vertical-align:middle}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;color:var(--pine-deep);margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--ink-soft)}
+  .transit{margin-top:13px;background:color-mix(in srgb,var(--pine) 8%,white);border:1px solid color-mix(in srgb,var(--pine) 20%,white);border-radius:var(--radius);padding:10px 12px;font-size:.83rem;color:var(--ink);flex-grow:1}
+  .transit .tlabel{display:block;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);margin-bottom:4px}
+  .transit.none{background:color-mix(in srgb,var(--ink-soft) 8%,white);border-color:color-mix(in srgb,var(--ink-soft) 20%,white);color:var(--ink-soft)}
+  .transit.none .tlabel{color:var(--ink-soft)}
+  .card > p{flex-grow:0}
+  .card:not(:has(.transit)) > p{flex-grow:1}
+  .stats{display:flex;gap:12px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+  .stat{flex:1}
+  .stat .k{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-weight:600;font-size:.95rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat.cost .v{color:var(--wine)}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);text-decoration:none;border-bottom:1.5px solid var(--terra);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{color:var(--wine);border-color:var(--wine)}
+  .card-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:13px}
+  .card-links .card-link{margin-top:0}
+  .card-link.map{color:var(--pine);border-color:var(--pine)}
+  .card-link.map:hover,.card-link.map:focus-visible{color:var(--pine-deep);border-color:var(--pine-deep)}
+  .empty{display:none;text-align:center;padding:54px 20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
+  .empty.show{display:block}
+  footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:20px}
+  a:focus-visible,.chip:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  @media (max-width:560px){.hero{padding:48px 20px 0}main{padding:26px 20px 64px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Lagos · Western Algarve · Golf</div>
+  <h1>Golf, sorted by the <em>drive</em> to the first tee.</h1>
+  <p class="lede">Twelve courses within reach of the old town — three on the doorstep, the rest an easy run east. Full club hire at every one.</p>
+  <div class="meta-strip"><span><b>12</b> courses</span><span><b>3</b> distance bands</span><span><b>4</b> styles</span><span>club hire everywhere</span></div>
+  <div class="frieze"></div>
+</header>
+<main>
+  <div class="note"><b>Club hire at every course.</b> Each course here rents complete sets — mention right- or left-handed and men's or ladies' when you book, and reserve the set together with your tee time. Alternatively, an Algarve golf-delivery service can drop a hire set at your apartment for the whole trip. Green fees swing a lot by season and time of day (twilight rates are cheaper), so check current prices on each course's own page.</div>
+  <div class="note transit-note"><b>Getting there.</b> With clubs and a bag, a <b>car or taxi is realistically the way to every course</b> — public transport isn't practical for golf. The distances and one-way <span class="tick">Uber estimates</span> below are measured from Praça Luís de Camões, so they double as a rough taxi guide; real fares move with demand and time of day. Boavista, Palmares and Espiche are short hops; the Portimão, Carvoeiro and Silves courses are a longer run east. Where a course has its own official site, the card links to it, and every card has a Google Maps pin.</div>
+  <div class="filter-wrap">
+    <div class="filter-label">Filter by style</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">All</button>
+      <button class="chip" data-cat="champ" style="--dot:var(--c-champ)" aria-pressed="false"><span class="dot"></span>Championship</button>
+      <button class="chip" data-cat="resort" style="--dot:var(--c-resort)" aria-pressed="false"><span class="dot"></span>Resort &amp; spa</button>
+      <button class="chip" data-cat="scenic" style="--dot:var(--c-scenic)" aria-pressed="false"><span class="dot"></span>Scenic</button>
+      <button class="chip" data-cat="relaxed" style="--dot:var(--c-relaxed)" aria-pressed="false"><span class="dot"></span>Relaxed &amp; value</button>
+    </div>
+  </div>
+  <div id="bands"></div>
+  <div class="empty" id="empty">Nothing under that style — try another.</div>
+</main>
+<footer><div class="rule">A planning reference for golf near Lagos. Book tee times and hire sets a day or two ahead in peak season, and ask about buggy hire on the hillier courses (Boavista, Parque da Floresta, Álamos). Green fees, opening hours and course conditions vary by season — confirm on the official sites before you play. Club rental is offered at every course listed.</div></footer>
+<script>
+const CATS={champ:{label:'Championship',color:'var(--c-champ)'},resort:{label:'Resort & spa',color:'var(--c-resort)'},scenic:{label:'Scenic',color:'var(--c-scenic)'},relaxed:{label:'Relaxed & value',color:'var(--c-relaxed)'}};
+const PID={"Boavista Golf & Spa Resort":"ChIJrxFvgwcxGw0RlRLhXPbtXsI","Palmares Ocean Living & Golf":"ChIJf_mfAcMvGw0Rjae6navdMuM","Espiche Golf":"ChIJGeyU8zU3Gw0RrgQeNK5U8GE","Parque da Floresta (Santo António Golf)":"ChIJO9t9qNhJGw0RkT2wCjvzcK4","Pestana Alto Golf & Country Club":"ChIJG7poFc4oGw0RBVaZpNSsDJg","Penina Championship Course":"ChIJKSG1r5ooGw0R4dFYu2XAx5g","Morgado Golf Course":"ChIJXzQe9XomGw0RExi8PLUJRxU","Álamos Golf Course":"ChIJed8nn34mGw0RHQsqrvSsYEE","Pestana Silves Golf":"ChIJy4V_M2LXGg0R3b3Bs-1zgJs","Pestana Gramacho Golf":"ChIJN3mTjO7XGg0RPJrUx55F2DI","Pestana Vale da Pinta Golf":"ChIJf_KNodDXGg0Rh20l2mheg04","Amendoeira Golf Resort":"ChIJA08FffTQGg0R_8VrmIadWnw"};
+const BANDS=[
+{num:'I',title:'In & around Lagos',range:'≤10 km · Uber ≈ €9–18',items:[
+{cat:'resort',name:'Boavista Golf & Spa Resort',dist:'≈5 km · 10 min',cost:'€9–14',desc:"One of the western Algarve's original courses — a hilly Howard Swan parkland layout with sweeping views over the Bay of Lagos and the Monchique hills. Rental clubs, driving range and pro shop on site; a buggy is worth it for the climbs.",transit:"A short taxi/Uber from the old town — with clubs, a car or taxi is easiest.",url:'https://www.boavistaresort.pt/'},
+{cat:'scenic',name:'Palmares Ocean Living & Golf',dist:'≈6 km · 12 min',cost:'€10–15',desc:"A spectacular 27-hole Robert Trent Jones Jr. layout tumbling down toward Meia Praia, with ocean and lagoon views at nearly every hole and a signature stretch right along the beach. Premium green fees — book well ahead.",transit:"A short taxi/Uber across the bay; some resorts arrange golf transfers.",url:'https://www.palmaresliving.com/'},
+{cat:'relaxed',name:'Espiche Golf',dist:'≈10 km · 15 min',cost:'€12–18',desc:"A relaxed, environmentally-minded course with wide, forgiving fairways, a good practice area and a friendly clubhouse — a favourite for an unhurried round. Rental sets available, and a food-and-drink buggy roams the course.",transit:"Taxi/Uber, or a Vamus bus toward Luz then a short taxi; a car is easiest with clubs.",url:'https://www.espichegolf.pt/'}
+]},
+{num:'II',title:'Short drive',range:'18–22 km · Uber ≈ €22–36',items:[
+{cat:'resort',name:'Pestana Alto Golf & Country Club',dist:'≈18 km · 20 min',cost:'€22–30',desc:"Sir Henry Cotton's last design, at Alvor — generous, undulating fairways rising to tiny, tricky elevated greens. Part of the Pestana group; a classic that rewards a caddie book and course conditions are consistently praised.",transit:"Train Lagos→Portimão or a Vamus bus, then a taxi; a car is easiest with clubs.",url:'https://pestanagolf.com/golf/'},
+{cat:'scenic',name:'Parque da Floresta (Santo António Golf)',dist:'≈20 km · 25 min',cost:'€24–32',desc:"Set high in the hills west of Lagos toward Salema, a dramatic, quirky course with big elevation changes and views to the sea and the wild Costa Vicentina. A proper challenge — and a scenic one. A buggy is strongly recommended.",transit:"No practical public transport — car or taxi.",none:true},
+{cat:'champ',name:'Penina Championship Course',dist:'≈22 km · 22 min',cost:'€26–36',desc:"Sir Henry Cotton's championship masterpiece on the flat Alvor plain — a genuine test with mature trees, water and fast greens, plus the resort's shorter courses alongside. A piece of Algarve golf history.",transit:"On the N125 — Vamus buses pass nearby, or train to Portimão + taxi; car easiest.",url:'https://www.penina.com/'}
+]},
+{num:'III',title:'Further afield',range:'35 km+ · Uber ≈ €40–70',items:[
+{cat:'champ',name:'Morgado Golf Course',dist:'≈35 km · 35 min',cost:'€40–54',desc:"A long, open championship course below the Monchique mountains, with wide fairways and a battalion of deep, strategic bunkers. Good value on early or twilight tee times; a buggy helps on the bigger course.",transit:"No practical public transport — car or taxi.",none:true},
+{cat:'relaxed',name:'Álamos Golf Course',dist:'≈35 km · 35 min',cost:'€40–54',desc:"Morgado's sister course — shorter, more forgiving and full of undulating, well-guarded greens. Often the pick for a fun, less punishing round in the same peaceful countryside setting.",transit:"No practical public transport — car or taxi.",none:true},
+{cat:'relaxed',name:'Pestana Silves Golf',dist:'≈38 km · 38 min',cost:'€42–56',desc:"One of the newer, easier-walking Pestana courses, in a serene rural setting below Silves and the Monchique hills — wide fairways, some elevated tees and a modern clubhouse. Good value.",transit:"Train Lagos→Silves (station ~2 km out) + taxi; a car is easiest with clubs.",url:'https://pestanagolf.com/golf/'},
+{cat:'resort',name:'Pestana Gramacho Golf',dist:'≈40 km · 40 min',cost:'€44–58',desc:"The neatest of the three Pestana Carvoeiro courses — a Ronald Fream / Nick Price design famous for its double greens and fast, rolling putting surfaces, with well-spaced holes and a fine terrace over the 18th.",transit:"No practical public transport — car or taxi.",none:true,url:'https://pestanagolf.com/golf/'},
+{cat:'champ',name:'Pestana Vale da Pinta Golf',dist:'≈40 km · 40 min',cost:'€44–58',desc:"A long-respected championship layout among olive groves and a repeat European Seniors Tour qualifying host, with lightning greens and clever dog-legs. Sister course to Gramacho.",transit:"No practical public transport — car or taxi.",none:true,url:'https://pestanagolf.com/golf/'},
+{cat:'champ',name:'Amendoeira Golf Resort',dist:'≈48 km · 45 min',cost:'€52–70',desc:"A big 36-hole resort near Alcantarilha with two contrasting championship courses — the demanding Faldo and the more playable O'Connor Jr. Expansive, scenic and a favourite for multi-round golf trips.",transit:"No practical public transport — car or taxi.",none:true,url:'https://www.amendoeiraresort.com/'}
+]}
+];
+const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const transit=it.transit?`<div class="transit${it.none?' none':''}"><span class="tlabel">Getting there</span>${it.transit}</div>`:'';const link=it.url?`<a class="card-link" href="${it.url}" target="_blank" rel="noopener noreferrer">Official site ↗</a>`:'';const map=`<a class="card-link map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.name+' Algarve golf')}${PID[it.name]?('&query_place_id='+PID[it.name]):''}" target="_blank" rel="noopener noreferrer">Map ↗</a>`;return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p>${transit}<div class="stats"><div class="stat"><span class="k">From centre</span><span class="v">${it.dist}</span></div><div class="stat cost"><span class="k">Uber ~</span><span class="v">${it.cost}</span></div></div><div class="card-links">${link}${map}</div></article>`}).join('')}</div></section>`).join('')}
+function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
+document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
+build();
+</script>
+</body>
+</html>
