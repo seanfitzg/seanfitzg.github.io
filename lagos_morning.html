@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lagos · Breakfast &amp; Brunch near Casa Margo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4ECDD;--paper-2:#FCF7EE;--ink:#2B2A31;--ink-soft:#6E6968;
+    --pine:#245C4E;--pine-deep:#173B31;--terra:#C0682C;--wine:#8E2C40;
+    --c-brunch:#C0682C;--c-coffee:#6B4A34;--c-bakery:#B8862B;--c-healthy:#4E7B3A;
+    --line:rgba(43,42,49,.14);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .hero{max-width:1120px;margin:0 auto;padding:64px 28px 0}
+  .topnav{display:flex;gap:22px;margin-bottom:26px;font-size:.85rem;font-weight:600}
+  .topnav a{color:var(--pine);text-decoration:none;padding-bottom:3px;border-bottom:2px solid transparent;transition:color .12s ease,border-color .12s ease}
+  .topnav a:hover{color:var(--pine-deep)}
+  .topnav a.active{color:var(--terra);border-color:var(--terra)}
+  .eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pine-deep);max-width:15ch}
+  h1 em{font-style:italic;color:var(--terra)}
+  .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--ink);max-width:44ch;margin-top:22px;line-height:1.4}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+  .meta-strip b{color:var(--pine);font-weight:600}
+  .frieze{height:26px;margin-top:40px;
+    background-image:
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      linear-gradient(45deg,var(--pine) 25%,transparent 25%,transparent 75%,var(--pine) 75%),
+      radial-gradient(circle at center,var(--terra) 22%,transparent 24%);
+    background-size:26px 26px,26px 26px,26px 26px;background-position:0 0,13px 13px,0 0;
+    opacity:.9;border-top:2px solid var(--pine);border-bottom:2px solid var(--pine)}
+  main{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+  .note{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--terra);border-radius:var(--radius);padding:17px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:16px}
+  .note:last-of-type{margin-bottom:34px}
+  .note b{color:var(--ink);font-weight:600}
+  .filter-wrap{position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 74%,transparent);padding:14px 0 16px;margin-bottom:4px}
+  .filter-label{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer;transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease}
+  .chip:hover{transform:translateY(-1px)}
+  .chip[aria-pressed="true"]{background:var(--pine);color:#fff;border-color:var(--pine)}
+  .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--dot,#999)}
+  .band{margin-top:44px}
+  .band-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:1px solid var(--pine)}
+  .band-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.15rem;color:var(--terra);letter-spacing:.05em}
+  .band-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;letter-spacing:-.01em;color:var(--pine-deep)}
+  .band-head .range{margin-left:auto;font-size:.8rem;color:var(--ink-soft);white-space:nowrap;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .14s ease;border-top:3px solid var(--cat,var(--pine))}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(23,59,49,.5)}
+  .card.hide{display:none}
+  .tag{align-self:flex-start;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cat,var(--pine));margin-bottom:10px}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cat,var(--pine));margin-right:8px;vertical-align:middle}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;color:var(--pine-deep);margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--ink-soft);flex-grow:1}
+  .stats{display:flex;gap:12px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}
+  .stat{flex:1}
+  .stat .k{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .stat .v{font-weight:600;font-size:.95rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat.price .v{color:var(--pine)}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);text-decoration:none;border-bottom:1.5px solid var(--pine);padding-bottom:2px;transition:color .12s ease,border-color .12s ease}
+  .card-link:hover,.card-link:focus-visible{color:var(--pine-deep);border-color:var(--pine-deep)}
+  .empty{display:none;text-align:center;padding:54px 20px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
+  .empty.show{display:block}
+  footer{max-width:1120px;margin:0 auto;padding:0 28px 64px;font-size:.82rem;color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line);padding-top:20px}
+  a:focus-visible,.chip:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  @media (max-width:560px){.hero{padding:48px 20px 0}main{padding:26px 20px 64px}.band-head .range{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <nav class="topnav"><a href="lagos_kids.html">Kids</a><a href="lagos_ladies.html">Ladies</a><a href="lagos_spas.html">Spas</a><a href="lagos_restaurants.html">Restaurants</a><a href="lagos_morning.html" class="active">Morning</a></nav>
+  <div class="eyebrow">Lagos · Western Algarve · Breakfast &amp; brunch near Casa Margo</div>
+  <h1>Morning, <em>sorted</em> by the walk over.</h1>
+  <p class="lede">Sixteen breakfast, brunch and coffee spots, all within ten minutes on foot — full sit-down brunches, easygoing cafés, bakeries and healthy bowls.</p>
+  <div class="meta-strip"><span><b>16</b> spots</span><span><b>≤10</b>-min walk</span><span><b>4</b> styles</span><span>Google listing on every card</span></div>
+  <div class="frieze"></div>
+</header>
+<main>
+  <div class="note"><b>About the list.</b> Every spot is within a genuine 10-minute walk of Casa Margo (Praça Luís de Camões) — most are much closer. Walk times are approximate, door to door through the old-town lanes. The price guide is rough — <b>€</b> a coffee-and-pastry budget, <b>€€</b> a proper sit-down brunch. A few of the best bakeries and cafés here are <b>cash only</b>, flagged on the card — worth carrying a little cash for pastries. Each card links to the spot's Google listing for hours, menu and photos; the popular brunch spots get busy, so an early start helps.</div>
+  <div class="filter-wrap">
+    <div class="filter-label">Filter by style</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">All</button>
+      <button class="chip" data-cat="brunch" style="--dot:var(--c-brunch)" aria-pressed="false"><span class="dot"></span>Full brunch</button>
+      <button class="chip" data-cat="coffee" style="--dot:var(--c-coffee)" aria-pressed="false"><span class="dot"></span>Coffee &amp; café</button>
+      <button class="chip" data-cat="bakery" style="--dot:var(--c-bakery)" aria-pressed="false"><span class="dot"></span>Bakery &amp; pastry</button>
+      <button class="chip" data-cat="healthy" style="--dot:var(--c-healthy)" aria-pressed="false"><span class="dot"></span>Healthy &amp; bowls</button>
+    </div>
+  </div>
+  <div id="bands"></div>
+  <div class="empty" id="empty">Nothing under that style — try another.</div>
+</main>
+<footer><div class="rule">A hand-picked shortlist, not every café in town. Opening days and hours vary — several close one weekday, and a few are cash only. Check the Google listing before you set out, especially for the smaller bakeries with limited seating.</div></footer>
+<script>
+const CATS={brunch:{label:'Full brunch',color:'var(--c-brunch)'},coffee:{label:'Coffee & café',color:'var(--c-coffee)'},bakery:{label:'Bakery & pastry',color:'var(--c-bakery)'},healthy:{label:'Healthy & bowls',color:'var(--c-healthy)'}};
+const PID={"Twin Fin":"ChIJh2Aq3y4xGw0Ro58yGUb3Ae4","Indigo Bar":"ChIJ43QP44ExGw0RpL1LMqKXqE4","Black and White Coffee Shop":"ChIJa_3S6PsxGw0RiYMrGty50FA","Goji Lounge Café":"ChIJCwRX8s4xGw0RyWsdTaDnmOs","Coffee & Waves":"ChIJoR0rxs8xGw0RqWaXQykpul4","Alex — coffee, brunch & wine":"ChIJy1bplMAxGw0RZiMBYK726eQ","London Tiger Coffee":"ChIJO0uOis4xGw0RnEmmWWc_FvE","Tiratisù — Coffee and more":"ChIJV5730S4xGw0RBXxd7KA5xZU","Croissanteria 29":"ChIJld8baM4xGw0R1o0fWb7hpOM","Padaria Central":"ChIJDYJYiM4xGw0RtWLUa-fbnts","Mealha":"ChIJb0RnCQAxGw0RoI-KKsD6kBg","All Things Dough Centro":"ChIJB5O0NdAxGw0RTn-i3HPX1eY","All Things Dough":"ChIJlQWA3tgxGw0RLDGlXVLWIC8","OAKBERRY Açaí":"ChIJr_7FYEwxGw0R0e02KcO1us8","Coffee Break Lagos":"ChIJ27UB4nYxGw0R_Uvxrn6jz5M","Family Hub Café":"ChIJDWYJrpAxGw0ReAonyvp8oYM"};
+const BANDS=[
+{num:'I',title:'A five-minute stroll',range:'≤5 min',items:[
+{cat:'brunch',name:'Twin Fin',dist:'4-min walk',cost:'€€',desc:"A stylish, laid-back brunch spot with a genuinely diverse menu — eggs Benedict, prosciutto waffles, banana bread — plenty of vegan options, and fantastic smoothies. No queue like the touristier places nearby."},
+{cat:'brunch',name:'Indigo Bar',dist:'3-min walk',cost:'€€',desc:"A relaxed café-bar with a sunny rooftop patio, açaí bowls loaded with granola, and an Eggs Benedict-led brunch menu. Friendly service and a lovely spot to linger over coffee."},
+{cat:'coffee',name:'Black and White Coffee Shop',dist:'3-min walk',cost:'€€',desc:"Consistently rated the best coffee in Lagos, with excellent pancakes, a hearty breakfast burrito, vegan options and beautiful croissants. Gets busy early — worth the short queue."},
+{cat:'brunch',name:'Goji Lounge Café',dist:'2-min walk',cost:'€€',desc:"A light, healthy brunch spot known for its Buddha bowls, açaí and good pancakes, with a calm vibe. Cash only, and closed Tuesdays."},
+{cat:'healthy',name:'Coffee & Waves',dist:'6-min walk',cost:'€€',desc:"A surf-themed coffee shop with a devoted following — yogurt bowls, papaya bowls, avocado toast and excellent latte art, served with a genuinely warm welcome."},
+{cat:'coffee',name:'Alex — coffee, brunch & wine',dist:'8-min walk',cost:'€€',desc:"A stylish, slightly-hidden brunch and coffee spot — superb cinnamon buns, flat whites, cheese toasties — with a calm, funky vibe. A lovely, less-crowded morning stop."},
+{cat:'coffee',name:'London Tiger Coffee',dist:'3-min walk',cost:'€',desc:"A cosy, colourful café with lots of vegan options and plant-based milks, plus a well-loved cake selection. A relaxed spot to sit with a coffee and treat."}
+]},
+{num:'II',title:'A bit further',range:'6–10 min',items:[
+{cat:'bakery',name:'Tiratisù — Coffee and more',dist:'6-min walk',cost:'€',desc:"A little coffee-and-dessert gem on the tourist street with genuinely fresh bread, good pastel de nata and a real tiramisu. Closed Sundays."},
+{cat:'bakery',name:'Croissanteria 29',dist:'5-min walk',cost:'€',desc:"A beloved 30-year-old family spot for warm croissant sandwiches — ham, prosciutto, salad and mayonnaise — plus fresh orange juice. Cash only."},
+{cat:'bakery',name:'Padaria Central',dist:'5-min walk',cost:'€',desc:"A proper old-town Portuguese bakery loved for its pastel de nata, croquettes and savoury pastries — take a ticket and wait your turn. Cash only; closed Sundays."},
+{cat:'bakery',name:'Mealha',dist:'6-min walk',cost:'€',desc:"A lovely, unhurried local café run by a kind elderly gentleman — cheap, authentic pastel de nata and good coffee, with a steady stream of regulars."},
+{cat:'bakery',name:'All Things Dough Centro',dist:'5-min walk',cost:'€',desc:"The central outpost of Lagos's popular all-vegan bakery — cardamom buns, pain au chocolat and good bread. Closed Sundays and Mondays."},
+{cat:'bakery',name:'All Things Dough',dist:'9-min walk',cost:'€',desc:"The original all-vegan bakery near the marina, famous for cardamom buns and pastel de nata that even non-vegans rave about. A little further, but worth it. Closed Sundays and Mondays."},
+{cat:'healthy',name:'OAKBERRY Açaí',dist:'7-min walk',cost:'€',desc:"A dedicated açaí bowl bar with fresh fruit and a granola made with olive oil rather than seed oils. Popular and consistently well-reviewed — go early before it sells out."},
+{cat:'coffee',name:'Coffee Break Lagos',dist:'10-min walk',cost:'€',desc:"An unassuming café by Praia da Batata with lovely sea views, simple honest breakfasts, egg toasts and fresh juice, plus a fortune-cookie note with every order. A little further but a real find."},
+{cat:'brunch',name:'Family Hub Café',dist:'10-min walk',cost:'€€',desc:"A gorgeous café near Praia da Batata with excellent food and — handy if little ones are along — a proper play area, though the food and coffee are just as good for adults on their own."}
+]}
+];
+const bandsEl=document.getElementById('bands'),emptyEl=document.getElementById('empty');
+function build(){bandsEl.innerHTML=BANDS.map(band=>`<section class="band"><div class="band-head"><span class="band-num">${band.num}</span><h2>${band.title}</h2><span class="range">${band.range}</span></div><div class="grid">${band.items.map(it=>{const c=CATS[it.cat];const map=`<a class="card-link" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.name+' Lagos')}${PID[it.name]?('&query_place_id='+PID[it.name]):''}" target="_blank" rel="noopener noreferrer">Map & menu ↗</a>`;return `<article class="card" data-cat="${it.cat}" style="--cat:${c.color}"><span class="tag">${c.label}</span><h3>${it.name}</h3><p>${it.desc}</p><div class="stats"><div class="stat"><span class="k">On foot</span><span class="v">${it.dist}</span></div><div class="stat price"><span class="k">Price</span><span class="v">${it.cost}</span></div></div>${map}</article>`}).join('')}</div></section>`).join('')}
+function filter(cat){let v=0;document.querySelectorAll('.card').forEach(card=>{const s=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hide',!s);if(s)v++});document.querySelectorAll('.band').forEach(b=>{const any=[...b.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));b.style.display=any?'':'none'});emptyEl.classList.toggle('show',v===0)}
+document.getElementById('chips').addEventListener('click',e=>{const btn=e.target.closest('.chip');if(!btn)return;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');filter(btn.dataset.cat)});
+build();
+</script>
+</body>
+</html>
