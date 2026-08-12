@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surf Training — Sessions &amp; Descriptions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F2;
+    --card:#FFFFFF;
+    --ink:#16303A;
+    --muted:#6E858C;
+    --line:#DCE4E5;
+    --motion:#0E86A8;
+    --ghost:#AFC4CA;
+    --a:#0E86A8; --a-bg:#E4F1F4; --a-bd:#BEE0E7;
+    --b:#C67A18; --b-bg:#FBF1DE; --b-bd:#F0D9A9;
+    --c:#5B8A3C; --c-bg:#EEF5E6; --c-bd:#CFE3BC;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:36px 22px 72px;}
+
+  /* Header */
+  .eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;font-size:13px;color:var(--motion);margin:0 0 6px;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:clamp(36px,7vw,54px);line-height:.98;letter-spacing:-.01em;
+    margin:0 0 14px;text-transform:uppercase;}
+  .lede{max-width:64ch;color:var(--muted);font-size:15px;margin:0 0 26px;}
+
+  /* Info panel */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px;margin-bottom:34px;}
+  .panel h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    letter-spacing:.04em;font-weight:600;font-size:16px;margin:0 0 10px;}
+  .panel p{margin:0 0 10px;font-size:14.5px;}
+  .panel p:last-child{margin-bottom:0;}
+  .panel b{font-weight:600;}
+  .week{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 2px;}
+  .day{flex:1;min-width:120px;border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;text-align:center;}
+  .day .d{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;font-size:13px;color:var(--muted);}
+  .day .s{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;}
+
+  /* Section heads */
+  .section-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    margin:40px 0 18px;padding-bottom:10px;border-bottom:2px solid var(--ink);}
+  .section-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    text-transform:uppercase;font-size:27px;letter-spacing:.01em;margin:0;line-height:1;}
+  .section-head .note{color:var(--muted);font-size:13px;}
+
+  /* Session cards */
+  .session{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;margin-bottom:20px;border-top:5px solid var(--ink);}
+  .session.a{border-top-color:var(--a);}
+  .session.b{border-top-color:var(--b);}
+  .session.c{border-top-color:var(--c);}
+  .session .shead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
+  .session h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:24px;letter-spacing:.01em;margin:0;line-height:1;}
+  .badge{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;
+    letter-spacing:.06em;padding:3px 12px;border-radius:20px;text-transform:uppercase;flex:none;}
+  .badge.a{color:var(--a);background:var(--a-bg);border:1px solid var(--a-bd);}
+  .badge.b{color:var(--b);background:var(--b-bg);border:1px solid var(--b-bd);}
+  .badge.c{color:var(--c);background:var(--c-bg);border:1px solid var(--c-bd);}
+  .focus{color:var(--muted);font-size:13.5px;margin:0 0 16px;}
+
+  .block{margin-top:16px;}
+  .block .label{font-family:'Barlow Condensed',sans-serif;font-weight:600;
+    text-transform:uppercase;letter-spacing:.12em;font-size:12.5px;color:var(--motion);margin:0 0 8px;}
+  .block .label .meta{color:var(--muted);letter-spacing:.04em;font-weight:500;}
+  .prep-line{font-size:14.5px;margin:0;}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  table td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:baseline;}
+  table tr:last-child td{border-bottom:none;}
+  td.ex{font-weight:500;}
+  td.reps{text-align:right;white-space:nowrap;color:var(--ink);font-variant-numeric:tabular-nums;
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;letter-spacing:.02em;padding-left:14px;}
+  td.reps small{color:var(--muted);font-family:'Inter',sans-serif;font-weight:400;font-size:12px;}
+  .finisher{font-size:14.5px;margin:0;}
+
+  /* Equipment tags */
+  .kit{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:12px;letter-spacing:.07em;text-transform:uppercase;line-height:1.35;
+    padding:1px 9px;border-radius:20px;border:1px solid;white-space:nowrap;vertical-align:middle;}
+  .kit-kb{color:#7A3FC0;background:#F1E9FB;border-color:#DCC8F2;}
+  .kit-1db{color:#B23A6E;background:#FBE9F1;border-color:#F2C8DC;}
+  .kit-2db{color:#2E56A8;background:#E6EDFA;border-color:#C4D3F0;}
+  .kit-bw{color:#5E7480;background:#EAEFF0;border-color:#D3DDDF;}
+  .ex .kit{margin-left:7px;}
+
+  .kit-legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:13px 18px;margin-bottom:34px;font-size:13px;color:var(--muted);}
+  .kit-legend b{color:var(--ink);font-weight:600;font-family:'Barlow Condensed',sans-serif;
+    letter-spacing:.04em;text-transform:uppercase;font-size:13px;margin-right:2px;}
+
+  /* Descriptions */
+  .glossary{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:6px 24px;margin-bottom:20px;}
+  .term{padding:16px 0;border-bottom:1px solid var(--line);}
+  .term:last-child{border-bottom:none;}
+  .term h4{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;
+    letter-spacing:.02em;font-size:19px;margin:0 0 5px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .term h4 .in{font-family:'Inter',sans-serif;font-weight:500;text-transform:none;letter-spacing:0;
+    font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:1px 9px;}
+  .term p{margin:0;font-size:14.5px;}
+
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;text-align:center;}
+
+  /* Info icon + popup */
+  .info-btn{-webkit-appearance:none;appearance:none;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    width:19px;height:19px;margin-left:7px;padding:0;
+    border-radius:50%;border:1.5px solid var(--motion);background:transparent;color:var(--motion);
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;line-height:1;
+    vertical-align:middle;transition:background .15s,color .15s;}
+  .info-btn:hover,.info-btn:focus{background:var(--motion);color:#fff;outline:none;}
+  .info-btn:focus-visible{box-shadow:0 0 0 3px rgba(14,134,168,.35);}
+
+  .modal-backdrop{position:fixed;inset:0;background:rgba(16,48,58,.55);
+    display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;
+    opacity:0;pointer-events:none;transition:opacity .18s;}
+  .modal-backdrop.open{opacity:1;pointer-events:auto;}
+  .modal{background:var(--card);border-radius:18px;max-width:460px;width:100%;
+    padding:22px 24px 26px;box-shadow:0 24px 64px rgba(16,48,58,.32);
+    transform:translateY(10px) scale(.985);transition:transform .18s;
+    max-height:85vh;overflow:auto;border-top:5px solid var(--motion);}
+  .modal-backdrop.open .modal{transform:none;}
+  .modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px;}
+  .modal-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:25px;letter-spacing:.01em;margin:0;line-height:1.02;}
+  .modal-close{-webkit-appearance:none;appearance:none;cursor:pointer;flex:none;
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper);
+    color:var(--ink);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;
+    transition:background .15s;}
+  .modal-close:hover{background:#E1E7E8;}
+  .modal-kit{margin:0 0 14px;}
+  .modal-body{font-size:15px;line-height:1.62;color:var(--ink);margin:0;}
+
+  /* Diagram figures (used inside popups) */
+  .fig{stroke:var(--ink);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+  .gh{stroke:var(--ghost);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+  .head{fill:#fff;stroke:var(--ink);stroke-width:3.2;}
+  .head-gh{fill:#fff;stroke:var(--ghost);stroke-width:3;}
+  .kb{fill:var(--ink);}
+  .kb-gh{fill:var(--ghost);}
+  .db{stroke:var(--ink);stroke-width:3.2;stroke-linecap:round;}
+  .db-gh{stroke:var(--ghost);stroke-width:3;stroke-linecap:round;}
+  .ground{stroke:#C7D3D5;stroke-width:2.4;stroke-linecap:round;}
+  .mo{stroke:var(--motion);stroke-width:3;fill:none;stroke-linecap:round;}
+
+  .modal-dia{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+  .modal-dia svg{max-width:340px;width:100%;height:auto;display:block;margin:2px auto 0;}
+  .modal-legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+    margin-top:6px;font-size:11.5px;color:var(--muted);}
+  .modal-legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .modal-legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;border-radius:2px;}
+  .sw-ghost{border-color:var(--ghost);}
+  .sw-solid{border-color:var(--ink);}
+  .sw-mo{border-color:var(--motion);}
+
+  @media print{
+    .info-btn{display:none;}
+    .modal-backdrop{display:none !important;}
+  }
+    body{background:#fff;}
+    .wrap{max-width:none;padding:0 8px;}
+    .panel,.session,.glossary{box-shadow:none;break-inside:avoid;}
+    .term{break-inside:avoid;}
+    a{color:inherit;text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0E86A8"/>
+    </marker>
+  </defs>
+</svg>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Surf Fit · 40-Minute Sessions</p>
+  <h1>Sessions &amp; Descriptions</h1>
+  <p class="lede">Three sessions a week built around what surfing asks of you: paddle endurance, an explosive pop-up, and rotational core and balance. Kit needed — one 20&nbsp;kg kettlebell, two 10&nbsp;kg dumbbells, a mat.</p>
+</header>
+
+<div class="panel">
+  <h3>How each session runs</h3>
+  <p><b>15-min run</b> first to get warm, then <b>~2 min</b> of movement prep, a <b>~20 min</b> circuit, and a short core finisher — in and out inside 40 minutes.</p>
+  <p><b>Rounds:</b> aim for 4 circuit rounds, but run 3 if the clock is tight — quality reps beat rushing. Rest ~60&nbsp;seconds between rounds.</p>
+  <p><b>Progressing:</b> your weights are fixed, so add a round, slow the tempo, or shorten the rest before you worry about load.</p>
+  <div class="week">
+    <div class="day"><div class="d">Mon</div><div class="s" style="color:var(--a)">Session A</div></div>
+    <div class="day"><div class="d">Wed</div><div class="s" style="color:var(--b)">Session B</div></div>
+    <div class="day"><div class="d">Fri</div><div class="s" style="color:var(--c)">Session C</div></div>
+  </div>
+  <p style="margin-top:12px">Spread them out so shoulders and legs recover, and keep at least one full rest day before you surf if you can.</p>
+</div>
+
+<div class="kit-legend">
+  <b>Equipment key</b>
+  <span class="kit kit-kb">Kettlebell</span>
+  <span class="kit kit-1db">1 Dumbbell</span>
+  <span class="kit kit-2db">2 Dumbbells</span>
+  <span class="kit kit-bw">Bodyweight</span>
+</div>
+
+<!-- ===================== SESSIONS ===================== -->
+<div class="section-head">
+  <h2>The Sessions</h2>
+  <span class="note">run · prep · circuit · finisher · tap the <b style="color:var(--motion)">i</b> on any exercise for how to do it</span>
+</div>
+
+<!-- SESSION A -->
+<div class="session a">
+  <div class="shead"><h3>Paddle Power</h3><span class="badge a">Session A</span></div>
+  <p class="focus">Back, shoulders, posterior chain — the paddling engine.</p>
+
+  <div class="block">
+    <p class="label">Run <span class="meta">· 15 min easy</span></p>
+    <p class="prep-line">Get the blood moving and the heart rate up.</p>
+  </div>
+  <div class="block">
+    <p class="label">Prep <span class="meta">· ~2 min</span></p>
+    <p class="prep-line">Arm circles <button class="info-btn" data-key="arm-circles" aria-label="How to do it">i</button> · shoulder rotations <button class="info-btn" data-key="shoulder-rotations" aria-label="How to do it">i</button> · cat-cow <button class="info-btn" data-key="cat-cow" aria-label="How to do it">i</button></p>
+  </div>
+  <div class="block">
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <table>
+      <tr><td class="ex">Kettlebell swing <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-swing" aria-label="How to do it">i</button></td><td class="reps">× 15</td></tr>
+      <tr><td class="ex">Renegade row <small>— keep hips square</small> <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="renegade-row" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">DB floor press <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="db-floor-press" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <p class="label">Finisher <span class="meta">· 3 min</span></p>
+    <p class="finisher">Superman hold / prone Y-T-W raises <button class="info-btn" data-key="superman" aria-label="How to do it">i</button> — your paddling posture.</p>
+  </div>
+</div>
+
+<!-- SESSION B -->
+<div class="session b">
+  <div class="shead"><h3>Pop-Up &amp; Legs</h3><span class="badge b">Session B</span></div>
+  <p class="focus">Explosive lower body and hips — the drive that gets you to your feet.</p>
+
+  <div class="block">
+    <p class="label">Run <span class="meta">· 15 min easy</span></p>
+    <p class="prep-line">Get the blood moving and the heart rate up.</p>
+  </div>
+  <div class="block">
+    <p class="label">Prep <span class="meta">· ~2 min</span></p>
+    <p class="prep-line">Deep squat hold <button class="info-btn" data-key="deep-squat-hold" aria-label="How to do it">i</button> · leg swings <button class="info-btn" data-key="leg-swings" aria-label="How to do it">i</button> · world's greatest stretch <button class="info-btn" data-key="worlds-greatest-stretch" aria-label="How to do it">i</button></p>
+  </div>
+  <div class="block">
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <table>
+      <tr><td class="ex">Goblet squat <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="goblet-squat" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Reverse lunge <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="reverse-lunge" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Explosive push-up <small>or burpee</small> <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="explosive-push-up" aria-label="How to do it">i</button></td><td class="reps">× 8</td></tr>
+      <tr><td class="ex">KB Romanian deadlift <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-rdl" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <p class="label">Finisher <span class="meta">· 3 min</span></p>
+    <p class="finisher">Hollow hold <button class="info-btn" data-key="hollow-hold" aria-label="How to do it">i</button> + forearm plank <button class="info-btn" data-key="forearm-plank" aria-label="How to do it">i</button>.</p>
+  </div>
+</div>
+
+<!-- SESSION C -->
+<div class="session c">
+  <div class="shead"><h3>Rotation &amp; Balance</h3><span class="badge c">Session C</span></div>
+  <p class="focus">Core and single-leg stability — staying on the board and turning on a wave.</p>
+
+  <div class="block">
+    <p class="label">Run <span class="meta">· 15 min easy</span></p>
+    <p class="prep-line">Get the blood moving and the heart rate up.</p>
+  </div>
+  <div class="block">
+    <p class="label">Prep <span class="meta">· ~2 min</span></p>
+    <p class="prep-line">Thoracic rotations <button class="info-btn" data-key="thoracic-rotations" aria-label="How to do it">i</button> · hip openers <button class="info-btn" data-key="hip-openers" aria-label="How to do it">i</button></p>
+  </div>
+  <div class="block">
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <table>
+      <tr><td class="ex">DB Russian twist <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="russian-twist" aria-label="How to do it">i</button></td><td class="reps">× 20</td></tr>
+      <tr><td class="ex">Single-leg RDL <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="single-leg-rdl" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">KB clean &amp; push press <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="clean-push-press" aria-label="How to do it">i</button></td><td class="reps">× 6 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <p class="label">Finisher <span class="meta">· 3 min</span></p>
+    <p class="finisher">Side plank × 30s each side <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="side-plank" aria-label="How to do it">i</button> + slow DB rotational chops <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="rotational-chop" aria-label="How to do it">i</button>.</p>
+  </div>
+</div>
+
+<footer>
+  For form reference only — not a substitute for coaching. Brace your core on every rep, and drop the reps before you drop your form.
+</footer>
+
+</div>
+
+<!-- Exercise description popup -->
+<div class="modal-backdrop" id="ex-modal" role="dialog" aria-modal="true" aria-labelledby="ex-modal-title" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="modal-title" id="ex-modal-title"></h3>
+      <button class="modal-close" id="ex-modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-kit" id="ex-modal-kit"></div>
+    <p class="modal-body" id="ex-modal-body"></p>
+    <div class="modal-dia" id="ex-modal-dia">
+      <div id="ex-modal-svg"></div>
+      <div class="modal-legend">
+        <span><i class="sw-ghost"></i>start</span>
+        <span><i class="sw-solid"></i>finish</span>
+        <span><i class="sw-mo"></i>direction</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+  'arm-circles':{t:`Arm Circles`,k:'bw',b:`Stand tall with your arms extended straight out to the sides at shoulder height, making a T. Draw slow circles in the air with both hands, starting small and gradually growing them bigger. Do a set forwards, then reverse and go backwards. Gets blood into the shoulder muscles and greases the joint through its full range before you load it.`},
+  'shoulder-rotations':{t:`Shoulder Rotations`,k:'bw',b:`Either roll your shoulders — lift them toward your ears, then roll them back and down in a smooth circle, repeating several times before reversing — or, for more range, place your fingertips on your shoulders and draw big circles with your elbows. Both loosen the shoulder girdle and upper back, exactly the area that fatigues when you paddle.`},
+  'cat-cow':{t:`Cat-Cow`,k:'bw',b:`On all fours, hands under shoulders and knees under hips. For cow, drop your belly toward the floor, lift your chest and tailbone, and gently look up. For cat, reverse it: round your spine up toward the ceiling, tucking your chin and tailbone under. Flow slowly between the two — inhale into cow, exhale into cat. Mobilises the whole spine segment by segment.`},
+  'deep-squat-hold':{t:`Deep Squat Hold`,k:'bw',b:`Sink to the bottom of a squat and settle there, chest tall, heels down, elbows nudging the knees outward. Breathe and hold. Opens the hips, ankles and lower back and rehearses the depth you will use under load.`},
+  'leg-swings':{t:`Leg Swings`,k:'bw',b:`Stand on one leg (hold something for balance if needed) and swing the other leg forward and back like a relaxed pendulum, keeping your torso still. Do a set, then switch legs. Wakes up the hips and hamstrings through a moving range rather than a static stretch.`},
+  'worlds-greatest-stretch':{t:`World's Greatest Stretch`,k:'bw',b:`Step into a deep lunge and place the hand on the same side as your front foot down on the floor beside it. Then reach the other arm up toward the ceiling, rotating your chest open and following the hand with your eyes. Return and switch sides. One move that opens hips, spine and shoulders together.`},
+  'thoracic-rotations':{t:`Thoracic Rotations`,k:'bw',b:`On all fours, place one hand behind your head. Rotate that elbow up toward the ceiling, opening your chest and following the elbow with your eyes, then rotate it back down under your body. Repeat, then switch sides. Frees up the upper back for the twisting you do turning on a wave.`},
+  'hip-openers':{t:`Hip Openers`,k:'bw',b:`Drop into a low kneeling lunge — front foot planted, back knee down on the mat. Glide your hips forward ahead of the front foot to stretch the front of the trailing hip, then ease back. Repeat gently and switch sides. Loosens the hip flexors that tighten from sitting and paddling.`},
+  'kb-swing':{t:`Kettlebell Swing`,k:'kb',b:`Feet shoulder-width, kettlebell on the floor slightly ahead of you. Hinge at the hips (push your butt back, not a squat), grab the bell, and hike it between your legs like a rugby pass. Snap your hips forward to swing it up to chest height — the power comes from your hips, not your arms, which just guide it. Let it swing back down and repeat. Your core paddling and explosive-power builder.`},
+  'renegade-row':{t:`Renegade Row`,k:'2db',b:`Get into a push-up position gripping a dumbbell in each hand, feet wide for stability. Row one dumbbell up to your ribs while balancing on the other arm, keeping your hips square to the floor — do not let them twist. Lower and repeat on the other side. Builds the back and anti-rotation core you use paddling.`},
+  'push-up':{t:`Push-Up`,k:'bw',b:`Hands slightly wider than shoulders, body in a straight line from head to heels. Lower until your chest is just off the floor, elbows tracking back at roughly 45 degrees, then press up. Keep your core tight so your hips do not sag.`},
+  'db-floor-press':{t:`DB Floor Press`,k:'2db',b:`Lie on your back, knees bent, a dumbbell in each hand pressed up over your chest. Lower until your upper arms touch the floor, pause, then press back up. The floor limits the range, which is easier on the shoulders — good pressing volume without irritation.`},
+  'superman':{t:`Superman Hold / Y-T-W Raises`,k:'bw',b:`Lie face down. For superman, lift your chest, arms and legs off the floor and hold. For Y-T-W, lift your chest slightly and move your arms into each letter shape — overhead Y, out wide T, elbows-bent W — squeezing your upper back. Directly trains the paddling posture.`},
+  'goblet-squat':{t:`Goblet Squat`,k:'kb',b:`Hold the kettlebell against your chest with both hands, cupping the horns. Squat down keeping your chest up and knees tracking over your toes, aiming to get your hip crease below your knees. Drive up through your heels. The front load keeps you upright and honest.`},
+  'reverse-lunge':{t:`Reverse Lunge`,k:'2db',b:`Holding a dumbbell in each hand, step one foot straight back and lower until both knees are ~90 degrees, front thigh parallel to the floor. Push through the front heel to return. Easier on the knees than forward lunges and great for single-leg strength.`},
+  'explosive-push-up':{t:`Explosive Push-Up / Burpee`,k:'bw',b:`Explosive push-up: a normal push-up but you push hard enough that your hands leave the floor at the top. Burpee: from standing, drop to a push-up position, do a push-up, jump your feet back in, and jump up. Both train the fast hip-and-chest drive of the pop-up.`},
+  'kb-rdl':{t:`KB Romanian Deadlift`,k:'kb',b:`Hold the kettlebell in front of your thighs. Keeping a slight knee bend and a flat back, hinge at the hips and lower the bell along your legs until you feel a stretch in your hamstrings, then stand back up by squeezing your glutes. It is a hinge, not a squat — the bar path stays close to your body.`},
+  'russian-twist':{t:`DB Russian Twist`,k:'1db',b:`Sit with knees bent, heels lightly down (or lifted for more challenge), leaning back ~45 degrees. Hold one dumbbell and rotate it from hip to hip, touching down beside you each time. Trains the rotational core you use turning on a wave.`},
+  'single-leg-rdl':{t:`Single-Leg RDL`,k:'1db',b:`Hold one dumbbell and balance on one leg. Hinge at the hip and lower the weight toward the floor while your free leg extends straight back behind you, body forming a T. Return to standing under control. Your balance-under-load exercise — expect to wobble at first.`},
+  'clean-push-press':{t:`KB Clean & Push Press`,k:'kb',b:`Clean: hike the kettlebell back and pull it up to your shoulder in one motion, catching it in the rack position (bell resting on the back of your forearm). Push press: dip slightly at the knees, then drive up with your legs to help press the bell overhead. Lower to the shoulder, then to the floor, and repeat. A full-body power movement.`},
+  'hollow-hold':{t:`Hollow Hold`,k:'bw',b:`Lie on your back, press your lower back into the floor, and lift your shoulders and legs off the ground so your body forms a shallow banana shape. Arms can reach overhead to make it harder. Hold. A foundational core-tension drill.`},
+  'forearm-plank':{t:`Forearm Plank`,k:'bw',b:`On your forearms and toes, body in a straight line, core and glutes squeezed. Do not let your hips sag or pike up. Hold.`},
+  'side-plank':{t:`Side Plank`,k:'bw',b:`On one forearm, body stacked sideways in a straight line, hips lifted. Hold, then switch sides. Trains the lateral core that keeps you stable on the board.`},
+  'rotational-chop':{t:`DB Rotational Chop`,k:'1db',b:`Standing, hold one dumbbell in both hands. Bring it diagonally from low by one hip up across your body to above the opposite shoulder, rotating through your torso, then reverse. Controlled, not rushed — it trains the twisting power for turns.`}
+};
+  var DIA = {
+  'arm-circles':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Arms out in a T, drawing circles forwards then backwards">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <line x1="150" y1="96" x2="150" y2="54"/>
+      <circle class="head" cx="150" cy="45" r="7.5"/>
+      <line x1="150" y1="96" x2="146" y2="124"/><line x1="146" y1="124" x2="146" y2="150"/>
+      <line x1="150" y1="96" x2="154" y2="124"/><line x1="154" y1="124" x2="154" y2="150"/>
+      <!-- arms out in a T -->
+      <line x1="150" y1="60" x2="104" y2="60"/>
+      <line x1="150" y1="60" x2="196" y2="60"/>
+    </g>
+    <!-- circling arrows at both hands -->
+    <path class="mo" d="M104,50 A10,10 0 1 1 94,60" marker-end="url(#ah)"/>
+    <path class="mo" d="M196,50 A10,10 0 1 0 206,60" marker-end="url(#ah)"/>
+  </svg>`,
+  'shoulder-rotations':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Fingertips on shoulders, drawing big circles with the elbows">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <line x1="150" y1="96" x2="150" y2="54"/>
+      <circle class="head" cx="150" cy="45" r="7.5"/>
+      <line x1="150" y1="96" x2="146" y2="124"/><line x1="146" y1="124" x2="146" y2="150"/>
+      <line x1="150" y1="96" x2="154" y2="124"/><line x1="154" y1="124" x2="154" y2="150"/>
+      <!-- elbows out, fingertips to shoulders -->
+      <line x1="150" y1="62" x2="122" y2="76"/><line x1="122" y1="76" x2="144" y2="64"/>
+      <line x1="150" y1="62" x2="178" y2="76"/><line x1="178" y1="76" x2="156" y2="64"/>
+    </g>
+    <path class="mo" d="M122,66 A11,11 0 1 1 111,78" marker-end="url(#ah)"/>
+    <path class="mo" d="M178,66 A11,11 0 1 0 189,78" marker-end="url(#ah)"/>
+  </svg>`,
+  'cat-cow':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="On all fours, arch the spine down for cow then round it up for cat">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost: COW, belly dropped, head up -->
+    <g class="gh">
+      <line x1="66" y1="112" x2="66" y2="150"/> <!-- front arm -->
+      <line x1="118" y1="112" x2="118" y2="150"/> <!-- rear thigh->knee -->
+      <path d="M66,112 Q92,124 118,112"/> <!-- sagging spine (cow) -->
+      <circle class="head-gh" cx="56" cy="104" r="7"/> <!-- head looking up -->
+      <line x1="66" y1="112" x2="58" y2="106"/>
+    </g>
+    <!-- solid: CAT, rounded up -->
+    <g class="fig">
+      <line x1="196" y1="114" x2="196" y2="150"/>
+      <line x1="248" y1="114" x2="248" y2="150"/>
+      <path d="M196,114 Q222,92 248,114"/> <!-- rounded spine (cat) -->
+      <circle class="head" cx="188" cy="122" r="7.5"/> <!-- chin tucked -->
+      <line x1="196" y1="114" x2="190" y2="120"/>
+    </g>
+    <path class="mo" d="M150,120 Q150,106 150,98" marker-end="url(#ah)"/>
+    <text x="66" y="168" font-size="9" fill="#6E858C" text-anchor="middle" font-family="Inter">cow</text>
+    <text x="222" y="168" font-size="9" fill="#6E858C" text-anchor="middle" font-family="Inter">cat</text>
+  </svg>`,
+  'deep-squat-hold':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Sink into the bottom of a squat and hold, chest tall">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <line x1="150" y1="116" x2="150" y2="78"/>
+      <circle class="head" cx="150" cy="69" r="7.5"/>
+      <!-- deep squat, knees wide/forward -->
+      <line x1="150" y1="116" x2="172" y2="130"/><line x1="172" y1="130" x2="166" y2="150"/>
+      <line x1="150" y1="116" x2="128" y2="130"/><line x1="128" y1="130" x2="134" y2="150"/>
+      <!-- elbows inside knees, hands together -->
+      <line x1="150" y1="82" x2="150" y2="112"/>
+    </g>
+    <!-- hold marker: elbows pressing knees apart -->
+    <path class="mo" d="M138,112 L128,120" marker-end="url(#ah)"/>
+    <path class="mo" d="M162,112 L172,120" marker-end="url(#ah)"/>
+  </svg>`,
+  'leg-swings':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Balance on one leg and swing the other forward and back">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <line x1="150" y1="92" x2="150" y2="54"/>
+      <circle class="head" cx="150" cy="45" r="7.5"/>
+      <!-- support leg -->
+      <line x1="150" y1="92" x2="150" y2="150"/>
+      <!-- swinging leg (mid-swing forward) -->
+      <line x1="150" y1="92" x2="192" y2="112"/>
+      <!-- arm out for balance -->
+      <line x1="150" y1="58" x2="120" y2="66"/>
+      <line x1="150" y1="58" x2="176" y2="52"/>
+    </g>
+    <!-- ghost swinging leg back -->
+    <g class="gh"><line x1="150" y1="92" x2="112" y2="118"/></g>
+    <!-- double arrow front/back -->
+    <path class="mo" d="M118,132 Q150,142 186,128" marker-end="url(#ah)" marker-start="url(#ah)"/>
+  </svg>`,
+  'worlds-greatest-stretch':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Deep lunge with one hand down, other arm reaching up and rotating open">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <!-- deep lunge: front foot forward, back leg long -->
+      <line x1="150" y1="112" x2="150" y2="150"/> <!-- front shin -->
+      <line x1="150" y1="112" x2="150" y2="96"/>  <!-- front thigh (hip above) -->
+      <line x1="150" y1="112" x2="112" y2="146"/> <!-- back leg extended -->
+      <!-- torso up from hip, rotated -->
+      <line x1="150" y1="96" x2="168" y2="70"/>
+      <circle class="head" cx="172" cy="62" r="7.5"/>
+      <!-- inside hand down to floor -->
+      <line x1="150" y1="100" x2="140" y2="148"/>
+      <!-- top arm reaching up, opening chest -->
+      <line x1="164" y1="74" x2="192" y2="44"/>
+    </g>
+    <path class="mo" d="M182,84 Q198,64 190,46" marker-end="url(#ah)"/>
+  </svg>`,
+  'thoracic-rotations':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="On all fours, hand behind head, rotate the elbow up toward the ceiling">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <!-- quadruped -->
+      <line x1="120" y1="112" x2="120" y2="150"/> <!-- support arm -->
+      <line x1="180" y1="112" x2="180" y2="150"/> <!-- thigh->knee -->
+      <line x1="120" y1="112" x2="180" y2="112"/> <!-- flat back -->
+      <circle class="head" cx="110" cy="106" r="7.5"/>
+      <line x1="120" y1="112" x2="112" y2="108"/>
+      <!-- rotating arm: hand behind head, elbow up -->
+      <line x1="132" y1="112" x2="138" y2="88"/><line x1="138" y1="88" x2="122" y2="98"/>
+    </g>
+    <path class="mo" d="M150,96 Q146,78 138,70" marker-end="url(#ah)"/>
+  </svg>`,
+  'hip-openers':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Low kneeling lunge, sinking the hips forward to open the hip flexor">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <g class="fig">
+      <!-- front leg bent, foot planted -->
+      <line x1="160" y1="108" x2="160" y2="150"/> <!-- front shin -->
+      <line x1="160" y1="108" x2="150" y2="92"/>  <!-- hip above -->
+      <!-- back leg: knee down on floor, shin trailing -->
+      <line x1="150" y1="98" x2="120" y2="140"/><line x1="120" y1="140" x2="96" y2="150"/>
+      <!-- upright torso -->
+      <line x1="150" y1="92" x2="150" y2="60"/>
+      <circle class="head" cx="150" cy="51" r="7.5"/>
+      <!-- hands resting on front knee -->
+      <line x1="150" y1="66" x2="160" y2="104"/>
+    </g>
+    <!-- forward sink arrow at hip -->
+    <path class="mo" d="M132,116 L156,110" marker-end="url(#ah)"/>
+  </svg>`,
+  'kb-swing':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Hip hinge with bell low, then stand and swing bell to chest">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost: hinge, bell low -->
+    <g class="gh">
+      <line x1="80" y1="96" x2="104" y2="76"/>
+      <circle class="head-gh" cx="112" cy="69" r="7"/>
+      <line x1="80" y1="96" x2="74" y2="124"/><line x1="74" y1="124" x2="70" y2="150"/>
+      <line x1="80" y1="96" x2="86" y2="124"/><line x1="86" y1="124" x2="90" y2="150"/>
+      <line x1="104" y1="76" x2="84" y2="120"/>
+    </g>
+    <circle class="kb-gh" cx="84" cy="127" r="7"/><path class="gh" d="M79,122 Q84,115 89,122"/>
+    <!-- solid: standing, bell at chest -->
+    <g class="fig">
+      <line x1="212" y1="96" x2="212" y2="58"/>
+      <circle class="head" cx="212" cy="49" r="7.5"/>
+      <line x1="212" y1="96" x2="208" y2="124"/><line x1="208" y1="124" x2="208" y2="150"/>
+      <line x1="212" y1="96" x2="216" y2="124"/><line x1="216" y1="124" x2="216" y2="150"/>
+      <line x1="212" y1="58" x2="250" y2="72"/>
+    </g>
+    <circle class="kb" cx="256" cy="74" r="7"/><path class="fig" d="M251,69 Q256,62 261,69"/>
+    <path class="mo" d="M118,116 Q150,58 200,74" marker-end="url(#ah)"/>
+  </svg>`,
+  'renegade-row':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Push-up position on two dumbbells, rowing one to the ribs">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <g class="fig">
+      <!-- body line feet(right) to head(left), roughly horizontal plank -->
+      <line x1="240" y1="118" x2="120" y2="104"/>
+      <circle class="head" cx="108" cy="102" r="7.5"/>
+      <!-- legs -->
+      <line x1="240" y1="118" x2="256" y2="132"/><line x1="256" y1="132" x2="262" y2="148"/>
+      <line x1="240" y1="118" x2="250" y2="134"/><line x1="250" y1="134" x2="256" y2="148"/>
+      <!-- support arm down to floor -->
+      <line x1="150" y1="106" x2="150" y2="140"/>
+      <!-- rowing arm: elbow up, DB at ribs -->
+      <line x1="164" y1="106" x2="176" y2="90"/><line x1="176" y1="90" x2="168" y2="112"/>
+    </g>
+    <!-- dumbbells -->
+    <line class="db" x1="144" y1="142" x2="156" y2="142"/>
+    <line class="db" x1="162" y1="112" x2="174" y2="112"/>
+    <path class="mo" d="M188,120 L188,96" marker-end="url(#ah)"/>
+  </svg>`,
+  'push-up':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Lower chest to floor keeping body straight, then press up">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <!-- ghost: top position (arms straight) -->
+    <g class="gh">
+      <line x1="70" y1="112" x2="150" y2="100"/>
+      <circle class="head-gh" cx="160" cy="98" r="7"/>
+      <line x1="70" y1="112" x2="58" y2="130"/><line x1="70" y1="112" x2="64" y2="132"/>
+      <line x1="140" y1="101" x2="140" y2="140"/>
+    </g>
+    <!-- solid: bottom position -->
+    <g class="fig">
+      <line x1="150" y1="132" x2="230" y2="126"/>
+      <circle class="head" cx="240" cy="125" r="7.5"/>
+      <line x1="150" y1="132" x2="138" y2="146"/><line x1="150" y1="132" x2="144" y2="148"/>
+      <!-- bent arm -->
+      <line x1="220" y1="127" x2="214" y2="112"/><line x1="214" y1="112" x2="216" y2="140"/>
+    </g>
+    <path class="mo" d="M258,104 L258,120" marker-end="url(#ah)"/>
+  </svg>`,
+  'db-floor-press':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Lie on back, press dumbbells up from the floor">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <!-- body lying, knees bent (side view) -->
+    <g class="fig">
+      <circle class="head" cx="70" cy="138" r="7.5"/>
+      <line x1="78" y1="140" x2="168" y2="140"/> <!-- torso along floor -->
+      <line x1="168" y1="140" x2="196" y2="120"/> <!-- thigh up -->
+      <line x1="196" y1="120" x2="210" y2="148"/> <!-- shin down to floor -->
+      <!-- arms pressed up (solid) -->
+      <line x1="120" y1="140" x2="120" y2="104"/>
+    </g>
+    <!-- ghost arms: bent, weights near floor -->
+    <g class="gh">
+      <line x1="120" y1="140" x2="104" y2="128"/>
+      <line x1="120" y1="140" x2="136" y2="128"/>
+    </g>
+    <line class="db-gh" x1="98" y1="128" x2="110" y2="128"/>
+    <line class="db-gh" x1="130" y1="128" x2="142" y2="128"/>
+    <line class="db" x1="112" y1="104" x2="128" y2="104"/>
+    <path class="mo" d="M155,124 L155,104" marker-end="url(#ah)"/>
+  </svg>`,
+  'superman':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Lie face down and lift chest, arms and legs off the floor">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <!-- ghost flat on floor -->
+    <g class="gh">
+      <circle class="head-gh" cx="72" cy="140" r="7"/>
+      <line x1="80" y1="142" x2="150" y2="142"/>
+      <line x1="150" y1="142" x2="200" y2="142"/>
+    </g>
+    <!-- solid lifted arc -->
+    <g class="fig">
+      <path d="M150,118 Q120,108 100,116" /> <!-- upper back/chest raised -->
+      <circle class="head" cx="92" cy="115" r="7.5"/>
+      <!-- torso -->
+      <line x1="150" y1="118" x2="210" y2="120"/>
+      <!-- legs lifted -->
+      <line x1="210" y1="120" x2="248" y2="108"/>
+      <!-- arms reaching into Y -->
+      <line x1="108" y1="114" x2="86" y2="96"/>
+      <line x1="108" y1="114" x2="120" y2="94"/>
+    </g>
+    <path class="mo" d="M150,138 Q150,126 150,120" marker-end="url(#ah)"/>
+  </svg>`,
+  'goblet-squat':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Hold bell at chest, squat down keeping chest up, then stand">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost standing -->
+    <g class="gh">
+      <line x1="80" y1="94" x2="80" y2="56"/>
+      <circle class="head-gh" cx="80" cy="47" r="7"/>
+      <line x1="80" y1="94" x2="76" y2="124"/><line x1="76" y1="124" x2="76" y2="150"/>
+      <line x1="80" y1="94" x2="84" y2="124"/><line x1="84" y1="124" x2="84" y2="150"/>
+      <line x1="80" y1="60" x2="70" y2="80"/><line x1="80" y1="60" x2="90" y2="80"/>
+    </g>
+    <circle class="kb-gh" cx="80" cy="86" r="7"/>
+    <!-- solid squatted -->
+    <g class="fig">
+      <line x1="210" y1="118" x2="212" y2="80"/>
+      <circle class="head" cx="212" cy="71" r="7.5"/>
+      <!-- deep squat: hip low, knees forward -->
+      <line x1="210" y1="118" x2="230" y2="132"/><line x1="230" y1="132" x2="224" y2="150"/>
+      <line x1="210" y1="118" x2="194" y2="132"/><line x1="194" y1="132" x2="200" y2="150"/>
+      <line x1="212" y1="84" x2="204" y2="104"/><line x1="212" y1="84" x2="222" y2="104"/>
+    </g>
+    <circle class="kb" cx="213" cy="110" r="7"/>
+    <path class="mo" d="M150,86 Q160,120 176,128" marker-end="url(#ah)"/>
+  </svg>`,
+  'reverse-lunge':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Hold dumbbells, step one foot back and lower to both knees bent">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost standing -->
+    <g class="gh">
+      <line x1="78" y1="92" x2="78" y2="54"/>
+      <circle class="head-gh" cx="78" cy="45" r="7"/>
+      <line x1="78" y1="92" x2="76" y2="122"/><line x1="76" y1="122" x2="76" y2="150"/>
+      <line x1="78" y1="92" x2="80" y2="122"/><line x1="80" y1="122" x2="80" y2="150"/>
+      <line x1="78" y1="56" x2="72" y2="90"/><line x1="78" y1="56" x2="84" y2="90"/>
+    </g>
+    <line class="db-gh" x1="66" y1="90" x2="78" y2="90"/>
+    <line class="db-gh" x1="78" y1="90" x2="90" y2="90"/>
+    <!-- solid lunge -->
+    <g class="fig">
+      <line x1="200" y1="98" x2="200" y2="60"/>
+      <circle class="head" cx="200" cy="51" r="7.5"/>
+      <!-- front leg bent 90 -->
+      <line x1="200" y1="98" x2="200" y2="124"/><line x1="200" y1="124" x2="200" y2="150"/>
+      <!-- back leg extended behind, knee toward floor -->
+      <line x1="200" y1="98" x2="176" y2="120"/><line x1="176" y1="120" x2="192" y2="150"/>
+      <line x1="200" y1="62" x2="196" y2="98"/><line x1="200" y1="62" x2="206" y2="98"/>
+    </g>
+    <line class="db" x1="188" y1="98" x2="200" y2="98"/>
+    <line class="db" x1="200" y1="98" x2="212" y2="98"/>
+    <path class="mo" d="M150,86 Q140,110 168,120" marker-end="url(#ah)"/>
+  </svg>`,
+  'explosive-push-up':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Press hard from the bottom so the hands leave the floor">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <!-- ghost bottom -->
+    <g class="gh">
+      <line x1="70" y1="134" x2="150" y2="128"/>
+      <circle class="head-gh" cx="160" cy="127" r="7"/>
+      <line x1="70" y1="134" x2="60" y2="148"/>
+      <line x1="140" y1="129" x2="134" y2="114"/><line x1="134" y1="114" x2="136" y2="140"/>
+    </g>
+    <!-- solid airborne: body up, hands off floor -->
+    <g class="fig">
+      <line x1="150" y1="118" x2="230" y2="110"/>
+      <circle class="head" cx="240" cy="108" r="7.5"/>
+      <line x1="150" y1="118" x2="140" y2="132"/><line x1="150" y1="118" x2="146" y2="134"/>
+      <line x1="222" y1="111" x2="222" y2="128"/> <!-- hand hovering above floor -->
+    </g>
+    <!-- pop lines under hand -->
+    <line class="mo" x1="212" y1="140" x2="222" y2="134"/>
+    <line class="mo" x1="232" y1="140" x2="224" y2="134"/>
+    <path class="mo" d="M258,124 L258,106" marker-end="url(#ah)"/>
+  </svg>`,
+  'kb-rdl':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Hinge at the hips with a flat back, lowering the bell along the legs">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost standing tall, bell at thighs -->
+    <g class="gh">
+      <line x1="80" y1="94" x2="80" y2="56"/>
+      <circle class="head-gh" cx="80" cy="47" r="7"/>
+      <line x1="80" y1="94" x2="78" y2="124"/><line x1="78" y1="124" x2="78" y2="150"/>
+      <line x1="80" y1="94" x2="82" y2="124"/><line x1="82" y1="124" x2="82" y2="150"/>
+      <line x1="80" y1="58" x2="80" y2="100"/>
+    </g>
+    <circle class="kb-gh" cx="80" cy="106" r="7"/>
+    <!-- solid hinged forward -->
+    <g class="fig">
+      <line x1="200" y1="96" x2="176" y2="70"/> <!-- flat back leaning forward -->
+      <circle class="head" cx="168" cy="63" r="7.5"/>
+      <line x1="200" y1="96" x2="200" y2="124"/><line x1="200" y1="124" x2="200" y2="150"/> <!-- near-straight legs -->
+      <line x1="200" y1="96" x2="204" y2="124"/><line x1="204" y1="124" x2="204" y2="150"/>
+      <!-- arms hanging straight to bell near shins -->
+      <line x1="180" y1="74" x2="196" y2="118"/>
+    </g>
+    <circle class="kb" cx="197" cy="124" r="7"/>
+    <path class="mo" d="M108,110 Q140,118 168,120" marker-end="url(#ah)"/>
+  </svg>`,
+  'russian-twist':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Seated leaning back, rotate the weight from hip to hip">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <!-- seated leaning back, side view -->
+    <g class="fig">
+      <!-- torso leaning back ~45 -->
+      <line x1="150" y1="132" x2="120" y2="96"/>
+      <circle class="head" cx="114" cy="88" r="7.5"/>
+      <!-- bent legs, heels down -->
+      <line x1="150" y1="132" x2="184" y2="118"/><line x1="184" y1="118" x2="196" y2="146"/>
+      <!-- arms out front holding weight -->
+      <line x1="124" y1="100" x2="156" y2="112"/>
+    </g>
+    <line class="db" x1="152" y1="112" x2="164" y2="112"/>
+    <!-- rotation arrows left-right -->
+    <path class="mo" d="M150,128 Q170,130 182,124" marker-end="url(#ah)"/>
+    <path class="mo" d="M150,128 Q130,130 120,124" marker-end="url(#ah)"/>
+  </svg>`,
+  'single-leg-rdl':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Balance on one leg, hinge into a T with the free leg extended behind">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost standing on one leg -->
+    <g class="gh">
+      <line x1="78" y1="92" x2="78" y2="54"/>
+      <circle class="head-gh" cx="78" cy="45" r="7"/>
+      <line x1="78" y1="92" x2="78" y2="150"/>
+      <line x1="78" y1="92" x2="90" y2="118"/> <!-- lifted knee slightly -->
+      <line x1="78" y1="58" x2="78" y2="96"/>
+    </g>
+    <line class="db-gh" x1="72" y1="96" x2="84" y2="96"/>
+    <!-- solid: T balance -->
+    <g class="fig">
+      <!-- torso horizontal, standing leg vertical, free leg back = straight line -->
+      <line x1="196" y1="104" x2="252" y2="96"/> <!-- back-leg + torso form the T bar -->
+      <circle class="head" cx="150" cy="110" r="7.5"/>
+      <line x1="196" y1="104" x2="160" y2="110"/> <!-- torso to head -->
+      <line x1="196" y1="104" x2="196" y2="150"/> <!-- standing leg -->
+      <!-- arm hanging to weight -->
+      <line x1="168" y1="109" x2="168" y2="138"/>
+    </g>
+    <line class="db" x1="162" y1="138" x2="174" y2="138"/>
+    <path class="mo" d="M150,86 Q170,92 182,100" marker-end="url(#ah)"/>
+  </svg>`,
+  'clean-push-press':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Bell in the rack at the shoulder, dip the knees and drive it overhead">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost: rack position -->
+    <g class="gh">
+      <line x1="80" y1="94" x2="80" y2="56"/>
+      <circle class="head-gh" cx="80" cy="47" r="7"/>
+      <line x1="80" y1="94" x2="76" y2="124"/><line x1="76" y1="124" x2="76" y2="150"/>
+      <line x1="80" y1="94" x2="84" y2="124"/><line x1="84" y1="124" x2="84" y2="150"/>
+      <!-- rack arm: bent, bell at shoulder -->
+      <line x1="80" y1="60" x2="72" y2="72"/><line x1="72" y1="72" x2="82" y2="64"/>
+    </g>
+    <circle class="kb-gh" cx="84" cy="60" r="6.5"/>
+    <!-- solid: overhead lockout -->
+    <g class="fig">
+      <line x1="212" y1="94" x2="212" y2="56"/>
+      <circle class="head" cx="212" cy="47" r="7.5"/>
+      <line x1="212" y1="94" x2="208" y2="124"/><line x1="208" y1="124" x2="208" y2="150"/>
+      <line x1="212" y1="94" x2="216" y2="124"/><line x1="216" y1="124" x2="216" y2="150"/>
+      <!-- arm locked overhead -->
+      <line x1="212" y1="58" x2="212" y2="26"/>
+    </g>
+    <circle class="kb" cx="212" cy="19" r="6.5"/>
+    <path class="mo" d="M120,56 Q160,44 196,32" marker-end="url(#ah)"/>
+  </svg>`,
+  'hollow-hold':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="On your back, lift shoulders and legs into a shallow banana shape">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <g class="fig">
+      <!-- banana: low back pressed down, shoulders + legs up -->
+      <path d="M96,120 Q150,150 204,120"/>
+      <circle class="head" cx="86" cy="116" r="7.5"/>
+      <!-- arms reaching overhead beyond head -->
+      <line x1="96" y1="120" x2="66" y2="106"/>
+      <!-- legs raised -->
+      <line x1="204" y1="120" x2="234" y2="106"/>
+    </g>
+    <!-- press point marker -->
+    <path class="mo" d="M150,158 L150,148" marker-end="url(#ah)"/>
+    <text x="150" y="170" font-size="9" fill="#6E858C" text-anchor="middle" font-family="Inter">low back pressed down</text>
+  </svg>`,
+  'forearm-plank':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="On forearms and toes, body held in a straight line">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <g class="fig">
+      <!-- straight body from head to heels -->
+      <line x1="230" y1="118" x2="120" y2="104"/>
+      <circle class="head" cx="108" cy="102" r="7.5"/>
+      <!-- feet -->
+      <line x1="230" y1="118" x2="244" y2="132"/><line x1="244" y1="132" x2="250" y2="148"/>
+      <line x1="230" y1="118" x2="238" y2="134"/><line x1="238" y1="134" x2="244" y2="148"/>
+      <!-- forearm: elbow down to floor, forearm flat -->
+      <line x1="146" y1="106" x2="150" y2="140"/> <!-- upper arm to elbow -->
+      <line x1="150" y1="140" x2="130" y2="148"/> <!-- forearm flat -->
+    </g>
+    <!-- straightness guide -->
+    <path class="mo" d="M112,96 L232,110" stroke-dasharray="2 6"/>
+  </svg>`,
+  'side-plank':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Balanced on one forearm, body stacked sideways in a straight line">
+    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
+    <g class="fig">
+      <!-- diagonal straight body, top head, feet at floor -->
+      <line x1="120" y1="146" x2="210" y2="86"/>
+      <circle class="head" cx="220" cy="79" r="7.5"/>
+      <!-- support forearm down to floor -->
+      <line x1="150" y1="126" x2="150" y2="148"/>
+      <line x1="150" y1="148" x2="134" y2="148"/>
+      <!-- top arm raised -->
+      <line x1="180" y1="106" x2="192" y2="80"/>
+      <!-- stacked feet -->
+      <line x1="120" y1="146" x2="112" y2="150"/>
+    </g>
+    <path class="mo" d="M235,96 Q244,86 238,74" marker-end="url(#ah)"/>
+  </svg>`,
+  'rotational-chop':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Carry the weight diagonally from low hip to high across the opposite shoulder">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- standing figure, front-ish -->
+    <g class="fig">
+      <line x1="150" y1="96" x2="150" y2="56"/>
+      <circle class="head" cx="150" cy="47" r="7.5"/>
+      <line x1="150" y1="96" x2="140" y2="124"/><line x1="140" y1="124" x2="138" y2="150"/>
+      <line x1="150" y1="96" x2="160" y2="124"/><line x1="160" y1="124" x2="162" y2="150"/>
+      <!-- arms together holding weight, shown at high finish -->
+      <line x1="150" y1="60" x2="186" y2="40"/>
+    </g>
+    <!-- ghost low-start hands -->
+    <g class="gh">
+      <line x1="150" y1="74" x2="118" y2="104"/>
+    </g>
+    <line class="db-gh" x1="110" y1="104" x2="122" y2="112"/>
+    <line class="db" x1="184" y1="34" x2="196" y2="42"/>
+    <!-- diagonal motion arrow low->high -->
+    <path class="mo" d="M120,110 L184,42" marker-end="url(#ah)"/>
+  </svg>`
+};
+  var KIT = {kb:['Kettlebell','kit-kb'],'1db':['1 Dumbbell','kit-1db'],'2db':['2 Dumbbells','kit-2db'],bw:['Bodyweight','kit-bw']};
+  var modal=document.getElementById('ex-modal');
+  var titleEl=document.getElementById('ex-modal-title');
+  var bodyEl=document.getElementById('ex-modal-body');
+  var kitEl=document.getElementById('ex-modal-kit');
+  var closeBtn=document.getElementById('ex-modal-close');
+  var svgEl=document.getElementById('ex-modal-svg');
+  var diaWrap=document.getElementById('ex-modal-dia');
+  var lastFocus=null;
+  function openModal(key){
+    var d=DATA[key]; if(!d) return;
+    lastFocus=document.activeElement;
+    titleEl.textContent=d.t;
+    bodyEl.textContent=d.b;
+    var k=KIT[d.k]||['',''];
+    kitEl.innerHTML='<span class="kit '+k[1]+'">'+k[0]+'</span>';
+    var svg=DIA[key]||'';
+    svgEl.innerHTML=svg;
+    diaWrap.style.display = svg ? 'block' : 'none';
+    modal.hidden=false;
+    requestAnimationFrame(function(){modal.classList.add('open');});
+    closeBtn.focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    setTimeout(function(){modal.hidden=true;},180);
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.info-btn');
+    if(b){e.preventDefault();openModal(b.getAttribute('data-key'));return;}
+    if(e.target===modal){closeModal();}
+  });
+  closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&!modal.hidden)closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
