@@ -145,6 +145,13 @@
     color:var(--ink);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;
     transition:background .15s;}
   .modal-close:hover{background:#E1E7E8;}
+  .modal-nav{display:flex;gap:8px;flex:none;}
+  .modal-next{-webkit-appearance:none;appearance:none;cursor:pointer;
+    width:32px;height:32px;border-radius:50%;border:1.5px solid var(--motion);
+    background:transparent;color:var(--motion);font-size:18px;line-height:1;
+    display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
+  .modal-next:hover,.modal-next:focus{background:var(--motion);color:#fff;outline:none;}
+  .modal-next:focus-visible{box-shadow:0 0 0 3px rgba(14,134,168,.35);}
   .modal-kit{margin:0 0 14px;}
   .modal-body{font-size:15px;line-height:1.62;color:var(--ink);margin:0;}
 
@@ -236,20 +243,20 @@
   </div>
   <div class="block">
     <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Arm circles <button class="info-btn" data-key="arm-circles" aria-label="How to do it">i</button> · shoulder rotations <button class="info-btn" data-key="shoulder-rotations" aria-label="How to do it">i</button> · cat-cow <button class="info-btn" data-key="cat-cow" aria-label="How to do it">i</button></p>
+    <p class="prep-line">Arm circles <button class="info-btn" data-key="arm-circles" data-day="a" aria-label="How to do it">i</button> · shoulder rotations <button class="info-btn" data-key="shoulder-rotations" data-day="a" aria-label="How to do it">i</button> · cat-cow <button class="info-btn" data-key="cat-cow" data-day="a" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
     <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
     <table>
-      <tr><td class="ex">Kettlebell swing <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-swing" aria-label="How to do it">i</button></td><td class="reps">× 15</td></tr>
-      <tr><td class="ex">Renegade row <small>— keep hips square</small> <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="renegade-row" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
-      <tr><td class="ex">DB floor press <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="db-floor-press" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Kettlebell swing <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-swing" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 15</td></tr>
+      <tr><td class="ex">Renegade row <small>— keep hips square</small> <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="renegade-row" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">DB floor press <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="db-floor-press" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
     <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Superman hold / prone Y-T-W raises <button class="info-btn" data-key="superman" aria-label="How to do it">i</button> — your paddling posture.</p>
+    <p class="finisher">Superman hold / prone Y-T-W raises <button class="info-btn" data-key="superman" data-day="a" aria-label="How to do it">i</button> — your paddling posture.</p>
   </div>
 </div>
 
@@ -264,20 +271,20 @@
   </div>
   <div class="block">
     <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Deep squat hold <button class="info-btn" data-key="deep-squat-hold" aria-label="How to do it">i</button> · leg swings <button class="info-btn" data-key="leg-swings" aria-label="How to do it">i</button> · world's greatest stretch <button class="info-btn" data-key="worlds-greatest-stretch" aria-label="How to do it">i</button></p>
+    <p class="prep-line">Deep squat hold <button class="info-btn" data-key="deep-squat-hold" data-day="b" aria-label="How to do it">i</button> · leg swings <button class="info-btn" data-key="leg-swings" data-day="b" aria-label="How to do it">i</button> · world's greatest stretch <button class="info-btn" data-key="worlds-greatest-stretch" data-day="b" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
     <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
     <table>
-      <tr><td class="ex">Goblet squat <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="goblet-squat" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
-      <tr><td class="ex">Reverse lunge <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="reverse-lunge" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">Explosive push-up <small>or burpee</small> <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="explosive-push-up" aria-label="How to do it">i</button></td><td class="reps">× 8</td></tr>
-      <tr><td class="ex">KB Romanian deadlift <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-rdl" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Goblet squat <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="goblet-squat" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Reverse lunge <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="reverse-lunge" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Explosive push-up <small>or burpee</small> <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="explosive-push-up" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 8</td></tr>
+      <tr><td class="ex">KB Romanian deadlift <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-rdl" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
     <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Hollow hold <button class="info-btn" data-key="hollow-hold" aria-label="How to do it">i</button> + forearm plank <button class="info-btn" data-key="forearm-plank" aria-label="How to do it">i</button>.</p>
+    <p class="finisher">Hollow hold <button class="info-btn" data-key="hollow-hold" data-day="b" aria-label="How to do it">i</button> + forearm plank <button class="info-btn" data-key="forearm-plank" data-day="b" aria-label="How to do it">i</button>.</p>
   </div>
 </div>
 
@@ -292,20 +299,20 @@
   </div>
   <div class="block">
     <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Thoracic rotations <button class="info-btn" data-key="thoracic-rotations" aria-label="How to do it">i</button> · hip openers <button class="info-btn" data-key="hip-openers" aria-label="How to do it">i</button></p>
+    <p class="prep-line">Thoracic rotations <button class="info-btn" data-key="thoracic-rotations" data-day="c" aria-label="How to do it">i</button> · hip openers <button class="info-btn" data-key="hip-openers" data-day="c" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
     <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
     <table>
-      <tr><td class="ex">DB Russian twist <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="russian-twist" aria-label="How to do it">i</button></td><td class="reps">× 20</td></tr>
-      <tr><td class="ex">Single-leg RDL <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="single-leg-rdl" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">KB clean &amp; push press <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="clean-push-press" aria-label="How to do it">i</button></td><td class="reps">× 6 <small>each side</small></td></tr>
-      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">DB Russian twist <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="russian-twist" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 20</td></tr>
+      <tr><td class="ex">Single-leg RDL <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="single-leg-rdl" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">KB clean &amp; push press <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="clean-push-press" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 6 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
     <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Side plank × 30s each side <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="side-plank" aria-label="How to do it">i</button> + slow DB rotational chops <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="rotational-chop" aria-label="How to do it">i</button>.</p>
+    <p class="finisher">Side plank × 30s each side <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="side-plank" data-day="c" aria-label="How to do it">i</button> + slow DB rotational chops <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="rotational-chop" data-day="c" aria-label="How to do it">i</button>.</p>
   </div>
 </div>
 
@@ -320,7 +327,10 @@
   <div class="modal">
     <div class="modal-head">
       <h3 class="modal-title" id="ex-modal-title"></h3>
-      <button class="modal-close" id="ex-modal-close" aria-label="Close">&times;</button>
+      <div class="modal-nav">
+        <button class="modal-next" id="ex-modal-next" aria-label="Next exercise" title="Next exercise">&rarr;</button>
+        <button class="modal-close" id="ex-modal-close" aria-label="Close">&times;</button>
+      </div>
     </div>
     <div class="modal-kit" id="ex-modal-kit"></div>
     <p class="modal-body" id="ex-modal-body"></p>
@@ -831,12 +841,20 @@
   var bodyEl=document.getElementById('ex-modal-body');
   var kitEl=document.getElementById('ex-modal-kit');
   var closeBtn=document.getElementById('ex-modal-close');
+  var nextBtn=document.getElementById('ex-modal-next');
+  var DAYS={
+    a:['arm-circles','shoulder-rotations','cat-cow','kb-swing','renegade-row','push-up','db-floor-press','superman'],
+    b:['deep-squat-hold','leg-swings','worlds-greatest-stretch','goblet-squat','reverse-lunge','explosive-push-up','kb-rdl','hollow-hold','forearm-plank'],
+    c:['thoracic-rotations','hip-openers','russian-twist','single-leg-rdl','clean-push-press','push-up','side-plank','rotational-chop']
+  };
+  var curKey=null, curDay=null;
   var svgEl=document.getElementById('ex-modal-svg');
   var diaWrap=document.getElementById('ex-modal-dia');
   var lastFocus=null;
-  function openModal(key){
+  function openModal(key, day){
     var d=DATA[key]; if(!d) return;
-    lastFocus=document.activeElement;
+    if(!modal.classList.contains('open')) lastFocus=document.activeElement;
+    curKey=key; curDay=day;
     titleEl.textContent=d.t;
     bodyEl.textContent=d.b;
     var k=KIT[d.k]||['',''];
@@ -846,21 +864,30 @@
     diaWrap.style.display = svg ? 'block' : 'none';
     modal.hidden=false;
     requestAnimationFrame(function(){modal.classList.add('open');});
-    closeBtn.focus();
+    nextBtn.focus();
   }
   function closeModal(){
     modal.classList.remove('open');
     setTimeout(function(){modal.hidden=true;},180);
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
+  function goNext(){
+    var list=DAYS[curDay]; if(!list) return;
+    var i=list.indexOf(curKey);
+    var next=list[(i+1)%list.length];
+    openModal(next, curDay);
+  }
   document.addEventListener('click',function(e){
     var b=e.target.closest('.info-btn');
-    if(b){e.preventDefault();openModal(b.getAttribute('data-key'));return;}
+    if(b){e.preventDefault();openModal(b.getAttribute('data-key'), b.getAttribute('data-day'));return;}
     if(e.target===modal){closeModal();}
   });
+  nextBtn.addEventListener('click',goNext);
   closeBtn.addEventListener('click',closeModal);
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&!modal.hidden)closeModal();
+    if(modal.hidden)return;
+    if(e.key==='Escape')closeModal();
+    else if(e.key==='ArrowRight')goNext();
   });
 })();
 </script>
