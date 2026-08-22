@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Round Swing Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F1E4;
+    --paper-line:#E4DFCC;
+    --ink:#23271E;
+    --fairway:#1E3A2A;
+    --fairway-deep:#152B1F;
+    --flag:#B5382C;
+    --pencil:#7C8074;
+    --sand:#D8CFAF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--fairway-deep);
+    color:var(--ink);
+    font-family:'Archivo',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .card{
+    max-width:640px;
+    margin:0 auto;
+    background:var(--paper);
+    background-image:repeating-linear-gradient(to bottom, transparent 0 27px, var(--paper-line) 27px 28px);
+    min-height:100vh;
+    box-shadow:0 0 60px rgba(0,0,0,.45);
+  }
+  header{
+    background:var(--fairway);
+    color:var(--paper);
+    padding:26px 24px 22px;
+    border-bottom:5px double var(--sand);
+    background-image:none;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--sand);
+    margin-bottom:8px;
+  }
+  h1{
+    font-variation-settings:'wdth' 120;
+    font-weight:800;
+    font-size:clamp(26px,6vw,36px);
+    text-transform:uppercase;
+    line-height:1.05;
+  }
+  .formula{
+    margin-top:12px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    line-height:1.65;
+    color:#DCE5D8;
+    border-left:3px solid var(--flag);
+    padding-left:12px;
+  }
+  section{padding:22px 24px 4px;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:5px;
+    margin-bottom:12px;
+  }
+  .hole{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.14em;
+    color:var(--paper);
+    background:var(--fairway);
+    padding:2px 8px;
+    border-radius:2px;
+  }
+  h2{
+    font-variation-settings:'wdth' 116;
+    font-weight:700;
+    font-size:17px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  ul{list-style:none;}
+  li{
+    padding-left:24px;
+    position:relative;
+    margin-bottom:10px;
+    font-size:15px;
+  }
+  li::before{
+    content:"";
+    position:absolute;
+    left:2px; top:6px;
+    width:9px; height:9px;
+    border:2px solid var(--fairway);
+    background:var(--fairway);
+    border-radius:1px;
+  }
+  li.warn::before{background:transparent;border-color:var(--flag);}
+  li.warn{color:#5b2a24;}
+  footer{
+    background:var(--fairway);
+    color:var(--sand);
+    padding:18px 24px 24px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    line-height:1.8;
+    border-top:5px double var(--sand);
+    background-image:none;
+    margin-top:18px;
+  }
+  footer strong{color:var(--paper);}
+  @media print{
+    body{background:none;}
+    .card{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+<header>
+  <p class="eyebrow">Personal Yardage Book · Swing Notes</p>
+  <h1>Pre-Round Swing Card</h1>
+  <p class="formula">Hover the club → slow straight-back one-piece start (club, arms &amp; chest away together) → full free turn → hands above the trail shoulder → (nothing) → full finish: hips &amp; chest facing the target, balanced on the front side.</p>
+</header>
+
+<section>
+  <div class="sec-head"><span class="hole">1</span><h2>Setup</h2></div>
+  <ul>
+    <li><strong>Stand closer</strong> — arms hang relaxed, not reaching. Butt of the club: 4 fingers for wedges–7i, add the thumb for long irons &amp; hybrids, full hand-span for driver.</li>
+    <li><strong>Hover the club</strong> — lift the head off the ground before starting back (pro's tip). Forces soft hands automatically, kills the jerky start, keeps the wrists alive. A setup condition beats a thought you have to remember.</li>
+    <li><strong>Chin up a touch</strong> — a small lift at address clears room for the shoulders to turn under it. Not a head raise, just unblocking the neck. All clubs.</li>
+    <li><strong>Weight in the middle of your feet</strong> — arches, not the balls. Feeling like you're "sitting back" is just the correction from a toe-heavy habit. Toes should lift freely inside your shoes.</li>
+    <li class="warn"><strong>Too far away + weight on the toes</strong> = reaching, standing up through impact → thin, low, sliced. Check this first, before any swing fix.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="hole">2</span><h2>Backswing</h2></div>
+  <ul>
+    <li><strong>Slow, one-piece takeaway</strong> — arms, chest, hips start away together.</li>
+    <li><strong>Full turn, hips free</strong> — back to the target, head swivels, ball in the left eye at the top.</li>
+    <li><strong>Straight back &amp; low</strong> — a <em>feel</em>, first 12" only. The chest turn makes the real path arc gently inside; forcing it straight further would sway or shove the club outside. Counters my old inside whip. Check at shaft parallel: clubhead in line with or just outside the hands, shaft parallel to the target line.</li>
+    <li><strong>Hands stay in front of the chest</strong> — the corridor. Two rails from your shoulders that rotate with you; the club only moves because the chest turned.</li>
+    <li><strong>Soft hands at the top</strong> — grip pressure 4–5/10. Tension blocks the release, rushes transition, and lets the forearms twist the club flat. You can't over-do "soft." Fixed a poor session on its own.</li>
+    <li><strong>Hands finish above the trail shoulder</strong> — a destination, not a lift. Late in the backswing the arms go <em>up</em>, never <em>around</em>. Your unattended default is flat &amp; laid-off (club wrapped behind you) → club stuck, blocks/hooks, fats. Aim at the position; don't push the arms into it.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="hole">3</span><h2>Downswing</h2></div>
+  <ul>
+    <li><strong>Hips on autopilot</strong> — never a conscious trigger.</li>
+    <li><strong>No downswing thought</strong> — your best strikes come from an empty mind in the middle.</li>
+    <li><strong>One thought: the full finish</strong> — hips &amp; chest facing the target, stacked on the front side. A destination, not a trigger — you can't get there with a broken sequence.</li>
+    <li class="warn"><strong>Pulls + slices or thins</strong> = chest fired first. <strong>High + short</strong> = hips fired hard. Cure: slow start, picture the finish. <strong>Bad-day rescue:</strong> "hips start, full finish" — nothing else.</li>
+    <li class="warn"><strong>Don't swing hard.</strong> Effort grabs from the top, shortens the backswing, and costs posture → tops and thins. Speed comes from turn &amp; sequence — put the effort in the <em>finish</em>, never the top.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="hole">4</span><h2>Driver</h2></div>
+  <ul>
+    <li>Ball off <strong>lead heel</strong>, tee high, spine tilted away.</li>
+    <li><strong>Head behind the ball</strong> at impact — swing <strong>up</strong> at it.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="hole">5</span><h2>Chipping</h2></div>
+  <ul>
+    <li><strong>Feet &amp; hips open, shoulders square, weight left</strong> — and it stays left.</li>
+    <li><strong>Small chest turn back, chest keeps rotating through</strong> — quiet wrists.</li>
+    <li><strong>Runner:</strong> ball back of center, hands slightly ahead — or same stroke, less loft (8/9-iron).</li>
+  </ul>
+</section>
+
+<footer>
+  <strong>First tee:</strong> hover the club · slow straight-back start · full turn · hands above the trail shoulder · quiet mind · finish facing the target, balanced.
+</footer>
+
+</div>
+</body>
+</html>
