@@ -152,7 +152,11 @@
     display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
   .modal-next:hover,.modal-next:focus{background:var(--motion);color:#fff;outline:none;}
   .modal-next:focus-visible{box-shadow:0 0 0 3px rgba(14,134,168,.35);}
-  .modal-kit{margin:0 0 14px;}
+  .modal-kit{margin:0 0 14px;display:flex;gap:8px;flex-wrap:wrap;}
+  .rep-pill{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:12px;letter-spacing:.06em;text-transform:uppercase;line-height:1.35;
+    padding:1px 10px;border-radius:20px;border:1px solid var(--ink);background:var(--ink);color:#fff;
+    vertical-align:middle;}
   .modal-body{font-size:15px;line-height:1.62;color:var(--ink);margin:0;}
 
   /* Diagram figures (used inside popups) */
@@ -242,21 +246,21 @@
     <p class="prep-line">Get the blood moving and the heart rate up.</p>
   </div>
   <div class="block">
-    <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Arm circles <button class="info-btn" data-key="arm-circles" data-day="a" aria-label="How to do it">i</button> · shoulder rotations <button class="info-btn" data-key="shoulder-rotations" data-day="a" aria-label="How to do it">i</button> · cat-cow <button class="info-btn" data-key="cat-cow" data-day="a" aria-label="How to do it">i</button></p>
+    <p class="label">Prep <span class="meta">· ~2 min total</span></p>
+    <p class="prep-line">Arm circles <button class="info-btn" data-key="arm-circles" data-day="a" data-section="prep" aria-label="How to do it">i</button> · shoulder rotations <button class="info-btn" data-key="shoulder-rotations" data-day="a" data-section="prep" aria-label="How to do it">i</button> · cat-cow <button class="info-btn" data-key="cat-cow" data-day="a" data-section="prep" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
-    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds · ~16 mins · or cap at 20 min</span></p>
     <table>
-      <tr><td class="ex">Kettlebell swing <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-swing" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 15</td></tr>
-      <tr><td class="ex">Renegade row <small>— keep hips square</small> <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="renegade-row" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
-      <tr><td class="ex">DB floor press <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="db-floor-press" data-day="a" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Kettlebell swing <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-swing" data-day="a" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 15</td></tr>
+      <tr><td class="ex">Renegade row <small>— keep hips square</small> <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="renegade-row" data-day="a" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="a" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">DB floor press <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="db-floor-press" data-day="a" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
-    <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Superman hold / prone Y-T-W raises <button class="info-btn" data-key="superman" data-day="a" aria-label="How to do it">i</button> — your paddling posture.</p>
+    <p class="label">Finisher <span class="meta">· 3 min total</span></p>
+    <p class="finisher">Superman hold / prone Y-T-W raises <button class="info-btn" data-key="superman" data-day="a" data-section="finisher" aria-label="How to do it">i</button> — your paddling posture.</p>
   </div>
 </div>
 
@@ -270,21 +274,21 @@
     <p class="prep-line">Get the blood moving and the heart rate up.</p>
   </div>
   <div class="block">
-    <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Deep squat hold <button class="info-btn" data-key="deep-squat-hold" data-day="b" aria-label="How to do it">i</button> · leg swings <button class="info-btn" data-key="leg-swings" data-day="b" aria-label="How to do it">i</button> · world's greatest stretch <button class="info-btn" data-key="worlds-greatest-stretch" data-day="b" aria-label="How to do it">i</button></p>
+    <p class="label">Prep <span class="meta">· ~2 min total</span></p>
+    <p class="prep-line">Deep squat hold <button class="info-btn" data-key="deep-squat-hold" data-day="b" data-section="prep" aria-label="How to do it">i</button> · leg swings <button class="info-btn" data-key="leg-swings" data-day="b" data-section="prep" aria-label="How to do it">i</button> · world's greatest stretch <button class="info-btn" data-key="worlds-greatest-stretch" data-day="b" data-section="prep" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
-    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds · ~16 mins · or cap at 20 min</span></p>
     <table>
-      <tr><td class="ex">Goblet squat <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="goblet-squat" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
-      <tr><td class="ex">Reverse lunge <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="reverse-lunge" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">Explosive push-up <small>or burpee</small> <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="explosive-push-up" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 8</td></tr>
-      <tr><td class="ex">KB Romanian deadlift <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-rdl" data-day="b" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Goblet squat <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="goblet-squat" data-day="b" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">Reverse lunge <span class="kit kit-2db">2 Dumbbells</span> <button class="info-btn" data-key="reverse-lunge" data-day="b" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">Surfing Pop-Up <small>(or burpee)</small> <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="surfing-pop-up" data-day="b" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 8</td></tr>
+      <tr><td class="ex">KB Romanian deadlift <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="kb-rdl" data-day="b" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
-    <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Hollow hold <button class="info-btn" data-key="hollow-hold" data-day="b" aria-label="How to do it">i</button> + forearm plank <button class="info-btn" data-key="forearm-plank" data-day="b" aria-label="How to do it">i</button>.</p>
+    <p class="label">Finisher <span class="meta">· 3 min total</span></p>
+    <p class="finisher">Hollow hold <button class="info-btn" data-key="hollow-hold" data-day="b" data-section="finisher" aria-label="How to do it">i</button> + forearm plank <button class="info-btn" data-key="forearm-plank" data-day="b" data-section="finisher" aria-label="How to do it">i</button>.</p>
   </div>
 </div>
 
@@ -298,21 +302,21 @@
     <p class="prep-line">Get the blood moving and the heart rate up.</p>
   </div>
   <div class="block">
-    <p class="label">Prep <span class="meta">· ~2 min</span></p>
-    <p class="prep-line">Thoracic rotations <button class="info-btn" data-key="thoracic-rotations" data-day="c" aria-label="How to do it">i</button> · hip openers <button class="info-btn" data-key="hip-openers" data-day="c" aria-label="How to do it">i</button></p>
+    <p class="label">Prep <span class="meta">· ~2 min total</span></p>
+    <p class="prep-line">Thoracic rotations <button class="info-btn" data-key="thoracic-rotations" data-day="c" data-section="prep" aria-label="How to do it">i</button> · hip openers <button class="info-btn" data-key="hip-openers" data-day="c" data-section="prep" aria-label="How to do it">i</button></p>
   </div>
   <div class="block">
-    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds</span></p>
+    <p class="label">Circuit <span class="meta">· 4 rounds · rest 60s between rounds · ~18 mins · or cap at 20 min</span></p>
     <table>
-      <tr><td class="ex">DB Russian twist <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="russian-twist" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 20</td></tr>
-      <tr><td class="ex">Single-leg RDL <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="single-leg-rdl" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
-      <tr><td class="ex">KB clean &amp; push press <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="clean-push-press" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 6 <small>each side</small></td></tr>
-      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="c" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
+      <tr><td class="ex">DB Russian twist <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="russian-twist" data-day="c" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 20</td></tr>
+      <tr><td class="ex">Single-leg RDL <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="single-leg-rdl" data-day="c" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 8 <small>each side</small></td></tr>
+      <tr><td class="ex">KB clean &amp; push press <span class="kit kit-kb">Kettlebell</span> <button class="info-btn" data-key="clean-push-press" data-day="c" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 6 <small>each side</small></td></tr>
+      <tr><td class="ex">Push-up <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="push-up" data-day="c" data-section="circuit" aria-label="How to do it">i</button></td><td class="reps">× 12</td></tr>
     </table>
   </div>
   <div class="block">
-    <p class="label">Finisher <span class="meta">· 3 min</span></p>
-    <p class="finisher">Side plank × 30s each side <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="side-plank" data-day="c" aria-label="How to do it">i</button> + slow DB rotational chops <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="rotational-chop" data-day="c" aria-label="How to do it">i</button>.</p>
+    <p class="label">Finisher <span class="meta">· 3 min total</span></p>
+    <p class="finisher">Side plank × 30s each side <span class="kit kit-bw">Bodyweight</span> <button class="info-btn" data-key="side-plank" data-day="c" data-section="finisher" aria-label="How to do it">i</button> + slow DB rotational chops <span class="kit kit-1db">1 Dumbbell</span> <button class="info-btn" data-key="rotational-chop" data-day="c" data-section="finisher" aria-label="How to do it">i</button>.</p>
   </div>
 </div>
 
@@ -363,7 +367,7 @@
   'superman':{t:`Superman Hold / Y-T-W Raises`,k:'bw',b:`Lie face down. For superman, lift your chest, arms and legs off the floor and hold. For Y-T-W, lift your chest slightly and move your arms into each letter shape — overhead Y, out wide T, elbows-bent W — squeezing your upper back. Directly trains the paddling posture.`},
   'goblet-squat':{t:`Goblet Squat`,k:'kb',b:`Hold the kettlebell against your chest with both hands, cupping the horns. Squat down keeping your chest up and knees tracking over your toes, aiming to get your hip crease below your knees. Drive up through your heels. The front load keeps you upright and honest.`},
   'reverse-lunge':{t:`Reverse Lunge`,k:'2db',b:`Holding a dumbbell in each hand, step one foot straight back and lower until both knees are ~90 degrees, front thigh parallel to the floor. Push through the front heel to return. Easier on the knees than forward lunges and great for single-leg strength.`},
-  'explosive-push-up':{t:`Explosive Push-Up / Burpee`,k:'bw',b:`Explosive push-up: a normal push-up but you push hard enough that your hands leave the floor at the top. Burpee: from standing, drop to a push-up position, do a push-up, jump your feet back in, and jump up. Both train the fast hip-and-chest drive of the pop-up.`},
+  'surfing-pop-up':{t:`Surfing Pop-Up`,k:'bw',b:`Start lying prone on the mat as if you have just caught a wave — chest down, hands flat beneath your ribs. In one explosive move, push the floor away and swing your feet under you, landing in your surf stance: feet staggered, knees bent, hips low, chest up, eyes forward, arms out for balance. Reset and repeat, popping up as fast and clean as you can. It rehearses the exact motion of getting to your feet on the board. Swap in a burpee now and then for extra conditioning.`},
   'kb-rdl':{t:`KB Romanian Deadlift`,k:'kb',b:`Hold the kettlebell in front of your thighs. Keeping a slight knee bend and a flat back, hinge at the hips and lower the bell along your legs until you feel a stretch in your hamstrings, then stand back up by squeezing your glutes. It is a hinge, not a squat — the bar path stays close to your body.`},
   'russian-twist':{t:`DB Russian Twist`,k:'1db',b:`Sit with knees bent, heels lightly down (or lifted for more challenge), leaning back ~45 degrees. Hold one dumbbell and rotate it from hip to hip, touching down beside you each time. Trains the rotational core you use turning on a wave.`},
   'single-leg-rdl':{t:`Single-Leg RDL`,k:'1db',b:`Hold one dumbbell and balance on one leg. Hinge at the hip and lower the weight toward the floor while your free leg extends straight back behind you, body forming a T. Return to standing under control. Your balance-under-load exercise — expect to wobble at first.`},
@@ -658,26 +662,26 @@
     <line class="db" x1="200" y1="98" x2="212" y2="98"/>
     <path class="mo" d="M150,86 Q140,110 168,120" marker-end="url(#ah)"/>
   </svg>`,
-  'explosive-push-up':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Press hard from the bottom so the hands leave the floor">
-    <line class="ground" x1="20" y1="150" x2="280" y2="150"/>
-    <!-- ghost bottom -->
+  'surfing-pop-up':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Pop from lying prone on the mat up into a low surf stance">
+    <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
+    <!-- ghost: prone start on the mat -->
     <g class="gh">
-      <line x1="70" y1="134" x2="150" y2="128"/>
-      <circle class="head-gh" cx="160" cy="127" r="7"/>
-      <line x1="70" y1="134" x2="60" y2="148"/>
-      <line x1="140" y1="129" x2="134" y2="114"/><line x1="134" y1="114" x2="136" y2="140"/>
+      <polyline points="66,147 108,143 152,135"/>
+      <circle class="head-gh" cx="161" cy="131" r="7"/>
+      <line x1="152" y1="135" x2="150" y2="150"/>
     </g>
-    <!-- solid airborne: body up, hands off floor -->
+    <!-- surfboard under the stance -->
+    <path class="gh" d="M172,151 Q206,145 242,151 Q206,157 172,151 Z"/>
+    <!-- solid: low surf stance -->
     <g class="fig">
-      <line x1="150" y1="118" x2="230" y2="110"/>
-      <circle class="head" cx="240" cy="108" r="7.5"/>
-      <line x1="150" y1="118" x2="140" y2="132"/><line x1="150" y1="118" x2="146" y2="134"/>
-      <line x1="222" y1="111" x2="222" y2="128"/> <!-- hand hovering above floor -->
+      <line x1="206" y1="112" x2="212" y2="82"/>
+      <circle class="head" cx="215" cy="73" r="7.5"/>
+      <line x1="206" y1="112" x2="222" y2="130"/><line x1="222" y1="130" x2="231" y2="150"/>
+      <line x1="206" y1="112" x2="190" y2="130"/><line x1="190" y1="130" x2="181" y2="150"/>
+      <line x1="212" y1="84" x2="238" y2="88"/>
+      <line x1="212" y1="84" x2="189" y2="76"/>
     </g>
-    <!-- pop lines under hand -->
-    <line class="mo" x1="212" y1="140" x2="222" y2="134"/>
-    <line class="mo" x1="232" y1="140" x2="224" y2="134"/>
-    <path class="mo" d="M258,124 L258,106" marker-end="url(#ah)"/>
+    <path class="mo" d="M150,138 Q172,84 198,104" marker-end="url(#ah)"/>
   </svg>`,
   'kb-rdl':`<svg class="dia" viewBox="0 0 300 170" role="img" aria-label="Hinge at the hips with a flat back, lowering the bell along the legs">
     <line class="ground" x1="20" y1="152" x2="280" y2="152"/>
@@ -836,29 +840,61 @@
   </svg>`
 };
   var KIT = {kb:['Kettlebell','kit-kb'],'1db':['1 Dumbbell','kit-1db'],'2db':['2 Dumbbells','kit-2db'],bw:['Bodyweight','kit-bw']};
+  var REPS = {
+  'arm-circles':'~40s',
+  'shoulder-rotations':'~40s',
+  'cat-cow':'~40s',
+  'deep-squat-hold':'~40s',
+  'leg-swings':'~40s',
+  'worlds-greatest-stretch':'~40s',
+  'thoracic-rotations':'~30s each side',
+  'hip-openers':'~30s each side',
+  'kb-swing':'15 reps',
+  'renegade-row':'8 reps each side',
+  'push-up':'12 reps',
+  'db-floor-press':'12 reps',
+  'goblet-squat':'12 reps',
+  'reverse-lunge':'8 reps each side',
+  'surfing-pop-up':'8 reps',
+  'kb-rdl':'12 reps',
+  'russian-twist':'20 reps',
+  'single-leg-rdl':'8 reps each side',
+  'clean-push-press':'6 reps each side',
+  'superman':'~3 min',
+  'hollow-hold':'~90s hold',
+  'forearm-plank':'~90s hold',
+  'side-plank':'30s each side',
+  'rotational-chop':'~2 min slow reps'
+};
   var modal=document.getElementById('ex-modal');
   var titleEl=document.getElementById('ex-modal-title');
   var bodyEl=document.getElementById('ex-modal-body');
   var kitEl=document.getElementById('ex-modal-kit');
   var closeBtn=document.getElementById('ex-modal-close');
   var nextBtn=document.getElementById('ex-modal-next');
-  var DAYS={
-    a:['arm-circles','shoulder-rotations','cat-cow','kb-swing','renegade-row','push-up','db-floor-press','superman'],
-    b:['deep-squat-hold','leg-swings','worlds-greatest-stretch','goblet-squat','reverse-lunge','explosive-push-up','kb-rdl','hollow-hold','forearm-plank'],
-    c:['thoracic-rotations','hip-openers','russian-twist','single-leg-rdl','clean-push-press','push-up','side-plank','rotational-chop']
+  var SEG={
+    a:{prep:['arm-circles','shoulder-rotations','cat-cow'],
+       circuit:['kb-swing','renegade-row','push-up','db-floor-press'],
+       finisher:['superman']},
+    b:{prep:['deep-squat-hold','leg-swings','worlds-greatest-stretch'],
+       circuit:['goblet-squat','reverse-lunge','surfing-pop-up','kb-rdl'],
+       finisher:['hollow-hold','forearm-plank']},
+    c:{prep:['thoracic-rotations','hip-openers'],
+       circuit:['russian-twist','single-leg-rdl','clean-push-press','push-up'],
+       finisher:['side-plank','rotational-chop']}
   };
-  var curKey=null, curDay=null;
+  var curKey=null, curDay=null, curSect=null;
   var svgEl=document.getElementById('ex-modal-svg');
   var diaWrap=document.getElementById('ex-modal-dia');
   var lastFocus=null;
-  function openModal(key, day){
+  function openModal(key, day, sect){
     var d=DATA[key]; if(!d) return;
     if(!modal.classList.contains('open')) lastFocus=document.activeElement;
-    curKey=key; curDay=day;
+    curKey=key; curDay=day; curSect=sect;
     titleEl.textContent=d.t;
     bodyEl.textContent=d.b;
     var k=KIT[d.k]||['',''];
-    kitEl.innerHTML='<span class="kit '+k[1]+'">'+k[0]+'</span>';
+    kitEl.innerHTML='<span class="kit '+k[1]+'">'+k[0]+'</span>'+(REPS[key]?' <span class="rep-pill">'+REPS[key]+'</span>':'');
     var svg=DIA[key]||'';
     svgEl.innerHTML=svg;
     diaWrap.style.display = svg ? 'block' : 'none';
@@ -871,15 +907,18 @@
     setTimeout(function(){modal.hidden=true;},180);
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
-  function goNext(){
-    var list=DAYS[curDay]; if(!list) return;
+  function step(dir){
+    var day=SEG[curDay]; if(!day) return;
+    var list=day[curSect]; if(!list) return;
     var i=list.indexOf(curKey);
-    var next=list[(i+1)%list.length];
-    openModal(next, curDay);
+    var j=(i+dir+list.length)%list.length;
+    openModal(list[j], curDay, curSect);
   }
+  function goNext(){step(1);}
+  function goPrev(){step(-1);}
   document.addEventListener('click',function(e){
     var b=e.target.closest('.info-btn');
-    if(b){e.preventDefault();openModal(b.getAttribute('data-key'), b.getAttribute('data-day'));return;}
+    if(b){e.preventDefault();openModal(b.getAttribute('data-key'), b.getAttribute('data-day'), b.getAttribute('data-section'));return;}
     if(e.target===modal){closeModal();}
   });
   nextBtn.addEventListener('click',goNext);
@@ -888,6 +927,7 @@
     if(modal.hidden)return;
     if(e.key==='Escape')closeModal();
     else if(e.key==='ArrowRight')goNext();
+    else if(e.key==='ArrowLeft')goPrev();
   });
 })();
 </script>
