@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swing Thoughts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEEE8;
+    --paper-2:#E4E6DC;
+    --ink:#17301F;
+    --ink-soft:#3B4A3C;
+    --muted:#6E7A6A;
+    --brass:#B0801F;
+    --brass-deep:#8C6414;
+    --line:#C9CBBF;
+    --line-soft:#D9DACF;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:18px;
+    line-height:1.5;
+    padding:0 20px 80px;
+  }
+  .wrap{max-width:680px;margin:0 auto;}
+
+  /* ---- Masthead ---- */
+  header{
+    padding:44px 0 22px;
+    border-bottom:2px solid var(--ink);
+  }
+  .kicker{
+    font-family:"Archivo",sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.14em;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:"Archivo",sans-serif;
+    font-weight:800;
+    font-size:clamp(38px,10vw,60px);
+    line-height:.95;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+
+  /* ---- Rhythm banner: the one thing above all ---- */
+  .rhythm{
+    margin:22px 0 8px;
+    padding:20px 22px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:2px;
+  }
+  .rhythm .lead{
+    font-family:"Archivo",sans-serif;
+    font-weight:800;
+    font-size:22px;
+    letter-spacing:-.01em;
+    margin:0 0 6px;
+  }
+  .rhythm p{
+    margin:0;
+    font-size:16.5px;
+    line-height:1.45;
+    color:#D6DBD0;
+  }
+
+  /* ---- Legend ---- */
+  .legend{
+    display:flex;
+    gap:26px;
+    flex-wrap:wrap;
+    padding:16px 2px 4px;
+    font-family:"Archivo",sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:9px;}
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.active{background:var(--brass);}
+  .dot.target{background:transparent;border:1.5px solid var(--muted);}
+
+  /* ---- Sections ---- */
+  section{padding:34px 0 4px;border-top:1px solid var(--line);}
+  section:first-of-type{border-top:none;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:14px;
+    margin:0 0 16px;
+  }
+  h2{
+    font-family:"Archivo",sans-serif;
+    font-weight:800;
+    font-size:26px;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .phase-note{
+    font-family:"Archivo",sans-serif;
+    font-weight:500;
+    font-size:13px;
+    color:var(--brass-deep);
+    letter-spacing:.02em;
+    text-align:right;
+    max-width:52%;
+  }
+
+  /* two-column mini blocks (grip / setup subparts) */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;}
+  .pair .cell b{
+    font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;
+    color:var(--muted);display:block;margin-bottom:2px;
+  }
+
+  /* ---- Thought lists ---- */
+  ul.thoughts{list-style:none;margin:0;padding:0;}
+  ul.thoughts li{
+    position:relative;
+    padding:9px 0 9px 30px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.thoughts li:last-child{border-bottom:none;}
+  ul.thoughts li::before{
+    content:"";
+    position:absolute;left:2px;top:16px;
+    width:11px;height:11px;border-radius:50%;
+  }
+  li.active::before{background:var(--brass);}
+  li.active{color:var(--ink);font-weight:500;}
+  li.target::before{background:transparent;border:1.5px solid var(--muted);top:15px;}
+  li.target{color:var(--ink-soft);}
+
+  /* numbered setup routine */
+  ol.routine{list-style:none;margin:0;padding:0;counter-reset:step;}
+  ol.routine li{
+    position:relative;
+    padding:13px 0 13px 46px;
+    border-bottom:1px solid var(--line-soft);
+    counter-increment:step;
+  }
+  ol.routine li:last-child{border-bottom:none;}
+  ol.routine li::before{
+    content:counter(step);
+    position:absolute;left:0;top:11px;
+    width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;
+    color:var(--ink);
+    border:1.5px solid var(--ink);border-radius:50%;
+  }
+
+  .note{
+    display:block;font-size:15px;color:var(--muted);
+    font-style:italic;margin-top:2px;
+  }
+
+  footer{
+    margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);
+    font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--muted);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  /* ---- Floating quick-glance button (CSS-only popup) ---- */
+  .modal-toggle{position:absolute;opacity:0;width:0;height:0;pointer-events:none;}
+  .fab{
+    position:fixed;right:20px;bottom:20px;z-index:20;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--brass);color:#fff;
+    padding:14px 18px 14px 15px;border-radius:100px;
+    font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(23,48,31,.28);
+    transition:background .15s ease,transform .12s ease;
+  }
+  .fab:hover{background:var(--brass-deep);}
+  .fab:active{transform:translateY(1px);}
+  .fab svg{width:20px;height:20px;flex:0 0 auto;}
+  .modal-toggle:focus-visible ~ .fab{outline:2px solid var(--ink);outline-offset:3px;}
+
+  .modal{
+    display:none;position:fixed;inset:0;z-index:30;
+    align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .modal-toggle:checked ~ .modal{display:flex;}
+  .modal .backdrop{position:absolute;inset:0;background:rgba(12,22,15,.55);cursor:pointer;}
+  .modal .dialog{
+    position:relative;z-index:1;
+    width:100%;max-width:420px;max-height:86vh;overflow:auto;
+    background:var(--paper);
+    border-radius:6px;
+    padding:26px 24px 28px;
+    box-shadow:0 24px 60px rgba(12,22,15,.4);
+  }
+  .modal .dialog h2{margin-top:0;}
+  .modal .m-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;margin-bottom:6px;
+  }
+  .modal .m-kicker{
+    font-family:"Archivo",sans-serif;font-weight:600;font-size:12px;
+    letter-spacing:.13em;color:var(--brass-deep);margin:0;
+  }
+  .modal .close{
+    flex:0 0 auto;cursor:pointer;
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Archivo",sans-serif;font-size:20px;line-height:1;
+    color:var(--ink);border:1.5px solid var(--line);
+  }
+  .modal .close:hover{background:var(--paper-2);}
+  .modal .rhythm{margin:14px 0 20px;}
+  .modal .phase{
+    font-family:"Archivo",sans-serif;font-weight:800;font-size:15px;
+    letter-spacing:.02em;color:var(--ink);
+    margin:20px 0 4px;
+  }
+  .modal .phase:first-of-type{margin-top:8px;}
+
+  @media(max-width:520px){
+    body{font-size:17px;}
+    .pair{grid-template-columns:1fr;gap:10px;}
+    .phase-note{max-width:100%;text-align:left;}
+    .sec-head{flex-direction:column;gap:4px;}
+    .fab .fab-text{display:none;}
+    .fab{padding:15px;}
+  }
+
+  @media print{
+    body{background:#fff;padding:0 12px;}
+    .rhythm{background:#fff;color:#000;border:2px solid #000;}
+    .rhythm p{color:#333;}
+    section{break-inside:avoid;}
+    .fab,.modal{display:none !important;}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .fab{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="quick" class="modal-toggle">
+
+<label class="fab" for="quick" title="Show swing thoughts" aria-label="Show swing thoughts">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M7 22V4"></path>
+    <path d="M7 4c4-2 7 2 11 0v8c-4 2-7-2-11 0"></path>
+  </svg>
+  <span class="fab-text">Swing thoughts</span>
+</label>
+
+<div class="modal">
+  <label class="backdrop" for="quick" aria-label="Close"></label>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="In-swing thoughts">
+    <div class="m-head">
+      <p class="m-kicker">IN-SWING FEELS</p>
+      <label class="close" for="quick" aria-label="Close">&times;</label>
+    </div>
+
+    <div class="rhythm">
+      <p class="lead">Rhythm above all.</p>
+      <p>Don&rsquo;t force it for distance &mdash; smooth and complete.</p>
+    </div>
+
+    <p class="phase">Backswing</p>
+    <ul class="thoughts">
+      <li class="active">Start SLOW and straight back at the very start.</li>
+      <li class="active">Keep the right forearm&ndash;shaft angle constant for the first 12&ndash;24 inches.</li>
+      <li class="active">Once the clubhead is horizontal, feel the hands go UP.</li>
+    </ul>
+
+    <p class="phase">Transition</p>
+    <ul class="thoughts">
+      <li class="active">Start down by turning the hips (some days the left knee).</li>
+      <li class="active">Keep the left bum back &mdash; keep the angles, don&rsquo;t early extend.</li>
+      <li class="active">Feel wristy at the transition.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <p class="kicker">HANDICAP 7.0 &rarr; 5.4 &middot; ROUND CARD</p>
+    <h1>Swing<br>Thoughts</h1>
+  </header>
+
+  <div class="rhythm">
+    <p class="lead">Rhythm above all.</p>
+    <p>Never force the swing to add distance &mdash; the moment you press for it, consistency goes. Let speed come from a smooth, complete motion.</p>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot active"></span> In-swing thought (feel it as you go)</span>
+    <span><span class="dot target"></span> Target (aiming for, not thinking about)</span>
+  </div>
+
+  <section>
+    <div class="sec-head"><h2>Grip</h2></div>
+    <div class="pair">
+      <div class="cell"><b>Left hand</b>Base of the fingers.</div>
+      <div class="cell"><b>Right hand</b>Only the fingers.</div>
+    </div>
+    <ul class="thoughts" style="margin-top:14px;">
+      <li class="target">Light grip at all times.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Setup Routine</h2></div>
+    <ol class="routine">
+      <li>Stand behind the ball. Pick the target line and an intermediate spot a foot or two ahead of the ball to aim at.</li>
+      <li>Place right foot opposite the ball, perpendicular to the target line. Use left foot for driver.<span class="note">Square &mdash; a clean reference before flaring.</span></li>
+      <li>Sole the club behind the ball, face square to the intermediate spot.</li>
+      <li>Get both feet into position &mdash; ball position set by the lead foot, trail foot out to stance width for the club.</li>
+      <li>Flare left foot just past comfortable, pivoting from the toe so the heel stays put.<span class="note">Keeps the aim you just set.</span></li>
+      <li>Check alignment off the heels, not the toes &mdash; heels parallel to the target line. Aim with your left shoulder.</li>
+      <li>Posture: bend from the waist (not too much, not too straight), sit onto the hips / bum out so the back is straight, minimal knee bend, stand as close to the ball as you can. Relaxed right arm.</li>
+      <li>One waggle to keep the hands soft, then go.</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Backswing</h2>
+      <p class="phase-note">Start slow &mdash; set the rhythm here.</p>
+    </div>
+    <ul class="thoughts">
+      <li class="active">Start SLOW and straight back at the very start.</li>
+      <li class="active">Keep the angle between the right forearm and clubshaft constant for the first 12&ndash;24 inches.</li>
+      <li class="target">Keep the clubhead &ldquo;closed.&rdquo; Face angle matches spine angle.</li>
+      <li class="active">Once the clubhead is horizontal, feel like the hands go UP.</li>
+      <li class="target">Keep hands &amp; arms in front of the body at all times. Don&rsquo;t come inside.</li>
+      <li class="target">Make a full shoulder and hip turn.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Transition</h2>
+      <p class="phase-note">Slow here for good rhythm.</p>
+    </div>
+    <ul class="thoughts">
+      <li class="active">Start the downswing by turning the hips (some days the left knee).</li>
+      <li class="active">Keep the left bum back as the hips turn &mdash; keep the body angles, don&rsquo;t early extend.</li>
+      <li class="active">Feel wristy at the transition.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Downswing</h2>
+      <p class="phase-note">Rotate through &mdash; full, complete finish.</p>
+    </div>
+    <ul class="thoughts">
+      <li class="target">Turn hips and shoulders. Rotate the body through the downswing.</li>
+      <li class="target">Don&rsquo;t drop the right elbow &mdash; let it swing naturally.</li>
+      <li class="target">Don&rsquo;t drop the right shoulder. It may feel more powerful, but (per SwingCaddy) you lose distance. Downswing by turning the upper body.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Wedges</h2></div>
+    <ul class="thoughts">
+      <li class="target">Turn everything back and forward at the same time.</li>
+      <li class="target">Start the downswing by turning the hips.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Chipping</h2></div>
+    <ul class="thoughts">
+      <li class="target">Stand tall.</li>
+      <li class="target">Grip lightly.</li>
+      <li class="target">Weight on the front foot.</li>
+      <li class="target">Stand close to the ball.</li>
+      <li class="target">Hit down on the ball.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>All grip &amp; setup thoughts applied every time.</span>
+    <span>Backswing: 1&ndash;2 thoughts &middot; Transition: 1 thought.</span>
+  </footer>
+
+</div>
+</body>
+</html>
