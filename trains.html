@@ -1,0 +1,166 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Newbridge Commute Times</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, timetable cards per direction, service colour as a left stripe + tinted row */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --fg:#1d2420; --muted:#5d6862; --line:#dde2de;
+  --ic:#00704a; --ic-bg:#e3f2ea;          /* Heuston InterCity – Irish Rail green */
+  --cm:#2f6db3; --cm-bg:#e4edf8;          /* Heuston Commuter */
+  --pd:#b0560e; --pd-bg:#fbeedf;          /* Pearse direct */
+  --pc:#8a4fa3; --pc-bg:#f2e8f6;          /* Pearse with change */
+  --bike:#00704a;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131715; --surface:#1b201d; --fg:#e7ece9; --muted:#9aa59f; --line:#2c3430;
+  --ic:#4cc493; --ic-bg:#173027; --cm:#7fb0ea; --cm-bg:#18263a;
+  --pd:#f0a35e; --pd-bg:#35241a; --pc:#c99be0; --pc-bg:#2c1f34; --bike:#4cc493; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131715; --surface:#1b201d; --fg:#e7ece9; --muted:#9aa59f; --line:#2c3430;
+  --ic:#4cc493; --ic-bg:#173027; --cm:#7fb0ea; --cm-bg:#18263a;
+  --pd:#f0a35e; --pd-bg:#35241a; --pc:#c99be0; --pc-bg:#2c1f34; --bike:#4cc493; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-block:32px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+header h1{font-size:1.75rem;margin:0 0 4px;font-weight:600;text-wrap:balance}
+header p{margin:0;color:var(--muted);max-width:70ch}
+.route{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-top:8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+.chip[aria-pressed="false"]{opacity:.45}
+.fastchip{font-weight:600}.fastchip[aria-pressed="false"]{opacity:.7}.fastchip[aria-pressed="true"]{border-color:var(--fg)}
+.star{color:var(--ic)}
+.plat{color:var(--muted);font-weight:400}
+.chip:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.dot{width:10px;height:10px;border-radius:50%}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+section h2{font-size:1.05rem;margin:0;padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+section h2 small{font-weight:400;color:var(--muted);font-size:.85rem}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:720px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.t{font-family:var(--mono);font-weight:500;white-space:nowrap}
+td.lead{border-left:5px solid var(--c)}
+tr{background:var(--cbg)}
+tr.h{--c:var(--ic);--cbg:var(--ic-bg)}
+tr.p{--c:var(--pd);--cbg:var(--pd-bg)}
+.svc{color:var(--c);font-weight:600;white-space:nowrap}
+.chg{color:var(--muted);font-size:.88rem}
+.total{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.fast .total::after{content:" ★";color:var(--c)}
+.bike{font-size:.85rem;color:var(--muted)}
+.bike b{color:var(--bike);font-weight:600}
+footer{color:var(--muted);font-size:.85rem;display:flex;flex-direction:column;gap:6px;max-width:75ch}
+footer p{margin:0}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Newbridge ⇄ South Anne St</h1>
+    <p>Weekday door-to-door times via Heuston (train + Luas Red Line + walk) or Pearse (train + walk). Times from the Irish Rail journey planner for Monday 16 November 2026.</p>
+    <div class="route">Home → 11 min drive + 4 min parking → Newbridge · Heuston → Luas to Abbey St/Jervis → walk ≈ 30 min · Pearse → walk ≈ 10 min</div>
+  </header>
+
+  <div class="legend" role="group" aria-label="Filter by service">
+    <button class="chip fastchip" id="f-fast" data-k="fast" aria-pressed="false"><span class="star">★</span>Fastest only</button>
+    <button class="chip" id="f-h" data-k="h" aria-pressed="true"><span class="dot" style="background:var(--ic)"></span>Heuston</button>
+    <button class="chip" id="f-p" data-k="p" aria-pressed="true"><span class="dot" style="background:var(--pd)"></span>Pearse</button>
+    <button class="chip fastchip" id="f-direct" data-k="direct" aria-pressed="false">Direct only</button>
+  </div>
+
+  <section>
+    <h2>Morning · home to work <small>★ fastest (under 1h 15m) · sorted by time you leave home</small></h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Leave home</th><th>Newbridge dep.</th><th>Service</th><th>Change at</th><th>Arrive Dublin</th><th>At work</th><th>Total</th></tr></thead>
+      <tbody id="am"></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Evening · work to home <small>★ fastest (under 1h 15m) · sorted by time you leave work</small></h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Leave work</th><th>Dublin dep.</th><th>Service</th><th>Change at</th><th>Newbridge arr.</th><th>Home</th><th>Total</th></tr></thead>
+      <tbody id="pm"></tbody>
+    </table></div>
+  </section>
+
+  <footer>
+    <p><b>Dublin Bike instead of the Luas:</b> cycling between Heuston and a stand near Dawson or Molesworth St takes about 20 min including docking, against about 30 min by Luas. That saves about 10 min on every Heuston journey: arrive at work 10 min earlier in the morning, or leave work 10 min later in the evening. From Pearse the walk is only about 800 m, so a bike saves nothing. Check stand availability in the Dublin Bikes app at peak times.</p>
+    <p>(P2) / (P3) is the departure platform at Newbridge.</p>
+    <p>Arrival times at work and home are estimates. Weekend timetables are different.</p>
+  </footer>
+</div>
+
+<script>
+const AM=[
+["05:44","05:59","ic0","","06:42","07:12","1h 28m"],
+["05:49","06:04","pd","Direct","07:16","07:26","1h 37m"],
+["06:05","06:20","ic","","06:53","07:23","1h 18m"],
+["06:05","06:20","pc","Hazelhatch (06:35 → 06:46)","07:29","07:39","1h 34m"],
+["06:21","06:36","cm","","07:20","07:50","1h 29m"],
+["06:35","06:50","cm","","07:26","07:56","1h 21m"],
+["06:40","06:55","pd","Direct","07:58","08:08","1h 28m"],
+["06:54","07:09","ic","","07:44","08:14","1h 20m"],
+["07:04","07:19","pd","Direct","08:19","08:29","1h 25m"],
+["07:14","07:29","ic","","07:59","08:29","1h 15m"],
+["07:27","07:42","ic","","08:08","08:38","1h 11m",1],
+["07:32","07:47","cm","","08:28","08:58","1h 26m"],
+["07:32","07:47","pc","Clondalkin Fonthill (08:13 → 08:28)","08:59","09:09","1h 37m"],
+["07:53","08:08","ic","","08:34","09:04","1h 11m",1],
+["07:58","08:13","cm","","08:52","09:22","1h 24m"],
+["07:58","08:13","pc","Clondalkin Fonthill (08:39 → 08:45)","09:18","09:28","1h 30m"],
+["08:18","08:33","ic","","09:00","09:30","1h 12m"],
+["08:29","08:44","cm","","09:26","09:56","1h 27m"],
+["08:54","09:09","pd","Direct","10:08","10:18","1h 24m"],
+["09:11","09:26","ic","","09:53","10:23","1h 12m"],
+["09:36","09:51","pc","Hazelhatch (10:06 → 10:35)","11:19","11:29","1h 53m"]];
+AM[0][2]="cm";
+const PM=[
+["14:40","15:10","ic","","15:31","15:46","1h 06m",1],
+["14:55","15:25","cm","","16:05","16:20","1h 25m"],
+["15:21","15:33","pc","Park West & Cherry Orchard (16:01 → 16:28)","17:01","17:16","1h 55m"],
+["16:00","16:30","ic","","16:51","17:06","1h 06m",1],
+["16:30","16:42","pc","Drumcondra (16:52 → 16:58)","17:47","18:02","1h 32m"],
+["16:40","17:10","ic","","17:32","17:47","1h 07m"],
+["17:00","17:30","ic","","17:56","18:11","1h 11m"],
+["17:05","17:35","ic","Sallins (17:53 → 18:01)","18:08","18:23","1h 18m"],
+["17:20","17:32","pd","Direct","18:34","18:49","1h 29m"],
+["17:35","18:05","cm","","18:46","19:01","1h 26m"],
+["18:05","18:35","ic","","18:56","19:11","1h 06m",1],
+["18:09","18:21","pc","Connolly (18:26 → 18:32)","19:35","19:50","1h 41m"],
+["18:31","18:43","pc","Adamstown (19:22 → 19:28)","19:48","20:03","1h 32m"],
+["18:38","19:08","cm","","19:48","20:03","1h 25m"],
+["19:01","19:13","pc","Adamstown (19:57 → 20:04)","20:24","20:39","1h 38m"],
+["19:15","19:45","cm","","20:24","20:39","1h 24m"],
+["19:37","19:49","pc","Park West & Cherry Orchard (20:19 → 20:28)","21:00","21:15","1h 38m"],
+["19:50","20:20","ic","","21:00","21:15","1h 25m"],
+["20:21","20:33","pc","Adamstown (21:13 → 21:24)","21:46","22:01","1h 40m"],
+["20:35","21:05","cm","","21:46","22:01","1h 26m"]];
+const NAME={ic:"Heuston · InterCity",cm:"Heuston · Commuter",pd:"Pearse · direct",pc:"Pearse · 1 change"};
+const add=(t,m)=>{let[h,mm]=t.split(":").map(Number);let x=h*60+mm+m;return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")};
+const less=(d)=>{let m=d.match(/(\d+)h (\d+)m/);let x=+m[1]*60+ +m[2]-10;return (x>=60?Math.floor(x/60)+"h ":"")+String(x%60).padStart(2,"0")+"m"};
+const mins=d=>{let m=d.match(/(\d+)h (\d+)m/);return +m[1]*60+ +m[2]};
+AM.concat(PM).forEach(r=>r[7]=mins(r[6])<75?1:0);
+const R=r=>(r[2]==="ic"||r[2]==="cm")?"h":"p";
+const P3=new Set(["06:04","06:55","07:19","08:13","09:09"]);
+const dep=(r,am)=>am?`${r[1]} <span class="plat">(P${P3.has(r[1])?3:2})</span>`:r[1];
+function render(id,rows,am){
+  document.getElementById(id).innerHTML=rows.map(r=>`<tr class="${R(r)}${r[7]?" fast":""}" data-k="${R(r)}" data-fast="${r[7]?1:0}" data-direct="${(!r[3]||r[3]==="Direct")?1:0}">
+    <td class="t lead">${r[0]}</td><td class="t">${dep(r,am)}</td><td class="svc">${NAME[r[2]]}</td>
+    <td class="chg">${r[3]||"Direct"}</td><td class="t">${r[4]}</td><td class="t">${r[5]}</td>
+    <td class="total">${r[6]}</td></tr>`).join("");
+}
+render("am",AM,true);render("pm",PM,false);
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+  b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");
+  const on=new Set([...document.querySelectorAll('.chip[aria-pressed="true"]')].map(c=>c.dataset.k));
+  const fastOnly=on.has("fast"), directOnly=on.has("direct");
+  document.querySelectorAll("tbody tr").forEach(tr=>tr.hidden=!on.has(tr.dataset.k)||(fastOnly&&tr.dataset.fast!=="1")||(directOnly&&tr.dataset.direct!=="1"));
+}));
+</script>
+
+</body></html>
