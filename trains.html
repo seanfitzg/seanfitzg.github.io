@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newbridge ⇄ Dublin Train Times</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #fff; --text: #1d2330; --muted: #5f6b7a;
+    --line: #e3e7ec; --accent: #0b6e4f; --accent-soft: #e6f4ee; --warn: #9a5b00; --warn-soft: #fff4e0;
+    --pearse: #6b3fa0; --pearse-soft: #f1eafa; --heuston: #1f5fa8; --heuston-soft: #e8f0fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#15181d; --card:#1e232a; --text:#e8ecf1; --muted:#9aa5b1; --line:#2c333c;
+            --accent:#4cc79a; --accent-soft:#1d3a30; --warn:#f0b04d; --warn-soft:#3a2e1a;
+            --pearse:#c3a3ef; --pearse-soft:#2f2540; --heuston:#8ab8f0; --heuston-soft:#1e2c3f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background:var(--bg); color:var(--text); line-height:1.45; }
+  header { padding:28px 20px 8px; max-width:1000px; margin:0 auto; }
+  h1 { margin:0 0 4px; font-size:1.6rem; }
+  .sub { color:var(--muted); margin:0; font-size:.95rem; }
+  nav { max-width:1000px; margin:12px auto 0; padding:0 20px; display:flex; gap:8px; flex-wrap:wrap; }
+  nav a { text-decoration:none; color:var(--accent); background:var(--accent-soft);
+          padding:6px 12px; border-radius:999px; font-size:.88rem; font-weight:600; }
+  main { max-width:1000px; margin:0 auto; padding:12px 20px 40px; }
+  section.card { background:var(--card); border:1px solid var(--line); border-radius:12px;
+                 padding:18px 18px 10px; margin:18px 0 26px; }
+  section.card h2 { margin:0 0 4px; font-size:1.3rem; }
+  .meta { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:.93rem; }
+  th, td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); white-space:nowrap; }
+  td.t { font-variant-numeric: tabular-nums; white-space:nowrap; }
+  tr.best td { background:var(--accent-soft); }
+  tr.best td.t:first-child { font-weight:700; }
+  tr.cutoff td { border-bottom:2px dashed var(--muted); }
+  .via { display:inline-block; font-size:.75rem; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap; }
+  .via.p { background:var(--pearse-soft); color:var(--pearse); }
+  .via.h { background:var(--heuston-soft); color:var(--heuston); }
+  .tag { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 7px; border-radius:6px;
+         background:var(--accent-soft); color:var(--accent); margin-left:4px; white-space:nowrap; }
+  .tag.warn { background:var(--warn-soft); color:var(--warn); }
+  .tag.ic { background:transparent; border:1px solid var(--accent); }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:.85rem; color:var(--muted); margin:0 0 12px; align-items:center; }
+  .legend .dash { display:inline-block; width:28px; border-top:2px dashed var(--muted); vertical-align:middle; margin-right:4px; }
+  .legend .sw { display:inline-block; width:14px; height:14px; border-radius:3px; background:var(--accent-soft); border:1px solid var(--accent); vertical-align:middle; margin-right:4px; }
+  ul.notes { margin:12px 0 8px; padding-left:20px; font-size:.9rem; }
+  ul.notes li { margin:4px 0; }
+  footer { max-width:1000px; margin:0 auto; padding:0 20px 20px; color:var(--muted); font-size:.85rem; }
+  footer a { color:var(--accent); }
+  details.prompt { max-width:1000px; margin:0 auto 40px; padding:0 20px; }
+  details.prompt > div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; margin-top:10px; }
+  details.prompt summary { cursor:pointer; font-weight:700; color:var(--accent); padding:8px 0; }
+  details.prompt textarea { width:100%; min-height:440px; font-family: ui-monospace, Menlo, Consolas, monospace;
+         font-size:.82rem; line-height:1.5; padding:12px; border:1px solid var(--line); border-radius:8px;
+         background:var(--bg); color:var(--text); resize:vertical; }
+  details.prompt button { margin-top:10px; padding:8px 16px; border:0; border-radius:8px; background:var(--accent);
+         color:#fff; font-weight:600; cursor:pointer; }
+  details.prompt .copied { margin-left:10px; color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Newbridge ⇄ Dublin Train Times</h1>
+  <p class="sub">Weekdays (Mon–Fri) · Train only · Work: 10 South Anne St · 19 min walk to/from Pearse · 30 min to/from Heuston</p>
+</header>
+
+<nav>
+  <a href="#morning">Morning: Newbridge → work</a>
+  <a href="#evening">Evening: work → Newbridge</a>
+</nav>
+
+<main>
+
+<section class="card" id="morning">
+  <h2>Morning · Newbridge → work</h2>
+  <p class="meta">Departures from Newbridge 06:00–10:00, in order</p>
+  <div class="legend">
+    <span><span class="via p">Pearse</span> +19 min walk</span>
+    <span><span class="via h">Heuston</span> +30 min to work</span>
+    <span><span class="sw"></span>Best options</span>
+    <span><span class="dash"></span>Last train to reach work before 09:15</span>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Leave Newbridge</th><th>Via</th><th>Route</th><th>Arrive station</th><th>Arrive work</th><th>Door to door</th></tr></thead>
+    <tbody>
+      <tr><td class="t">06:00</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">06:42</td><td class="t">07:12</td><td class="t">1h12</td></tr>
+      <tr><td class="t">06:04</td><td><span class="via p">Pearse</span></td><td>Direct</td><td class="t">07:16</td><td class="t">07:35</td><td class="t">1h31</td></tr>
+      <tr class="best"><td class="t">06:20</td><td><span class="via h">Heuston</span></td><td>Intercity (from Galway) <span class="tag ic">Fast</span></td><td class="t">06:53</td><td class="t">07:23</td><td class="t">1h03</td></tr>
+      <tr><td class="t">06:20</td><td><span class="via p">Pearse</span></td><td>Same intercity to Hazelhatch (arr 06:36), change for the 06:46 Grand Canal Dock train</td><td class="t">07:29</td><td class="t">07:48</td><td class="t">1h28</td></tr>
+      <tr><td class="t">06:36</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">07:20</td><td class="t">07:50</td><td class="t">1h14</td></tr>
+      <tr><td class="t">06:50</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">07:26</td><td class="t">07:56</td><td class="t">1h06</td></tr>
+      <tr class="best"><td class="t">06:55</td><td><span class="via p">Pearse</span></td><td>Direct</td><td class="t">07:58</td><td class="t">08:17</td><td class="t">1h22</td></tr>
+      <tr><td class="t">07:09</td><td><span class="via h">Heuston</span></td><td>Intercity (from Waterford)</td><td class="t">07:44</td><td class="t">08:14</td><td class="t">1h05</td></tr>
+      <tr class="best"><td class="t">07:19</td><td><span class="via p">Pearse</span></td><td>Direct</td><td class="t">08:19</td><td class="t">08:38</td><td class="t">1h19</td></tr>
+      <tr class="best"><td class="t">07:30</td><td><span class="via h">Heuston</span></td><td>Intercity (from Galway) <span class="tag ic">Fast</span></td><td class="t">07:59</td><td class="t">08:29</td><td class="t">59m</td></tr>
+      <tr><td class="t">07:35</td><td><span class="via h">Heuston</span></td><td>Commuter <span class="tag warn">Skip – slower</span></td><td class="t">08:16</td><td class="t">08:46</td><td class="t">1h11</td></tr>
+      <tr class="best"><td class="t">07:43</td><td><span class="via h">Heuston</span></td><td>Intercity (from Waterford) <span class="tag ic">Fast</span></td><td class="t">08:08</td><td class="t">08:38</td><td class="t">55m</td></tr>
+      <tr><td class="t">07:47</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">08:28</td><td class="t">08:58</td><td class="t">1h11</td></tr>
+      <tr><td class="t">07:47</td><td><span class="via p">Pearse</span></td><td>Same train to Hazelhatch (arr 08:03), change for the 08:15 Grand Canal Dock train</td><td class="t">08:59</td><td class="t">09:18</td><td class="t">1h31</td></tr>
+      <tr class="best cutoff"><td class="t">08:09</td><td><span class="via h">Heuston</span></td><td>Intercity (from Westport) <span class="tag ic">Fast</span></td><td class="t">08:34</td><td class="t">09:04</td><td class="t">55m</td></tr>
+      <tr><td class="t">08:13</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">08:52</td><td class="t">09:22</td><td class="t">1h09</td></tr>
+      <tr><td class="t">08:13</td><td><span class="via p">Pearse</span></td><td>Same train to Hazelhatch (arr 08:29), change for the 08:34 Grand Canal Dock train <span class="tag warn">4 min change</span></td><td class="t">09:18</td><td class="t">09:37</td><td class="t">1h24</td></tr>
+      <tr class="best"><td class="t">08:35</td><td><span class="via h">Heuston</span></td><td>Intercity (from Waterford) <span class="tag ic">Fast</span></td><td class="t">09:00</td><td class="t">09:30</td><td class="t">55m</td></tr>
+      <tr><td class="t">08:44</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">09:26</td><td class="t">09:56</td><td class="t">1h12</td></tr>
+      <tr class="best"><td class="t">09:09</td><td><span class="via p">Pearse</span></td><td>Direct</td><td class="t">10:08</td><td class="t">10:27</td><td class="t">1h18</td></tr>
+      <tr class="best"><td class="t">09:28</td><td><span class="via h">Heuston</span></td><td>Intercity (from Limerick) <span class="tag ic">Fast</span></td><td class="t">09:53</td><td class="t">10:23</td><td class="t">55m</td></tr>
+      <tr><td class="t">09:51</td><td><span class="via h">Heuston</span></td><td>Commuter</td><td class="t">10:37</td><td class="t">11:07</td><td class="t">1h16</td></tr>
+      <tr><td class="t">09:51</td><td><span class="via p">Pearse</span></td><td>Same train to Hazelhatch (arr 10:07), change for the 10:35 Grand Canal Dock train</td><td class="t">11:19</td><td class="t">11:38</td><td class="t">1h47</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="notes">
+    <li>The fast intercity trains to Heuston (07:30, 07:43, 08:09, 08:35, 09:28) get you to work in about 55 to 59 minutes, the quickest of any option.</li>
+    <li>There are four direct trains to Pearse: 06:04, 06:55, 07:19 and 09:09. Other Pearse options use the Heuston train as far as Hazelhatch, then change.</li>
+    <li>Skip the 07:35 commuter train. The 07:30 and 07:43 intercity trains both get in before it.</li>
+    <li>There's no good Pearse option between 07:19 and 09:09. If you need to arrive at work between about 08:40 and 09:30, go via Heuston.</li>
+  </ul>
+</section>
+
+<section class="card" id="evening">
+  <h2>Evening · work → Newbridge</h2>
+  <p class="meta">Departures after 16:00, in order of when to leave work</p>
+  <div class="legend">
+    <span><span class="via p">Pearse</span> 19 min walk</span>
+    <span><span class="via h">Heuston</span> 30 min from work</span>
+    <span><span class="sw"></span>Best options</span>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Leave work</th><th>Via</th><th>Depart</th><th>Route</th><th>Arrive Newbridge</th><th>Door to station</th></tr></thead>
+    <tbody>
+      <tr><td class="t">15:50</td><td><span class="via h">Heuston</span></td><td class="t">16:20</td><td>Commuter to Portlaoise</td><td class="t">17:01</td><td class="t">1h11</td></tr>
+      <tr class="best"><td class="t">16:00</td><td><span class="via h">Heuston</span></td><td class="t">16:30</td><td>Intercity to Galway <span class="tag ic">Fast</span></td><td class="t">16:51</td><td class="t">51m</td></tr>
+      <tr><td class="t">16:12</td><td><span class="via p">Pearse</span></td><td class="t">16:31</td><td>Hazelhatch train, change at Hazelhatch (arr 17:20) for the 17:30 Newbridge train</td><td class="t">17:47</td><td class="t">1h35</td></tr>
+      <tr class="best"><td class="t">16:40</td><td><span class="via h">Heuston</span></td><td class="t">17:10</td><td>Intercity to Athlone <span class="tag ic">Fast</span></td><td class="t">17:32</td><td class="t">52m</td></tr>
+      <tr><td class="t">16:57</td><td><span class="via h">Heuston</span></td><td class="t">17:27</td><td>Commuter to Portlaoise</td><td class="t">18:08</td><td class="t">1h11</td></tr>
+      <tr class="best"><td class="t">17:01</td><td><span class="via h">Heuston</span></td><td class="t">17:31</td><td>Intercity to Galway <span class="tag ic">Fast</span></td><td class="t">17:56</td><td class="t">55m</td></tr>
+      <tr class="best"><td class="t">17:13</td><td><span class="via p">Pearse</span></td><td class="t">17:32</td><td>Direct <span class="tag">No change</span></td><td class="t">18:34</td><td class="t">1h21</td></tr>
+      <tr><td class="t">17:35</td><td><span class="via h">Heuston</span></td><td class="t">18:05</td><td>Commuter to Portlaoise</td><td class="t">18:46</td><td class="t">1h11</td></tr>
+      <tr><td class="t">17:55</td><td><span class="via h">Heuston</span></td><td class="t">18:25</td><td>Commuter to Portlaoise</td><td class="t">19:07</td><td class="t">1h12</td></tr>
+      <tr><td class="t">17:55</td><td><span class="via p">Pearse</span></td><td class="t">~18:15</td><td>Any DART from Pearse to Connolly (about 5 min), then the 18:32 direct train from Connolly <span class="tag">Safer than 18:43</span></td><td class="t">19:35</td><td class="t">1h40</td></tr>
+      <tr class="best"><td class="t">18:05</td><td><span class="via h">Heuston</span></td><td class="t">18:35</td><td>Intercity to Waterford <span class="tag ic">Fast</span></td><td class="t">18:56</td><td class="t">51m</td></tr>
+      <tr><td class="t">18:24</td><td><span class="via p">Pearse</span></td><td class="t">18:43</td><td>Hazelhatch train, change at Hazelhatch for the 19:33 Portlaoise train <span class="tag warn">4 min change</span></td><td class="t">19:49</td><td class="t">1h25</td></tr>
+      <tr><td class="t">18:38</td><td><span class="via h">Heuston</span></td><td class="t">19:08</td><td>Commuter to Portlaoise</td><td class="t">19:48</td><td class="t">1h10</td></tr>
+      <tr><td class="t">18:54</td><td><span class="via p">Pearse</span></td><td class="t">19:13</td><td>Hazelhatch train, change at Hazelhatch for the 20:09 Portlaoise train</td><td class="t">20:25</td><td class="t">1h31</td></tr>
+      <tr><td class="t">19:15</td><td><span class="via h">Heuston</span></td><td class="t">19:45</td><td>Commuter to Portlaoise</td><td class="t">20:24</td><td class="t">1h09</td></tr>
+      <tr><td class="t">19:50</td><td><span class="via h">Heuston</span></td><td class="t">20:20</td><td>Intercity to Waterford</td><td class="t">21:00</td><td class="t">1h10</td></tr>
+      <tr><td class="t">20:14</td><td><span class="via p">Pearse</span></td><td class="t">20:33</td><td>Hazelhatch train, change at Hazelhatch for the 21:29 Portlaoise train</td><td class="t">21:47</td><td class="t">1h33</td></tr>
+      <tr><td class="t">20:35</td><td><span class="via h">Heuston</span></td><td class="t">21:05</td><td>Commuter to Portlaoise</td><td class="t">21:46</td><td class="t">1h11</td></tr>
+      <tr><td class="t">21:14</td><td><span class="via p">Pearse</span></td><td class="t">21:33</td><td>Hazelhatch train, change at Hazelhatch for the 22:34 Portlaoise train</td><td class="t">22:51</td><td class="t">1h37</td></tr>
+      <tr><td class="t">21:40</td><td><span class="via h">Heuston</span></td><td class="t">22:10</td><td>Commuter to Portlaoise</td><td class="t">22:50</td><td class="t">1h10</td></tr>
+      <tr><td class="t">22:14</td><td><span class="via p">Pearse</span></td><td class="t">22:33</td><td>Hazelhatch train, change at Hazelhatch for the 23:34 Kildare train</td><td class="t">23:51</td><td class="t">1h37</td></tr>
+      <tr><td class="t">22:40</td><td><span class="via h">Heuston</span></td><td class="t">23:10</td><td>Commuter to Kildare</td><td class="t">23:50</td><td class="t">1h10</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="notes">
+    <li>Heuston is usually quicker. The intercity trains take about 21 to 25 minutes, compared with about 40 for the commuter trains. The 17:31 gets in before the 17:27, and the 18:35 gets in before the 18:25.</li>
+    <li>The 17:32 is the only direct train from Pearse after 4pm. If you miss the 17:30 connection at Hazelhatch on the 16:31 route, the next train is at 17:52 and gets in at 18:09.</li>
+    <li>The 18:43 from Pearse has a tight 4-minute change at Hazelhatch. If you miss it, you'll wait until 20:09. The DART to Connolly for the 18:32 direct train is the safer choice. DARTs run about every 10 minutes.</li>
+    <li>Don't take the 19:49 from Pearse. It reaches Hazelhatch too late for the 20:09 and leaves you waiting for the 21:29.</li>
+    <li>The 20:20 Waterford train is slow for an intercity. It takes 40 minutes, about the same as a commuter train.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>These times come from Irish Rail's live timetable for Thursday 19 November 2026. Monday to Friday is usually the same, but Fridays sometimes differ a bit. Check the Irish Rail app on the day, and the station screens for platforms.</p>
+  <p>Source: <a href="http://api.irishrail.ie/realtime/">Irish Rail realtime data</a></p>
+</footer>
+
+<details class="prompt">
+  <summary>Prompt to refresh this page</summary>
+  <div>
+  <textarea id="refresh-prompt" readonly>Rebuild my commuter train timetable page, trains.html, using today's live Irish Rail timetable. Use a weekday (Mon–Fri). If today is a weekend, use the next weekday's date.
+
+ABOUT ME
+- I work at 10 South Anne St, Dublin. I travel between work and Newbridge (Co. Kildare) by train only (no Luas or bus).
+- Walk between work and Pearse Station: 19 minutes.
+- Journey between work and Heuston Station: 30 minutes.
+
+DATA SOURCE
+- Use the Irish Rail realtime API (http://api.irishrail.ie/realtime/realtime.asmx), opened in the browser.
+- For each train code A100–A999, D100–D999, P100–P999 and E100–E999, call getTrainMovementsXML?TrainId=CODE&amp;TrainDate=DD%20mon%20YYYY and keep the trains that stop (LocationType is not "T") at the relevant stations in the right order. Run the requests in parallel batches.
+- Pearse–Newbridge trains run through the Phoenix Park Tunnel (Grand Canal Dock / Pearse / Connolly to Hazelhatch / Newbridge). Many of them end at Hazelhatch, so also work out connections at Hazelhatch with Heuston–Portlaoise/Kildare trains.
+
+THE TWO TABLES (each combines the Pearse and Heuston routes, sorted by time, with a colour-coded "Via" badge for Pearse or Heuston)
+1. Morning: Newbridge → work, trains leaving Newbridge 06:00–10:00, sorted by departure.
+   Columns: Leave Newbridge | Via | Route | Arrive station | Arrive work (Pearse +19 min, Heuston +30 min) | Door to door.
+   - Heuston: all direct trains, labelled Commuter or Intercity (with origin).
+   - Pearse: direct trains, plus sensible changes at Hazelhatch (state the arrival and connecting departure times). Leave out options that arrive no earlier than a later direct train. Where a Pearse option uses the same Newbridge train as a Heuston row, say "Same train to Hazelhatch…".
+   - Draw a dashed horizontal line under the last train that gets me to work before 09:15.
+2. Evening: work → Newbridge, trains leaving Pearse or Heuston after 16:00, sorted by when to leave work.
+   Columns: Leave work (Pearse −19 min, Heuston −30 min) | Via | Depart | Route | Arrive Newbridge | Door to station.
+   - Pearse: direct trains and changes at Hazelhatch (say "change at Hazelhatch" with the times).
+   - Also include direct Newbridge trains that leave from Connolly (not Pearse) as Pearse rows, reached by any DART from Pearse to Connolly (about 5 min), where they're a safer or faster option than a nearby Pearse departure.
+
+PAGE RULES
+- Highlight the best options (direct trains, fast intercity trains, earliest arrivals).
+- Label connections of 5 minutes or less with "4 min change" (or however long it is), and label trains that are beaten by an earlier or nearby train with "Skip – slower".
+- Add a small legend above each table (Via badges, highlight, dashed line) and short notes underneath: best picks, trains to avoid, tight changes, and backup options if I miss a connection.
+- Single self-contained HTML file with links at the top to each table, phone-friendly, dark mode support, morning table first.
+- Footer: the date the timetable was taken from and a reminder to check the Irish Rail app on the day (Fridays may differ).
+- Keep this prompt in a collapsible box at the bottom of the page, with a Copy button.
+- Give me the file as trains.html.</textarea>
+  <button type="button" onclick="(function(b){var t=document.getElementById('refresh-prompt');t.select();try{navigator.clipboard.writeText(t.value).then(function(){b.nextElementSibling.textContent='Copied';},function(){document.execCommand('copy');b.nextElementSibling.textContent='Copied';});}catch(e){document.execCommand('copy');b.nextElementSibling.textContent='Copied';}})(this)">Copy prompt</button><span class="copied"></span>
+  </div>
+</details>
+
+</body>
+</html>
